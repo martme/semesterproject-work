@@ -14,6 +14,7 @@
 		5BC5CE2719B60810002EF30D /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC5CE2619B60810002EF30D /* AudioUnit.framework */; };
 		5BC5CE2919B60817002EF30D /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC5CE2819B60817002EF30D /* CoreServices.framework */; };
 		5BC5CE2B19B6081F002EF30D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC5CE2A19B6081F002EF30D /* Carbon.framework */; };
+		5BC9C00119B60DA4002E2A4C /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC9C00019B60DA4002E2A4C /* libportaudio.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,6 +39,8 @@
 		5BC5CE2619B60810002EF30D /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		5BC5CE2819B60817002EF30D /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		5BC5CE2A19B6081F002EF30D /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		5BC9BFFF19B60D94002E2A4C /* portaudio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = portaudio.h; path = ../../../../../../../../usr/local/include/portaudio.h; sourceTree = "<group>"; };
+		5BC9C00019B60DA4002E2A4C /* libportaudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libportaudio.a; path = ../../../../../../../../usr/local/lib/libportaudio.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +51,7 @@
 				5BC5CE2B19B6081F002EF30D /* Carbon.framework in Frameworks */,
 				5BC5CE2919B60817002EF30D /* CoreServices.framework in Frameworks */,
 				5BC5CE2719B60810002EF30D /* AudioUnit.framework in Frameworks */,
+				5BC9C00119B60DA4002E2A4C /* libportaudio.a in Frameworks */,
 				5BC5CE2519B6080A002EF30D /* AudioToolbox.framework in Frameworks */,
 				5BC5CE2319B60803002EF30D /* CoreAudio.framework in Frameworks */,
 			);
@@ -82,6 +86,8 @@
 			children = (
 				5B910D4C19B6046300C68677 /* main.c */,
 				5B910D4E19B6046300C68677 /* AudioCapture.1 */,
+				5BC9BFFF19B60D94002E2A4C /* portaudio.h */,
+				5BC9C00019B60DA4002E2A4C /* libportaudio.a */,
 			);
 			path = AudioCapture;
 			sourceTree = "<group>";
@@ -217,6 +223,10 @@
 		5B910D5319B6046300C68677 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/portaudio/19.20111121/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -224,6 +234,10 @@
 		5B910D5419B6046300C68677 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/portaudio/19.20111121/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
