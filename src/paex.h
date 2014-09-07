@@ -9,6 +9,7 @@
 #ifndef AudioCapture_paex_h
 #define AudioCapture_paex_h
 
-void paex_fuzz(void);
+int paex_fuzz(void);
+int paex_sine(void);
 
 #endif

@@ -1,4 +1,4 @@
-all: bin/fuzz
+all: bin/main
 
 clean: 
 	rm -rf bin
@@ -6,7 +6,7 @@ clean:
 bin:
 	mkdir -p bin
 
-bin/fuzz: src/*.c | bin
+bin/main: src/*.c | bin
 	cc $+ -framework Carbon -framework CoreServices -framework AudioUnit -framework AudioToolbox -framework CoreAudio /usr/local/lib/libportaudio.a -I/usr/local/include/ -o $@
 
 .PHONY: all

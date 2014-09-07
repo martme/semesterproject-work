@@ -6,6 +6,6 @@
 
 int main(void)
 {
-    printf("%s\n", "Hello, World!");
+    printf("%s\n", "Semester Project at NTNU - Powered by PortAudio");
     paex_fuzz();
 }
