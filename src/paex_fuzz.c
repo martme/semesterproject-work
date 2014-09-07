@@ -121,8 +121,7 @@ static int fuzzCallback( const void *inputBuffer, void *outputBuffer,
 }
 
 /*******************************************************************/
-int main(void);
-int main(void)
+int paex_fuzz(void)
 {
     PaStreamParameters inputParameters, outputParameters;
     PaStream *stream;
