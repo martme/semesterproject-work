@@ -7,5 +7,6 @@
 int main(void)
 {
     printf("%s\n", "Semester Project at NTNU - Powered by PortAudio");
-    paex_fuzz();
+    //paex_fuzz();
+    signal_dump();
 }

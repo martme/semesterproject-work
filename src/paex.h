@@ -11,5 +11,6 @@
 
 int paex_fuzz(void);
 int paex_sine(void);
+int signal_dump(void);
 
 #endif
