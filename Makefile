@@ -11,8 +11,6 @@ bin:
 	mkdir -p bin
 
 bin/main: src/*.c | bin
-	cc $+ $(FRAMEWORKS) $(PORTAUDIO) $(FFTW) -I/usr/local/include/ -o $@
+	gcc $+ $(FRAMEWORKS) $(PORTAUDIO) $(FFTW) -I/usr/local/include/ -o $@
 
 .PHONY: all
-
-

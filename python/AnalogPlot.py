@@ -50,7 +50,7 @@ class AnalogPlot:
 def main():
     plot = AnalogPlot(100)
     fig = plt.figure()
-    ax = plt.axes(xlim=(0, 100), ylim=(-0.05, 0.05))
+    ax = plt.axes(xlim=(0, 100), ylim=(-0.01,p))
     a0, = ax.plot([], [])
     a1, = ax.plot([], [])
     anim = animation.FuncAnimation(fig, plot.update, fargs=(a0, a1),interval=1)
