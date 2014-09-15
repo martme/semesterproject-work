@@ -26,7 +26,7 @@ def main(argv):
     z_max = 100
     print "min: " + str(z_min)
     print "max: " + str(z_max)
-    plt.pcolor(X, Y, Z, cmap=color, vmin=z_min, vmax=z_max) #cmap = 'binary'
+    plt.pcolor(np.array(X), np.array(Y), np.array(Z), cmap=color, vmin=z_min, vmax=z_max) #cmap = 'binary'
     plt.axis([X.min(), X.max(), Y.min(), Y.max()])
     plt.show()
 
