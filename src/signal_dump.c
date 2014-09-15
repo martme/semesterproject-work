@@ -9,7 +9,7 @@
 
 #define SAMPLE_RATE         (44100)
 #define PA_SAMPLE_TYPE      paFloat32
-#define FRAMES_PER_BUFFER   (2048) /* orig 64 */ /* 2048 = 2^11 -> N = 11 */
+#define FRAMES_PER_BUFFER   (512) /* orig 64 */ /* 2048 = 2^11 -> N = 11 */
 
 typedef float SAMPLE;
 
