@@ -5,13 +5,13 @@ import numpy as np
 from pylab import *
 
 def main(argv):
-    with open('sample_w512.txt') as f:
+    with open('samples/48kHz_w512.txt') as f:
         lines = [line.rstrip() for line in f]
 
     Z = [ [float(z) for z in line.split(" ")] for line in lines ]
 
     W = 512.0      # window size    (is 2048.0 in raw.txt and sample.txt)
-    Fs = 44100.0    # sample frequency
+    Fs = 48000.0    # sample frequency
 
     dt = W/Fs       # timestep
     df = Fs/W       # frequency step
@@ -23,7 +23,7 @@ def main(argv):
     color = colormap()
     z_min, z_max = np.abs(Z).min(), np.abs(Z).max()
     #z_min = 0
-    z_max = 100
+    #z_max = 200
     print "min: " + str(z_min)
     print "max: " + str(z_max)
     plt.pcolor(np.array(X), np.array(Y), np.array(Z), cmap=color, vmin=z_min, vmax=z_max) #cmap = 'binary'

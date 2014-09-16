@@ -13,7 +13,7 @@ def plot_freqs(Y, Fs, W):
     ylabel("Something")
 
 def main(argv):
-    Fs = 44100.0    # SAMPLE_RATE
+    Fs = 48000.0    # SAMPLE_RATE
     W = 512.0      # FRAMES_PER_BUFFER  (is 2048.0 in raw.txt and sample.txt)
     with open("sample_w512_db.txt") as samples:
         #for _ in xrange(2400):

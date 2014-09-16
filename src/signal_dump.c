@@ -7,7 +7,7 @@
 #include <fftw3.h>
 #include "portaudio.h"
 
-#define SAMPLE_RATE         (44100)
+#define SAMPLE_RATE         (48000)
 #define PA_SAMPLE_TYPE      paFloat32
 #define FRAMES_PER_BUFFER   (512) /* orig 64 */ /* 2048 = 2^11 -> N = 11 */
 
@@ -121,8 +121,8 @@ static void real_1d_fft(const float* data, int n)
         normalizer = blackman_harris(i, n) * (float) (n/2); /* Me thinks, contradict Stack Overflow .. */
         float value = (float) sqrtf( creal(out[i])*creal(out[i]) + cimag(out[i])*cimag(out[i]) );
         float normalized_value = value / normalizer;
-        //float db_normalized_value = to_decibel(normalized_value);
-        printf("%f ", normalized_value);
+        float db_normalized_value = to_decibel(value);
+        printf("%f ", db_normalized_value);
     }
     printf("\n");
     fflush(stdout);
