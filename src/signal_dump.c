@@ -1,3 +1,5 @@
+#include "main.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -9,18 +11,11 @@
 
 #define SAMPLE_RATE         (48000)
 #define PA_SAMPLE_TYPE      paFloat32
-#define FRAMES_PER_BUFFER   (512) /* orig 64 */ /* 2048 = 2^11 -> N = 11 */
+#define FRAMES_PER_BUFFER   (512) /* orig 64 */ /* 2048 = 2^11 -> N = 11 ??? */
 
 typedef float SAMPLE;
 
-
-
-static void real_1d_fft(const float* in, int n);
-static float to_decibel(float x);
 static int index_of_freq(int freq);
-static float blackman_harris(int n, int N);
-
-
 static int dumpCallback( const void *inputBuffer, void *outputBuffer,
                         unsigned long framesPerBuffer,
                         const PaStreamCallbackTimeInfo* timeInfo,
@@ -49,7 +44,8 @@ static int dumpCallback( const void *inputBuffer, void *outputBuffer,
 
     float sum = 0;
 
-    real_1d_fft(in, framesPerBuffer);
+    dump_fftw(in, framesPerBuffer);
+    /* Can skip rest, only used for playback ... */
     if ( inputBuffer == NULL ) {
         for (i = 0; i < framesPerBuffer; i++)
         {
@@ -74,85 +70,7 @@ static int dumpCallback( const void *inputBuffer, void *outputBuffer,
     return paContinue;
 }
 
-static void real_1d_fft(const float* data, int n)
-{
-    /*
-    Inspired by ex2 from http://people.sc.fsu.edu/~jburkardt/c_src/fftw3/fftw3_prb.c
-    FFT Spectrum Analysis in C explained: http://stackoverflow.com/questions/10627517/wav-file-analysis-c-libsndfile-fftw3
 
-    */
-    int i, nc;
-    float normalizer;
-
-    /* From stack overflow :s */
-    /*
-    int k, N;
-    N = FRAMES_PER_BUFFER;
-    for(k = 0; k < N; k++)
-    {
-        if(k == 0){
-            normalizer = blackman_harris(k, N);
-        }
-        else {
-            normalizer = blackman_harris(k, N);
-        }
-    }
-    normalizer = normalizer * (float) N/2;
-    printf("%f\n", normalizer);
-    */
-
-    float * in = fftwf_malloc(sizeof(float)*n);
-    for (i = 0; i < n; i++)
-    {
-        in[i] = 0 + data[i];
-    }
-    fftwf_complex *out;
-    fftwf_plan plan_forward;
-    //fftwf_plan plan_backward
-
-    nc = n/2 + 1;
-    out = fftwf_malloc( sizeof(fftwf_complex) * nc );
-    plan_forward = fftwf_plan_dft_r2c_1d(n, in, out, FFTW_ESTIMATE);
-    fftwf_execute(plan_forward);
-
-    for (i = 0; i < n/2 + 1; i++)
-    {
-        /* TODO: If correct: precompute normalizer for fast lookup */
-        normalizer = blackman_harris(i, n) * (float) (n/2); /* Me thinks, contradict Stack Overflow .. */
-        float value = (float) sqrtf( creal(out[i])*creal(out[i]) + cimag(out[i])*cimag(out[i]) );
-        float normalized_value = value / normalizer;
-        float db_normalized_value = to_decibel(value);
-        printf("%f ", db_normalized_value);
-    }
-    printf("\n");
-    fflush(stdout);
-    fftwf_destroy_plan(plan_forward);
-    fftwf_free(out);
-}
-
-
-static float blackman_harris(int n, int N)
-{
-    /* N represents width in samples (window), [n is sample in window?????] */
-    /* http://en.wikipedia.org/wiki/Window_function */
-    float a0, a1, a2, a3, seg1, seg2, seg3, w_n;
-    a0 = 0.35875;
-    a1 = 0.48829;
-    a2 = 0.14128;
-    a3 = 0.01168;
-
-    seg1 = a1 * (float) cos( ((float) 2 * (float) M_PI * (float) n) / ((float) N - (float) 1) );
-    seg2 = a2 * (float) cos( ((float) 4 * (float) M_PI * (float) n) / ((float) N - (float) 1) );
-    seg3 = a3 * (float) cos( ((float) 6 * (float) M_PI * (float) n) / ((float) N - (float) 1) );
-
-    w_n = a0 - seg1 + seg2 - seg3;
-    return w_n;
-}
-
-static float to_decibel(float x)
-{
-    return fabs ( 20.0f * log10f( x ) );
-}
 
 static int index_of_freq(int freq)
 {

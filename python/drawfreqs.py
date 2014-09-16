@@ -5,7 +5,7 @@ import numpy as np
 from pylab import *
 
 def main(argv):
-    with open('samples/48kHz_w512.txt') as f:
+    with open('samples/10k-20k_48kHz_w512_normalized.txt') as f:
         lines = [line.rstrip() for line in f]
 
     Z = [ [float(z) for z in line.split(" ")] for line in lines ]
@@ -23,7 +23,7 @@ def main(argv):
     color = colormap()
     z_min, z_max = np.abs(Z).min(), np.abs(Z).max()
     #z_min = 0
-    #z_max = 200
+    z_max = 1
     print "min: " + str(z_min)
     print "max: " + str(z_max)
     plt.pcolor(np.array(X), np.array(Y), np.array(Z), cmap=color, vmin=z_min, vmax=z_max) #cmap = 'binary'

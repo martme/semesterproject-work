@@ -1,4 +1,4 @@
-#include "paex.h"
+#include "main.h"
 
 #include "portaudio.h"
 #include <stdio.h>
@@ -9,4 +9,6 @@ int main(void)
     printf("%s\n", "Semester Project at NTNU - Powered by PortAudio");
     //paex_fuzz();
     signal_dump();
+
+    /*ampl_dump();*/
 }
