@@ -32,7 +32,7 @@ def main(argv):
 
 def colormap():
     import matplotlib as mpl
-    cmap = mpl.colors.ListedColormap([(0.0, x, 0.0, 0) for x in np.linspace(0, 1, 255)])
+    cmap = mpl.colors.ListedColormap([(0.0, x, 0.0, 1) for x in np.linspace(0, 1, 255)])
     return cmap
 
 
