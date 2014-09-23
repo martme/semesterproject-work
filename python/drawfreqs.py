@@ -8,13 +8,16 @@ def main(argv):
     #with open('samples/10k-20k_48kHz_w512.txt') as f:
     #with open('../samples/dumps/96kHz-24bit_whistle_w2048_transformed.dat') as f:
     #with open('../samples/dumps/96kHz-24bit_indiana_jones_whistle_w2048_transformed.dat') as f:
-    with open('../samples/dumps/96kHz-24bit_big_freq_range_w2048_transformed.dat') as f:
+    #with open('../samples/dumps/96kHz-24bit_big_freq_range_w2048_transformed.dat') as f:
+    with open('../samples/dump.dat') as f:
+
         lines = [line.rstrip() for line in f]
 
-    Z = [ [float(z) for z in line.split(" ")] for line in lines ]
-    Z = np.log10(Z);# convert to decibel scale
-    W = 2048.0      # window size    (is 2048.0 in raw.txt and sample.txt)
-    Fs = 96000.0    # sample frequency
+    W = float(lines[0].rstrip(" "))     # window size
+    Fs = float(lines[1].rstrip(" "))    # sample frequency
+
+
+    Z = [ [abs(float(z)) for z in line.split(" ")] for line in lines[2:] ]
 
     dt = W/Fs       # timestep
     df = Fs/W       # frequency step
@@ -22,8 +25,8 @@ def main(argv):
     Y, X = np.mgrid[slice( 0, len(Z) * dt, dt ),
                     slice( 0, len(Z[0]) * df, df )]
 
-
     color = colormap()
+    print Z[0]
     z_min, z_max = np.abs(Z).min(), np.abs(Z).max()
     #z_min = 0
     #z_max = 20

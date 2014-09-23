@@ -6,23 +6,15 @@
 #include <fftw3.h>
 #include <sndfile.h>
 
-/*
-struct SF_INFO
-{   sf_count_t  frames ;
-    int         samplerate ;
-    int         channels ;
-    int         format ;
-    int         sections ;
-    int         seekable ;
-} ;
-*/
-
-#define WINDOW_SIZE (2048)
+#define WINDOW_SIZE (1024)
 
 /* For inspiration: http://www.labbookpages.co.uk/audio/wavFiles.html */
-static int fftw_transform(float* data, int n);
-static int render_sndfile (char * sndfilepath);
-
+static float* power_spectrum(float *in, int N);
+static int render_sndfile(char * sndfilepath);
+static void apply_window(float *in, int N);
+static void convert_to_dB(float *arr, int N);
+static void dump_spectrum(float *arr, int N);
+static void dump_metadata(int W, int Fs);
 
 int process_wav(char* filename)
 {
@@ -34,7 +26,8 @@ static int render_sndfile (char * sndfilepath)
 {
     SNDFILE *sndfile;
     SF_INFO sndinfo;
-    float avg, *window;
+    float avg, *window, *spectrum;
+    int samples_in_spectrum = WINDOW_SIZE / 2 + 1;
     uint64_t i, j, w, num_windows;
 
     memset (&sndinfo, 0, sizeof (sndinfo)) ;
@@ -63,6 +56,8 @@ static int render_sndfile (char * sndfilepath)
 
     // printf("sample rate\t: %d Hz\n", sndinfo.samplerate);
     // printf("num frames \t: %lld\n", sndinfo.frames);
+
+    dump_metadata(WINDOW_SIZE, sndinfo.samplerate);
 
     // printf("%s\n", "Allocating buffer ...");
     float * buffer = malloc(sndinfo.channels*sndinfo.frames * sizeof(float));
@@ -95,28 +90,19 @@ static int render_sndfile (char * sndfilepath)
 
     num_windows = sndinfo.frames / WINDOW_SIZE;
 
-    window = malloc( WINDOW_SIZE*sizeof(float) );
+    window = malloc( WINDOW_SIZE * sizeof(float) );
     for (w = 0ull; w < num_windows; w++) {
-        // avg = 0;
         j = 0;
         for (i = 0; i < sndinfo.channels*WINDOW_SIZE; i += sndinfo.channels)
         {
             window[j++] = buffer[w*WINDOW_SIZE + i];
-
-            /* Print time domain */
-            // avg += buffer[w*WINDOW_SIZE + i];
-            // printf("%f ", buffer[w*WINDOW_SIZE + i]);
         }
-        fftw_transform(window, WINDOW_SIZE);
-
-        /* Print time domain */
-        // printf("\n");
-        // avg /= (float) WINDOW_SIZE;
-        // printf("%f\n", avg);
+        spectrum = power_spectrum(window, WINDOW_SIZE);
+        dump_spectrum(spectrum, samples_in_spectrum);
     }
 
 
-
+    free(spectrum);
     free(window);
     free(buffer);
     return 0;
@@ -124,28 +110,70 @@ static int render_sndfile (char * sndfilepath)
 } /* render_sndfile */
 
 
-
-static int fftw_transform(float* in, int n)
+static float* power_spectrum(float *in, int N)
 {
+    /* 1. Collect N samples where N is a power of 2 */
     int i, nc;
     fftwf_complex *out;
     fftwf_plan plan_forward;
+    nc = N/2 + 1;
 
-    nc = n/2 + 1;
-    out = fftwf_malloc( sizeof(fftwf_complex) * nc );
-    plan_forward = fftwf_plan_dft_r2c_1d(n, in, out, FFTW_ESTIMATE);
+
+    float *result = malloc( sizeof (float) * nc );
+
+    /* 2. Apply a soutable window function to the samples */
+    apply_window(in, N);
+
+    /* 3. Pass windowed samples to an FFT routine */
+    out = fftwf_malloc( sizeof( fftwf_complex ) * nc );
+    plan_forward = fftwf_plan_dft_r2c_1d(N, in, out, FFTW_ESTIMATE);
     fftwf_execute(plan_forward);
 
-    for (i = 0; i < n/2 + 1; i++)
+    /* 4. Calculate the squared magnitude of the FFT output bins (re * re + im * im) */
+    for (i = 0; i < nc; i++)
     {
-        float value = (float) sqrtf( creal(out[i])*creal(out[i]) + cimag(out[i])*cimag(out[i]) );
-        printf("%f ", value);
+        result[i] = (float) ( (float)creal(out[i])*creal(out[i]) + cimag(out[i])*cimag(out[i]) );
     }
-    printf("\n");
-    fflush(stdout);
+
+    /* 5. (optional) Calculate 10 * log10 of each magnitude squared output bin to get a value in dB */
+    convert_to_dB(result, nc);
+
     fftwf_destroy_plan(plan_forward);
     fftwf_free(out);
 
-    return 0;
+    return result;
 }
 
+static void apply_window(float *in, int N)
+{
+    return;
+}
+
+static void convert_to_dB(float *arr, int N)
+{
+    int i;
+    for (i = 0; i < N; i++)
+    {
+
+        //printf("%f ", arr[i]);
+        arr[i] = (float) 20*log10(arr[i]); /* 20 or 10 * log10 ???? */
+    }
+    //printf("\n");
+}
+
+static void dump_metadata(int W, int Fs)
+{
+    printf("%d\n", W);
+    printf("%d\n", Fs);
+}
+
+static void dump_spectrum(float *arr, int N)
+{
+    int i;
+    for (i = 0; i < N; i++){
+        printf("%f ", arr[i]);
+    }
+    printf("\n");
+    /* Flush output buffer to remove buffer delay in pipe */
+    fflush(stdout);
+}
