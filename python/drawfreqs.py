@@ -5,13 +5,16 @@ import numpy as np
 from pylab import *
 
 def main(argv):
-    with open('samples/10k-20k_48kHz_w512.txt') as f:
+    #with open('samples/10k-20k_48kHz_w512.txt') as f:
+    #with open('../samples/dumps/96kHz-24bit_whistle_w2048_transformed.dat') as f:
+    #with open('../samples/dumps/96kHz-24bit_indiana_jones_whistle_w2048_transformed.dat') as f:
+    with open('../samples/dumps/96kHz-24bit_big_freq_range_w2048_transformed.dat') as f:
         lines = [line.rstrip() for line in f]
 
     Z = [ [float(z) for z in line.split(" ")] for line in lines ]
-
-    W = 512.0      # window size    (is 2048.0 in raw.txt and sample.txt)
-    Fs = 48000.0    # sample frequency
+    Z = np.log10(Z);# convert to decibel scale
+    W = 2048.0      # window size    (is 2048.0 in raw.txt and sample.txt)
+    Fs = 96000.0    # sample frequency
 
     dt = W/Fs       # timestep
     df = Fs/W       # frequency step
@@ -23,7 +26,7 @@ def main(argv):
     color = colormap()
     z_min, z_max = np.abs(Z).min(), np.abs(Z).max()
     #z_min = 0
-    z_max = 10
+    #z_max = 20
     print "min: " + str(z_min)
     print "max: " + str(z_max)
     plt.pcolor(np.array(X), np.array(Y), np.array(Z), cmap=color, vmin=z_min, vmax=z_max) #cmap = 'binary'
@@ -38,7 +41,6 @@ def colormap():
 
 if __name__ == '__main__':
     #colormap()
-    print np.linspace(1, 0, 10)
     main(sys.argv[1:])
 
 

@@ -14,7 +14,7 @@ def plot_freqs(Y, Fs, W):
 
 def main(argv):
     Fs = 48000.0    # SAMPLE_RATE
-    W = 512.0      # FRAMES_PER_BUFFER  (is 2048.0 in raw.txt and sample.txt)
+    W = 2048.0      # FRAMES_PER_BUFFER  (is 2048.0 in raw.txt and sample.txt)
     with open("sample_w512_db.txt") as samples:
         #for _ in xrange(2400):
         #    samples.readline()

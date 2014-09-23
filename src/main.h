@@ -4,7 +4,7 @@
 
 void dump_fftw(const float* data, int n); /* Transform.c */
 
-void plot_wav(void);
+int process_wav(char* filename);
 int signal_dump(void); /* signal_dump.c */
 
 

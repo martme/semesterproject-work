@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <math.h>
 
-int main(void)
+int main(int argc, char *argv[])
 {
     /*
     Look at
@@ -14,7 +14,15 @@ int main(void)
         install using: brew install libsndfile
     */
 
-    plot_wav();
+    if (argc != 2)
+    {
+        printf("Usage: %s <soundfile.wav>\n", argv[0]);
+        return 1;
+    }
+    else if (argc == 2)
+    {
+        process_wav(argv[1]);
+    }
     /*signal_dump();*/
 
     /*ampl_dump();*/
