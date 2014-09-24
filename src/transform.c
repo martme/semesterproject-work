@@ -48,7 +48,6 @@ void dump_fftw(const float* data, int n)
 
 static float blackman_harris(int n, int N)
 {
-    /* N represents width in samples (window), [n is sample in window?????] */
     /* http://en.wikipedia.org/wiki/Window_function */
     float a0, a1, a2, a3, seg1, seg2, seg3, w_n;
     a0 = 0.35875;

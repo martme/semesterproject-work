@@ -7,10 +7,11 @@
 #include <sndfile.h>
 
 #define WINDOW_SIZE (1024)
+#define PI (3.1415926535)
 
 /* For inspiration: http://www.labbookpages.co.uk/audio/wavFiles.html */
 static float* power_spectrum(float *in, int N);
-static int render_sndfile(char * sndfilepath);
+static int process_sndfile(char * sndfilepath);
 static void apply_window(float *in, int N);
 static void convert_to_dB(float *arr, int N);
 static void dump_spectrum(float *arr, int N);
@@ -18,11 +19,11 @@ static void dump_metadata(int W, int Fs);
 
 int process_wav(char* filename)
 {
-    render_sndfile(filename);
+    process_sndfile(filename);
     return 0;
 }
 
-static int render_sndfile (char * sndfilepath)
+static int process_sndfile (char * sndfilepath)
 {
     SNDFILE *sndfile;
     SF_INFO sndinfo;
@@ -118,7 +119,6 @@ static float* power_spectrum(float *in, int N)
     fftwf_plan plan_forward;
     nc = N/2 + 1;
 
-
     float *result = malloc( sizeof (float) * nc );
 
     /* 2. Apply a soutable window function to the samples */
@@ -146,6 +146,10 @@ static float* power_spectrum(float *in, int N)
 
 static void apply_window(float *in, int N)
 {
+    int i;
+    for (i = 0; i < N; i++) {
+        in[i] *= 0.5 * ( 1 - cos( 2 * PI * i) / ( N-1 ) ); /* Hann function */
+    }
     return;
 }
 
@@ -156,7 +160,7 @@ static void convert_to_dB(float *arr, int N)
     {
 
         //printf("%f ", arr[i]);
-        arr[i] = (float) 20*log10(arr[i]); /* 20 or 10 * log10 ???? */
+        arr[i] = (float) 10*log10(arr[i]); /* 20 or 10 * log10 ???? */
     }
     //printf("\n");
 }

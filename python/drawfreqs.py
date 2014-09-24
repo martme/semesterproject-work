@@ -9,7 +9,7 @@ def main(argv):
     #with open('../samples/dumps/96kHz-24bit_whistle_w2048_transformed.dat') as f:
     #with open('../samples/dumps/96kHz-24bit_indiana_jones_whistle_w2048_transformed.dat') as f:
     #with open('../samples/dumps/96kHz-24bit_big_freq_range_w2048_transformed.dat') as f:
-    with open('../samples/dump.dat') as f:
+    with open('samples/dump.dat') as f:
 
         lines = [line.rstrip() for line in f]
 
@@ -17,7 +17,8 @@ def main(argv):
     Fs = float(lines[1].rstrip(" "))    # sample frequency
 
 
-    Z = [ [abs(float(z)) for z in line.split(" ")] for line in lines[2:] ]
+    Z = [ [ abs(float(z)) for z in line.split(" ")] for line in lines[2:] ]
+    #Z = np.log10(Z)
 
     dt = W/Fs       # timestep
     df = Fs/W       # frequency step
@@ -26,12 +27,12 @@ def main(argv):
                     slice( 0, len(Z[0]) * df, df )]
 
     color = colormap()
-    print Z[0]
     z_min, z_max = np.abs(Z).min(), np.abs(Z).max()
     #z_min = 0
     #z_max = 20
     print "min: " + str(z_min)
     print "max: " + str(z_max)
+
     plt.pcolor(np.array(X), np.array(Y), np.array(Z), cmap=color, vmin=z_min, vmax=z_max) #cmap = 'binary'
     plt.axis([X.min(), X.max(), Y.min(), Y.max()])
     plt.show()
