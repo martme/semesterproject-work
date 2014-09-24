@@ -9,7 +9,7 @@ def main(argv):
     #with open('../samples/dumps/96kHz-24bit_whistle_w2048_transformed.dat') as f:
     #with open('../samples/dumps/96kHz-24bit_indiana_jones_whistle_w2048_transformed.dat') as f:
     #with open('../samples/dumps/96kHz-24bit_big_freq_range_w2048_transformed.dat') as f:
-    with open('samples/dump.dat') as f:
+    with open('samples/whistle.dat') as f:
 
         lines = [line.rstrip() for line in f]
 

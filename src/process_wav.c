@@ -92,11 +92,23 @@ static int process_sndfile (char * sndfilepath)
     num_windows = sndinfo.frames / WINDOW_SIZE;
 
     window = malloc( WINDOW_SIZE * sizeof(float) );
-    for (w = 0ull; w < num_windows; w++) {
+    for (w = 0ull; w < num_windows; w++)
+    {
         j = 0;
         for (i = 0; i < sndinfo.channels*WINDOW_SIZE; i += sndinfo.channels)
         {
             window[j++] = buffer[w*WINDOW_SIZE + i];
+        }
+        spectrum = power_spectrum(window, WINDOW_SIZE);
+        dump_spectrum(spectrum, samples_in_spectrum);
+
+        /* Calculate spectrum with 50% overlap */
+        if (w + 1 >= num_windows) continue;
+
+        j = 0;
+        for (i = 0; i < sndinfo.channels*WINDOW_SIZE; i += sndinfo.channels)
+        {
+            window[j++] = buffer[w*WINDOW_SIZE + WINDOW_SIZE/2 + i];
         }
         spectrum = power_spectrum(window, WINDOW_SIZE);
         dump_spectrum(spectrum, samples_in_spectrum);
@@ -132,11 +144,11 @@ static float* power_spectrum(float *in, int N)
     /* 4. Calculate the squared magnitude of the FFT output bins (re * re + im * im) */
     for (i = 0; i < nc; i++)
     {
-        result[i] = (float) ( (float)creal(out[i])*creal(out[i]) + cimag(out[i])*cimag(out[i]) );
+        result[i] = (float) sqrt( (float)creal(out[i])*creal(out[i]) + cimag(out[i])*cimag(out[i]) );
     }
 
     /* 5. (optional) Calculate 10 * log10 of each magnitude squared output bin to get a value in dB */
-    convert_to_dB(result, nc);
+    //convert_to_dB(result, nc);
 
     fftwf_destroy_plan(plan_forward);
     fftwf_free(out);
