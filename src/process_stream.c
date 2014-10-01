@@ -44,7 +44,7 @@ static int dumpCallback( const void *inputBuffer, void *outputBuffer,
 
     float sum = 0;
 
-    dump_fftw(in, framesPerBuffer);
+    /* dump_fftw(in, framesPerBuffer); */
     /* Can skip rest, only used for playback ... */
     if ( inputBuffer == NULL ) {
         for (i = 0; i < framesPerBuffer; i++)
@@ -79,7 +79,7 @@ static int index_of_freq(int freq)
 
 
 /*******************************************************************/
-int signal_dump(void)
+int process_stream(void)
 {
     PaStreamParameters inputParameters, outputParameters;
     PaStream *stream;

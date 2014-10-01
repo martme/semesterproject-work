@@ -2,10 +2,10 @@
 #ifndef main_h
 #define main_h
 
-void dump_fftw(const float* data, int n); /* Transform.c */
-
 int process_wav(char* filename);
-int signal_dump(void); /* signal_dump.c */
 
+/* Window functions */
+void wf_hann(float * in, int N);
+void wf_blackman_harris(float * in, int N);
 
 #endif

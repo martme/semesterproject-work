@@ -1,3 +1,5 @@
+#include "main.h"
+
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
@@ -7,7 +9,6 @@
 #include <sndfile.h>
 
 #define WINDOW_SIZE (1024)
-#define PI (3.1415926535)
 
 /* For inspiration: http://www.labbookpages.co.uk/audio/wavFiles.html */
 static float* power_spectrum(float *in, int N);
@@ -158,11 +159,8 @@ static float* power_spectrum(float *in, int N)
 
 static void apply_window(float *in, int N)
 {
-    int i;
-    for (i = 0; i < N; i++) {
-        in[i] *= 0.5 * ( 1 - cos( 2 * PI * i) / ( N-1 ) ); /* Hann function */
-    }
-    return;
+    //wf_blackman_harris(in, N);
+    wf_hann(in, N);
 }
 
 static void convert_to_dB(float *arr, int N)

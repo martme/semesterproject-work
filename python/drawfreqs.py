@@ -9,18 +9,20 @@ def main(argv):
     #with open('../samples/dumps/96kHz-24bit_whistle_w2048_transformed.dat') as f:
     #with open('../samples/dumps/96kHz-24bit_indiana_jones_whistle_w2048_transformed.dat') as f:
     #with open('../samples/dumps/96kHz-24bit_big_freq_range_w2048_transformed.dat') as f:
-    with open('samples/whistle.dat') as f:
+    #with open('samples/whistle.dat') as f:
+    #    lines = [line.rstrip() for line in f]
+    #W = float(lines[0].rstrip())     # window size
+    #Fs = float(lines[1].rstrip())    # sample frequency
 
-        lines = [line.rstrip() for line in f]
-
-    W = float(lines[0].rstrip(" "))     # window size
-    Fs = float(lines[1].rstrip(" "))    # sample frequency
-
-
+    W = float(sys.stdin.readline().rstrip())
+    Fs = float(sys.stdin.readline().rstrip())
+    lines = [line.rstrip() for line in sys.stdin]
     Z = [ [ abs(float(z)) for z in line.split(" ")] for line in lines[2:] ]
     #Z = np.log10(Z)
 
-    dt = W/Fs       # timestep
+    print "W:\t%f\nFs:\t%f" % (W, Fs)
+
+    dt = W/(2*Fs)   # timestep --> only progress half a window at the time
     df = Fs/W       # frequency step
 
     Y, X = np.mgrid[slice( 0, len(Z) * dt, dt ),
@@ -29,7 +31,7 @@ def main(argv):
     color = colormap()
     z_min, z_max = np.abs(Z).min(), np.abs(Z).max()
     #z_min = 0
-    #z_max = 20
+    z_max = .1
     print "min: " + str(z_min)
     print "max: " + str(z_max)
 
