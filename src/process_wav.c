@@ -3,12 +3,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <stdint.h>
 
 #include <complex.h>
 #include <fftw3.h>
 #include <sndfile.h>
 
-#define WINDOW_SIZE (1024)
+#define WINDOW_SIZE (1024) /* Higher value --> better frequency granularity / worse time granularity */
 
 /* For inspiration: http://www.labbookpages.co.uk/audio/wavFiles.html */
 static float* power_spectrum(float *in, int N);
@@ -161,7 +162,7 @@ static float* power_spectrum(float *in, int N)
 static void apply_window(float *in, int N)
 {
     //wf_blackman_harris(in, N);
-    wf_hann(in, N);:Pass
+    wf_hann(in, N);
 }
 
 static void convert_to_dB(float *arr, int N)

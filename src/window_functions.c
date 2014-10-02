@@ -1,14 +1,11 @@
 #include <math.h>
-#define PI (3.1415926535)
-
-
 
 void wf_hann(float * in, int N)
 {
     int n;
     float w_n;
     for (n = 0; n < N; n++) {
-        w_n = 0.5 * ( 1 - cos( 2 * PI * n) / ( N-1 ) );
+        w_n = 0.5 * ( 1 - cos( 2 * M_PI * n) / ( N-1 ) );
         in[n] *= w_n;
     }
 }

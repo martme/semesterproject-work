@@ -1,6 +1,4 @@
 #include "main.h"
-
-#include "portaudio.h"
 #include "sndfile.h"
 #include <stdio.h>
 #include <math.h>
