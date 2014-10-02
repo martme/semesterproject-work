@@ -31,7 +31,7 @@ def main(argv):
     color = colormap()
     z_min, z_max = np.abs(Z).min(), np.abs(Z).max()
     #z_min = 0
-    z_max = .1
+    #z_max = 10
     print "min: " + str(z_min)
     print "max: " + str(z_max)
 

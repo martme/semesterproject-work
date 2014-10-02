@@ -145,6 +145,7 @@ static float* power_spectrum(float *in, int N)
     /* 4. Calculate the squared magnitude of the FFT output bins (re * re + im * im) */
     for (i = 0; i < nc; i++)
     {
+        /* Normalization here?? */
         result[i] = (float) sqrt( (float)creal(out[i])*creal(out[i]) + cimag(out[i])*cimag(out[i]) );
     }
 
@@ -160,7 +161,7 @@ static float* power_spectrum(float *in, int N)
 static void apply_window(float *in, int N)
 {
     //wf_blackman_harris(in, N);
-    wf_hann(in, N);
+    wf_hann(in, N);:Pass
 }
 
 static void convert_to_dB(float *arr, int N)
