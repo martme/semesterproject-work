@@ -5,20 +5,12 @@ import numpy as np
 from pylab import *
 
 def main(argv):
-    #with open('samples/10k-20k_48kHz_w512.txt') as f:
-    #with open('../samples/dumps/96kHz-24bit_whistle_w2048_transformed.dat') as f:
-    #with open('../samples/dumps/96kHz-24bit_indiana_jones_whistle_w2048_transformed.dat') as f:
-    #with open('../samples/dumps/96kHz-24bit_big_freq_range_w2048_transformed.dat') as f:
-    #with open('samples/whistle.dat') as f:
-    #    lines = [line.rstrip() for line in f]
-    #W = float(lines[0].rstrip())     # window size
-    #Fs = float(lines[1].rstrip())    # sample frequency
 
     W = float(sys.stdin.readline().rstrip())
     Fs = float(sys.stdin.readline().rstrip())
     lines = [line.rstrip() for line in sys.stdin]
-    Z = [ [ abs(float(z)) for z in line.split(" ")] for line in lines[2:] ]
-    #Z = np.log10(Z)
+    Z = [ [ (float(z)) for z in line.split(" ")] for line in lines[2:] ]
+    #Z = np.multiply(np.log10(Z), 20) # convert to dB
 
     print "W:\t%f\nFs:\t%f" % (W, Fs)
 
@@ -31,9 +23,15 @@ def main(argv):
     color = colormap()
     z_min, z_max = np.abs(Z).min(), np.abs(Z).max()
     #z_min = 0
-    #z_max = 10
-    print "min: " + str(z_min)
-    print "max: " + str(z_max)
+    #z_max = .0001
+    print "min:\t%f" % z_min
+    print "max:\t%f" % z_max
+    print "mean:\t%f" % np.mean(Z)
+    print "std:\t%f" % np.std(Z)
+    print "median:\t%f" % np.median(Z)
+
+    #z_max = np.mean(Z)+np.std(Z)
+    z_max = 10*np.median(Z)
 
     plt.pcolor(np.array(X), np.array(Y), np.array(Z), cmap=color, vmin=z_min, vmax=z_max) #cmap = 'binary'
     plt.axis([X.min(), X.max(), Y.min(), Y.max()])
