@@ -1,390 +1,58 @@
 
 #include <stdio.h>
 #include <sys/time.h>
+#include <fcntl.h>
+#include <linux/kd.h>
 /* #include <sys/time.h> */
 
-#define TIME_PER_OPERATION (2)
+#define TIME_PER_OPERATION (1)
 
-static void init(struct timeval *start, struct timeval *stop);
-static int time_elapsed (struct timeval start, struct timeval stop);
+static void begin(char *label);
+static void complete(char *label);
+/*static void byreference(void (*foo)(int));
+*/
 
 int main (int argc, char* argv) 
 {	
 	struct timeval stop, start;
-	
-
 
 	/* timeval t -->
 	 * tv_usec --> elapsed time in micro seconds 
 	 * tv_sec --> elapsed time in seconds
 	 */
 
-	printf("Looping micro instructions for %d seconds each\n", TIME_PER_OPERATION);
+	begin("nop");
+	nop(TIME_PER_OPERATION);
+	complete("nop");
 
-	printf("[ ] nop");
-	fflush(stdout);
+	begin("mul");
+	mul(TIME_PER_OPERATION);
+	complete("mul");
 
-	init(&start, &stop);
-	/* Looping through NOP */
-	while (time_elapsed(start, stop) < TIME_PER_OPERATION) 
-	{
-		__asm__ (
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			"nop;"
-			);
-		gettimeofday(&stop, NULL);
-	}
-	printf("\r[+] nop\n");
-	printf("[ ] mul");
-	fflush(stdout);
+	begin("add");
+	add(TIME_PER_OPERATION);
+	complete("add");
 
-	init(&start, &stop);
-	/* Looping through MUL */
-	while (time_elapsed(start, stop) < TIME_PER_OPERATION) 
-	{
-		__asm__ (
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			"mul %eax;"
-			);
-		gettimeofday(&stop, NULL);
-	}
+	begin("nop");
+	nop(TIME_PER_OPERATION);
+	complete("nop");
 
-	printf("\r[+] mul\n");
-	printf("[ ] add");
+	begin("mul");
+	mul(TIME_PER_OPERATION);
+	complete("mul");
 
-
-	fflush(stdout);
-	init(&start, &stop);
-
-	/* Looping through ADD */
-	while (time_elapsed(start, stop) < TIME_PER_OPERATION) 
-	{
-		__asm__ (
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			"add %eax, %eax;"
-			);
-		gettimeofday(&stop, NULL);
-	}
-	printf("\r[+] add\n");
-
-
-
-
-
+	begin("add");
+	add(TIME_PER_OPERATION);
+	complete("add");
 	return 0;
 }
 
-static void init(struct timeval *start, struct timeval *stop) 
+static void begin(char *label)
 {
-	gettimeofday(&(*start), NULL);
-	gettimeofday(&(*stop), NULL);
+	printf("[ ] %s", label);
+	fflush(stdout);
 }
-
-static int time_elapsed (struct timeval start, struct timeval stop)
+static void complete(char *label) 
 {
-	return stop.tv_sec - start.tv_sec;
+	printf("\r[+] %s\n", label);
 }

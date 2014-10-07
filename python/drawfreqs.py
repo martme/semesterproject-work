@@ -31,7 +31,9 @@ def main(argv):
     print "median:\t%f" % np.median(Z)
 
     #z_max = np.mean(Z)+np.std(Z)
-    z_max = 10*np.median(Z)
+    #z_max = 5*np.median(Z)
+    #z_max = np.mean(Z)
+    z_max = 0.1
 
     plt.pcolor(np.array(X), np.array(Y), np.array(Z), cmap=color, vmin=z_min, vmax=z_max) #cmap = 'binary'
     plt.axis([X.min(), X.max(), Y.min(), Y.max()])
