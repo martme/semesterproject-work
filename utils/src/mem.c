@@ -17,43 +17,47 @@ static void force_cache_miss()
 {
 	/* Able to hit 1000 times and never hit L1 or L2 cache, given linear cache strategy */
 	
-	char *data, tmp;
+	volatile char *data, tmp;
 	int i, size;
-	//clock_t start;
+	clock_t start;
 
 	size = 1000*L2_SIZE*sizeof(char);
 	data = malloc(size);
 
-	//start = clock();
+	start = clock();
 	for ( i = 0; i < size; i += L2_SIZE)
 	{
 		tmp = data[i];
 	}
-	free(data);
-	//printf("Time w/ cache miss:\t%f\n", (double)(clock() - start));
+	//free(data);
+	printf("Time w/ cache miss:\t%f\n", (double)(clock() - start));
 }
 
 static void no_cache_miss() 
 {
 	/* Able to hit 1000 times and never hit L1 or L2 cache, given linear cache strategy */
 	
-	char *data, tmp;
+	volatile char *data, tmp;
 	int i, size;
-	//clock_t start;
+	clock_t start;
 
 	size = 1000*sizeof(char);
 	data = malloc(size);
 
-	//start = clock();
+	start = clock();
 	for ( i = 0; i < size; i += 1)
 	{
 		tmp = data[i];
 	}
-	free(data);
-	//printf("Time w/o cache miss:\t%f\n", (double)(clock() - start));
+	//free(data);
+	printf("Time w/o cache miss:\t%f\n", (double)(clock() - start));
 }
 
 void mem(int TIME) {
+	force_cache_miss();
+	no_cache_miss();
+
+	return;
 	struct timeval start, stop;
 	gettimeofday(&start, NULL);
 	gettimeofday(&stop, NULL);
