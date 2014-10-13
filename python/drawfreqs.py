@@ -20,7 +20,9 @@ def main(argv):
     Y, X = np.mgrid[slice( 0, len(Z) * dt, dt ),
                     slice( 0, len(Z[0]) * df, df )]
 
-    color = colormap()
+    #color = colormap()
+    color = plt.get_cmap("seismic");
+    #Z = np.abs(Z)
     z_min, z_max = np.abs(Z).min(), np.abs(Z).max()
     #z_min = 0
     #z_max = .0001
@@ -31,9 +33,10 @@ def main(argv):
     print "median:\t%f" % np.median(Z)
 
     #z_max = np.mean(Z)+np.std(Z)
-    #z_max = 5*np.median(Z)
+    z_max = 50*np.median(Z)
     #z_max = np.mean(Z)
-    z_max = 0.1
+    #z_min = Z.min()/5
+    #z_max = 0
 
     plt.pcolor(np.array(X), np.array(Y), np.array(Z), cmap=color, vmin=z_min, vmax=z_max) #cmap = 'binary'
     plt.axis([X.min(), X.max(), Y.min(), Y.max()])

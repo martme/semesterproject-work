@@ -1,0 +1,3531 @@
+
+bin/main:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+0000000000400510 <_init>:
+  400510:	48 83 ec 08          	sub    $0x8,%rsp
+  400514:	48 8b 05 dd 2a 20 00 	mov    0x202add(%rip),%rax        # 602ff8 <_DYNAMIC+0x1d0>
+  40051b:	48 85 c0             	test   %rax,%rax
+  40051e:	74 05                	je     400525 <_init+0x15>
+  400520:	e8 5b 00 00 00       	callq  400580 <__gmon_start__@plt>
+  400525:	48 83 c4 08          	add    $0x8,%rsp
+  400529:	c3                   	retq   
+
+Disassembly of section .plt:
+
+0000000000400530 <clock@plt-0x10>:
+  400530:	ff 35 d2 2a 20 00    	pushq  0x202ad2(%rip)        # 603008 <_GLOBAL_OFFSET_TABLE_+0x8>
+  400536:	ff 25 d4 2a 20 00    	jmpq   *0x202ad4(%rip)        # 603010 <_GLOBAL_OFFSET_TABLE_+0x10>
+  40053c:	0f 1f 40 00          	nopl   0x0(%rax)
+
+0000000000400540 <clock@plt>:
+  400540:	ff 25 d2 2a 20 00    	jmpq   *0x202ad2(%rip)        # 603018 <_GLOBAL_OFFSET_TABLE_+0x18>
+  400546:	68 00 00 00 00       	pushq  $0x0
+  40054b:	e9 e0 ff ff ff       	jmpq   400530 <_init+0x20>
+
+0000000000400550 <printf@plt>:
+  400550:	ff 25 ca 2a 20 00    	jmpq   *0x202aca(%rip)        # 603020 <_GLOBAL_OFFSET_TABLE_+0x20>
+  400556:	68 01 00 00 00       	pushq  $0x1
+  40055b:	e9 d0 ff ff ff       	jmpq   400530 <_init+0x20>
+
+0000000000400560 <gettimeofday@plt>:
+  400560:	ff 25 c2 2a 20 00    	jmpq   *0x202ac2(%rip)        # 603028 <_GLOBAL_OFFSET_TABLE_+0x28>
+  400566:	68 02 00 00 00       	pushq  $0x2
+  40056b:	e9 c0 ff ff ff       	jmpq   400530 <_init+0x20>
+
+0000000000400570 <__libc_start_main@plt>:
+  400570:	ff 25 ba 2a 20 00    	jmpq   *0x202aba(%rip)        # 603030 <_GLOBAL_OFFSET_TABLE_+0x30>
+  400576:	68 03 00 00 00       	pushq  $0x3
+  40057b:	e9 b0 ff ff ff       	jmpq   400530 <_init+0x20>
+
+0000000000400580 <__gmon_start__@plt>:
+  400580:	ff 25 b2 2a 20 00    	jmpq   *0x202ab2(%rip)        # 603038 <_GLOBAL_OFFSET_TABLE_+0x38>
+  400586:	68 04 00 00 00       	pushq  $0x4
+  40058b:	e9 a0 ff ff ff       	jmpq   400530 <_init+0x20>
+
+0000000000400590 <malloc@plt>:
+  400590:	ff 25 aa 2a 20 00    	jmpq   *0x202aaa(%rip)        # 603040 <_GLOBAL_OFFSET_TABLE_+0x40>
+  400596:	68 05 00 00 00       	pushq  $0x5
+  40059b:	e9 90 ff ff ff       	jmpq   400530 <_init+0x20>
+
+00000000004005a0 <fflush@plt>:
+  4005a0:	ff 25 a2 2a 20 00    	jmpq   *0x202aa2(%rip)        # 603048 <_GLOBAL_OFFSET_TABLE_+0x48>
+  4005a6:	68 06 00 00 00       	pushq  $0x6
+  4005ab:	e9 80 ff ff ff       	jmpq   400530 <_init+0x20>
+
+Disassembly of section .text:
+
+00000000004005b0 <_start>:
+  4005b0:	31 ed                	xor    %ebp,%ebp
+  4005b2:	49 89 d1             	mov    %rdx,%r9
+  4005b5:	5e                   	pop    %rsi
+  4005b6:	48 89 e2             	mov    %rsp,%rdx
+  4005b9:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+  4005bd:	50                   	push   %rax
+  4005be:	54                   	push   %rsp
+  4005bf:	49 c7 c0 e0 22 40 00 	mov    $0x4022e0,%r8
+  4005c6:	48 c7 c1 70 22 40 00 	mov    $0x402270,%rcx
+  4005cd:	48 c7 c7 6a 10 40 00 	mov    $0x40106a,%rdi
+  4005d4:	e8 97 ff ff ff       	callq  400570 <__libc_start_main@plt>
+  4005d9:	f4                   	hlt    
+  4005da:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+00000000004005e0 <deregister_tm_clones>:
+  4005e0:	b8 67 30 60 00       	mov    $0x603067,%eax
+  4005e5:	55                   	push   %rbp
+  4005e6:	48 2d 60 30 60 00    	sub    $0x603060,%rax
+  4005ec:	48 83 f8 0e          	cmp    $0xe,%rax
+  4005f0:	48 89 e5             	mov    %rsp,%rbp
+  4005f3:	77 02                	ja     4005f7 <deregister_tm_clones+0x17>
+  4005f5:	5d                   	pop    %rbp
+  4005f6:	c3                   	retq   
+  4005f7:	b8 00 00 00 00       	mov    $0x0,%eax
+  4005fc:	48 85 c0             	test   %rax,%rax
+  4005ff:	74 f4                	je     4005f5 <deregister_tm_clones+0x15>
+  400601:	5d                   	pop    %rbp
+  400602:	bf 60 30 60 00       	mov    $0x603060,%edi
+  400607:	ff e0                	jmpq   *%rax
+  400609:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+0000000000400610 <register_tm_clones>:
+  400610:	b8 60 30 60 00       	mov    $0x603060,%eax
+  400615:	55                   	push   %rbp
+  400616:	48 2d 60 30 60 00    	sub    $0x603060,%rax
+  40061c:	48 c1 f8 03          	sar    $0x3,%rax
+  400620:	48 89 e5             	mov    %rsp,%rbp
+  400623:	48 89 c2             	mov    %rax,%rdx
+  400626:	48 c1 ea 3f          	shr    $0x3f,%rdx
+  40062a:	48 01 d0             	add    %rdx,%rax
+  40062d:	48 d1 f8             	sar    %rax
+  400630:	75 02                	jne    400634 <register_tm_clones+0x24>
+  400632:	5d                   	pop    %rbp
+  400633:	c3                   	retq   
+  400634:	ba 00 00 00 00       	mov    $0x0,%edx
+  400639:	48 85 d2             	test   %rdx,%rdx
+  40063c:	74 f4                	je     400632 <register_tm_clones+0x22>
+  40063e:	5d                   	pop    %rbp
+  40063f:	48 89 c6             	mov    %rax,%rsi
+  400642:	bf 60 30 60 00       	mov    $0x603060,%edi
+  400647:	ff e2                	jmpq   *%rdx
+  400649:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+0000000000400650 <__do_global_dtors_aux>:
+  400650:	80 3d 11 2a 20 00 00 	cmpb   $0x0,0x202a11(%rip)        # 603068 <completed.6972>
+  400657:	75 11                	jne    40066a <__do_global_dtors_aux+0x1a>
+  400659:	55                   	push   %rbp
+  40065a:	48 89 e5             	mov    %rsp,%rbp
+  40065d:	e8 7e ff ff ff       	callq  4005e0 <deregister_tm_clones>
+  400662:	5d                   	pop    %rbp
+  400663:	c6 05 fe 29 20 00 01 	movb   $0x1,0x2029fe(%rip)        # 603068 <completed.6972>
+  40066a:	f3 c3                	repz retq 
+  40066c:	0f 1f 40 00          	nopl   0x0(%rax)
+
+0000000000400670 <frame_dummy>:
+  400670:	48 83 3d a8 27 20 00 	cmpq   $0x0,0x2027a8(%rip)        # 602e20 <__JCR_END__>
+  400677:	00 
+  400678:	74 1e                	je     400698 <frame_dummy+0x28>
+  40067a:	b8 00 00 00 00       	mov    $0x0,%eax
+  40067f:	48 85 c0             	test   %rax,%rax
+  400682:	74 14                	je     400698 <frame_dummy+0x28>
+  400684:	55                   	push   %rbp
+  400685:	bf 20 2e 60 00       	mov    $0x602e20,%edi
+  40068a:	48 89 e5             	mov    %rsp,%rbp
+  40068d:	ff d0                	callq  *%rax
+  40068f:	5d                   	pop    %rbp
+  400690:	e9 7b ff ff ff       	jmpq   400610 <register_tm_clones>
+  400695:	0f 1f 00             	nopl   (%rax)
+  400698:	e9 73 ff ff ff       	jmpq   400610 <register_tm_clones>
+
+000000000040069d <add>:
+  40069d:	55                   	push   %rbp
+  40069e:	48 89 e5             	mov    %rsp,%rbp
+  4006a1:	48 83 ec 30          	sub    $0x30,%rsp
+  4006a5:	89 7d dc             	mov    %edi,-0x24(%rbp)
+  4006a8:	48 8d 45 e0          	lea    -0x20(%rbp),%rax
+  4006ac:	be 00 00 00 00       	mov    $0x0,%esi
+  4006b1:	48 89 c7             	mov    %rax,%rdi
+  4006b4:	e8 a7 fe ff ff       	callq  400560 <gettimeofday@plt>
+  4006b9:	48 8d 45 f0          	lea    -0x10(%rbp),%rax
+  4006bd:	be 00 00 00 00       	mov    $0x0,%esi
+  4006c2:	48 89 c7             	mov    %rax,%rdi
+  4006c5:	e8 96 fe ff ff       	callq  400560 <gettimeofday@plt>
+  4006ca:	e9 e1 07 00 00       	jmpq   400eb0 <add+0x813>
+  4006cf:	01 c0                	add    %eax,%eax
+  4006d1:	01 c0                	add    %eax,%eax
+  4006d3:	01 c0                	add    %eax,%eax
+  4006d5:	01 c0                	add    %eax,%eax
+  4006d7:	01 c0                	add    %eax,%eax
+  4006d9:	01 c0                	add    %eax,%eax
+  4006db:	01 c0                	add    %eax,%eax
+  4006dd:	01 c0                	add    %eax,%eax
+  4006df:	01 c0                	add    %eax,%eax
+  4006e1:	01 c0                	add    %eax,%eax
+  4006e3:	01 c0                	add    %eax,%eax
+  4006e5:	01 c0                	add    %eax,%eax
+  4006e7:	01 c0                	add    %eax,%eax
+  4006e9:	01 c0                	add    %eax,%eax
+  4006eb:	01 c0                	add    %eax,%eax
+  4006ed:	01 c0                	add    %eax,%eax
+  4006ef:	01 c0                	add    %eax,%eax
+  4006f1:	01 c0                	add    %eax,%eax
+  4006f3:	01 c0                	add    %eax,%eax
+  4006f5:	01 c0                	add    %eax,%eax
+  4006f7:	01 c0                	add    %eax,%eax
+  4006f9:	01 c0                	add    %eax,%eax
+  4006fb:	01 c0                	add    %eax,%eax
+  4006fd:	01 c0                	add    %eax,%eax
+  4006ff:	01 c0                	add    %eax,%eax
+  400701:	01 c0                	add    %eax,%eax
+  400703:	01 c0                	add    %eax,%eax
+  400705:	01 c0                	add    %eax,%eax
+  400707:	01 c0                	add    %eax,%eax
+  400709:	01 c0                	add    %eax,%eax
+  40070b:	01 c0                	add    %eax,%eax
+  40070d:	01 c0                	add    %eax,%eax
+  40070f:	01 c0                	add    %eax,%eax
+  400711:	01 c0                	add    %eax,%eax
+  400713:	01 c0                	add    %eax,%eax
+  400715:	01 c0                	add    %eax,%eax
+  400717:	01 c0                	add    %eax,%eax
+  400719:	01 c0                	add    %eax,%eax
+  40071b:	01 c0                	add    %eax,%eax
+  40071d:	01 c0                	add    %eax,%eax
+  40071f:	01 c0                	add    %eax,%eax
+  400721:	01 c0                	add    %eax,%eax
+  400723:	01 c0                	add    %eax,%eax
+  400725:	01 c0                	add    %eax,%eax
+  400727:	01 c0                	add    %eax,%eax
+  400729:	01 c0                	add    %eax,%eax
+  40072b:	01 c0                	add    %eax,%eax
+  40072d:	01 c0                	add    %eax,%eax
+  40072f:	01 c0                	add    %eax,%eax
+  400731:	01 c0                	add    %eax,%eax
+  400733:	01 c0                	add    %eax,%eax
+  400735:	01 c0                	add    %eax,%eax
+  400737:	01 c0                	add    %eax,%eax
+  400739:	01 c0                	add    %eax,%eax
+  40073b:	01 c0                	add    %eax,%eax
+  40073d:	01 c0                	add    %eax,%eax
+  40073f:	01 c0                	add    %eax,%eax
+  400741:	01 c0                	add    %eax,%eax
+  400743:	01 c0                	add    %eax,%eax
+  400745:	01 c0                	add    %eax,%eax
+  400747:	01 c0                	add    %eax,%eax
+  400749:	01 c0                	add    %eax,%eax
+  40074b:	01 c0                	add    %eax,%eax
+  40074d:	01 c0                	add    %eax,%eax
+  40074f:	01 c0                	add    %eax,%eax
+  400751:	01 c0                	add    %eax,%eax
+  400753:	01 c0                	add    %eax,%eax
+  400755:	01 c0                	add    %eax,%eax
+  400757:	01 c0                	add    %eax,%eax
+  400759:	01 c0                	add    %eax,%eax
+  40075b:	01 c0                	add    %eax,%eax
+  40075d:	01 c0                	add    %eax,%eax
+  40075f:	01 c0                	add    %eax,%eax
+  400761:	01 c0                	add    %eax,%eax
+  400763:	01 c0                	add    %eax,%eax
+  400765:	01 c0                	add    %eax,%eax
+  400767:	01 c0                	add    %eax,%eax
+  400769:	01 c0                	add    %eax,%eax
+  40076b:	01 c0                	add    %eax,%eax
+  40076d:	01 c0                	add    %eax,%eax
+  40076f:	01 c0                	add    %eax,%eax
+  400771:	01 c0                	add    %eax,%eax
+  400773:	01 c0                	add    %eax,%eax
+  400775:	01 c0                	add    %eax,%eax
+  400777:	01 c0                	add    %eax,%eax
+  400779:	01 c0                	add    %eax,%eax
+  40077b:	01 c0                	add    %eax,%eax
+  40077d:	01 c0                	add    %eax,%eax
+  40077f:	01 c0                	add    %eax,%eax
+  400781:	01 c0                	add    %eax,%eax
+  400783:	01 c0                	add    %eax,%eax
+  400785:	01 c0                	add    %eax,%eax
+  400787:	01 c0                	add    %eax,%eax
+  400789:	01 c0                	add    %eax,%eax
+  40078b:	01 c0                	add    %eax,%eax
+  40078d:	01 c0                	add    %eax,%eax
+  40078f:	01 c0                	add    %eax,%eax
+  400791:	01 c0                	add    %eax,%eax
+  400793:	01 c0                	add    %eax,%eax
+  400795:	01 c0                	add    %eax,%eax
+  400797:	01 c0                	add    %eax,%eax
+  400799:	01 c0                	add    %eax,%eax
+  40079b:	01 c0                	add    %eax,%eax
+  40079d:	01 c0                	add    %eax,%eax
+  40079f:	01 c0                	add    %eax,%eax
+  4007a1:	01 c0                	add    %eax,%eax
+  4007a3:	01 c0                	add    %eax,%eax
+  4007a5:	01 c0                	add    %eax,%eax
+  4007a7:	01 c0                	add    %eax,%eax
+  4007a9:	01 c0                	add    %eax,%eax
+  4007ab:	01 c0                	add    %eax,%eax
+  4007ad:	01 c0                	add    %eax,%eax
+  4007af:	01 c0                	add    %eax,%eax
+  4007b1:	01 c0                	add    %eax,%eax
+  4007b3:	01 c0                	add    %eax,%eax
+  4007b5:	01 c0                	add    %eax,%eax
+  4007b7:	01 c0                	add    %eax,%eax
+  4007b9:	01 c0                	add    %eax,%eax
+  4007bb:	01 c0                	add    %eax,%eax
+  4007bd:	01 c0                	add    %eax,%eax
+  4007bf:	01 c0                	add    %eax,%eax
+  4007c1:	01 c0                	add    %eax,%eax
+  4007c3:	01 c0                	add    %eax,%eax
+  4007c5:	01 c0                	add    %eax,%eax
+  4007c7:	01 c0                	add    %eax,%eax
+  4007c9:	01 c0                	add    %eax,%eax
+  4007cb:	01 c0                	add    %eax,%eax
+  4007cd:	01 c0                	add    %eax,%eax
+  4007cf:	01 c0                	add    %eax,%eax
+  4007d1:	01 c0                	add    %eax,%eax
+  4007d3:	01 c0                	add    %eax,%eax
+  4007d5:	01 c0                	add    %eax,%eax
+  4007d7:	01 c0                	add    %eax,%eax
+  4007d9:	01 c0                	add    %eax,%eax
+  4007db:	01 c0                	add    %eax,%eax
+  4007dd:	01 c0                	add    %eax,%eax
+  4007df:	01 c0                	add    %eax,%eax
+  4007e1:	01 c0                	add    %eax,%eax
+  4007e3:	01 c0                	add    %eax,%eax
+  4007e5:	01 c0                	add    %eax,%eax
+  4007e7:	01 c0                	add    %eax,%eax
+  4007e9:	01 c0                	add    %eax,%eax
+  4007eb:	01 c0                	add    %eax,%eax
+  4007ed:	01 c0                	add    %eax,%eax
+  4007ef:	01 c0                	add    %eax,%eax
+  4007f1:	01 c0                	add    %eax,%eax
+  4007f3:	01 c0                	add    %eax,%eax
+  4007f5:	01 c0                	add    %eax,%eax
+  4007f7:	01 c0                	add    %eax,%eax
+  4007f9:	01 c0                	add    %eax,%eax
+  4007fb:	01 c0                	add    %eax,%eax
+  4007fd:	01 c0                	add    %eax,%eax
+  4007ff:	01 c0                	add    %eax,%eax
+  400801:	01 c0                	add    %eax,%eax
+  400803:	01 c0                	add    %eax,%eax
+  400805:	01 c0                	add    %eax,%eax
+  400807:	01 c0                	add    %eax,%eax
+  400809:	01 c0                	add    %eax,%eax
+  40080b:	01 c0                	add    %eax,%eax
+  40080d:	01 c0                	add    %eax,%eax
+  40080f:	01 c0                	add    %eax,%eax
+  400811:	01 c0                	add    %eax,%eax
+  400813:	01 c0                	add    %eax,%eax
+  400815:	01 c0                	add    %eax,%eax
+  400817:	01 c0                	add    %eax,%eax
+  400819:	01 c0                	add    %eax,%eax
+  40081b:	01 c0                	add    %eax,%eax
+  40081d:	01 c0                	add    %eax,%eax
+  40081f:	01 c0                	add    %eax,%eax
+  400821:	01 c0                	add    %eax,%eax
+  400823:	01 c0                	add    %eax,%eax
+  400825:	01 c0                	add    %eax,%eax
+  400827:	01 c0                	add    %eax,%eax
+  400829:	01 c0                	add    %eax,%eax
+  40082b:	01 c0                	add    %eax,%eax
+  40082d:	01 c0                	add    %eax,%eax
+  40082f:	01 c0                	add    %eax,%eax
+  400831:	01 c0                	add    %eax,%eax
+  400833:	01 c0                	add    %eax,%eax
+  400835:	01 c0                	add    %eax,%eax
+  400837:	01 c0                	add    %eax,%eax
+  400839:	01 c0                	add    %eax,%eax
+  40083b:	01 c0                	add    %eax,%eax
+  40083d:	01 c0                	add    %eax,%eax
+  40083f:	01 c0                	add    %eax,%eax
+  400841:	01 c0                	add    %eax,%eax
+  400843:	01 c0                	add    %eax,%eax
+  400845:	01 c0                	add    %eax,%eax
+  400847:	01 c0                	add    %eax,%eax
+  400849:	01 c0                	add    %eax,%eax
+  40084b:	01 c0                	add    %eax,%eax
+  40084d:	01 c0                	add    %eax,%eax
+  40084f:	01 c0                	add    %eax,%eax
+  400851:	01 c0                	add    %eax,%eax
+  400853:	01 c0                	add    %eax,%eax
+  400855:	01 c0                	add    %eax,%eax
+  400857:	01 c0                	add    %eax,%eax
+  400859:	01 c0                	add    %eax,%eax
+  40085b:	01 c0                	add    %eax,%eax
+  40085d:	01 c0                	add    %eax,%eax
+  40085f:	01 c0                	add    %eax,%eax
+  400861:	01 c0                	add    %eax,%eax
+  400863:	01 c0                	add    %eax,%eax
+  400865:	01 c0                	add    %eax,%eax
+  400867:	01 c0                	add    %eax,%eax
+  400869:	01 c0                	add    %eax,%eax
+  40086b:	01 c0                	add    %eax,%eax
+  40086d:	01 c0                	add    %eax,%eax
+  40086f:	01 c0                	add    %eax,%eax
+  400871:	01 c0                	add    %eax,%eax
+  400873:	01 c0                	add    %eax,%eax
+  400875:	01 c0                	add    %eax,%eax
+  400877:	01 c0                	add    %eax,%eax
+  400879:	01 c0                	add    %eax,%eax
+  40087b:	01 c0                	add    %eax,%eax
+  40087d:	01 c0                	add    %eax,%eax
+  40087f:	01 c0                	add    %eax,%eax
+  400881:	01 c0                	add    %eax,%eax
+  400883:	01 c0                	add    %eax,%eax
+  400885:	01 c0                	add    %eax,%eax
+  400887:	01 c0                	add    %eax,%eax
+  400889:	01 c0                	add    %eax,%eax
+  40088b:	01 c0                	add    %eax,%eax
+  40088d:	01 c0                	add    %eax,%eax
+  40088f:	01 c0                	add    %eax,%eax
+  400891:	01 c0                	add    %eax,%eax
+  400893:	01 c0                	add    %eax,%eax
+  400895:	01 c0                	add    %eax,%eax
+  400897:	01 c0                	add    %eax,%eax
+  400899:	01 c0                	add    %eax,%eax
+  40089b:	01 c0                	add    %eax,%eax
+  40089d:	01 c0                	add    %eax,%eax
+  40089f:	01 c0                	add    %eax,%eax
+  4008a1:	01 c0                	add    %eax,%eax
+  4008a3:	01 c0                	add    %eax,%eax
+  4008a5:	01 c0                	add    %eax,%eax
+  4008a7:	01 c0                	add    %eax,%eax
+  4008a9:	01 c0                	add    %eax,%eax
+  4008ab:	01 c0                	add    %eax,%eax
+  4008ad:	01 c0                	add    %eax,%eax
+  4008af:	01 c0                	add    %eax,%eax
+  4008b1:	01 c0                	add    %eax,%eax
+  4008b3:	01 c0                	add    %eax,%eax
+  4008b5:	01 c0                	add    %eax,%eax
+  4008b7:	01 c0                	add    %eax,%eax
+  4008b9:	01 c0                	add    %eax,%eax
+  4008bb:	01 c0                	add    %eax,%eax
+  4008bd:	01 c0                	add    %eax,%eax
+  4008bf:	01 c0                	add    %eax,%eax
+  4008c1:	01 c0                	add    %eax,%eax
+  4008c3:	01 c0                	add    %eax,%eax
+  4008c5:	01 c0                	add    %eax,%eax
+  4008c7:	01 c0                	add    %eax,%eax
+  4008c9:	01 c0                	add    %eax,%eax
+  4008cb:	01 c0                	add    %eax,%eax
+  4008cd:	01 c0                	add    %eax,%eax
+  4008cf:	01 c0                	add    %eax,%eax
+  4008d1:	01 c0                	add    %eax,%eax
+  4008d3:	01 c0                	add    %eax,%eax
+  4008d5:	01 c0                	add    %eax,%eax
+  4008d7:	01 c0                	add    %eax,%eax
+  4008d9:	01 c0                	add    %eax,%eax
+  4008db:	01 c0                	add    %eax,%eax
+  4008dd:	01 c0                	add    %eax,%eax
+  4008df:	01 c0                	add    %eax,%eax
+  4008e1:	01 c0                	add    %eax,%eax
+  4008e3:	01 c0                	add    %eax,%eax
+  4008e5:	01 c0                	add    %eax,%eax
+  4008e7:	01 c0                	add    %eax,%eax
+  4008e9:	01 c0                	add    %eax,%eax
+  4008eb:	01 c0                	add    %eax,%eax
+  4008ed:	01 c0                	add    %eax,%eax
+  4008ef:	01 c0                	add    %eax,%eax
+  4008f1:	01 c0                	add    %eax,%eax
+  4008f3:	01 c0                	add    %eax,%eax
+  4008f5:	01 c0                	add    %eax,%eax
+  4008f7:	01 c0                	add    %eax,%eax
+  4008f9:	01 c0                	add    %eax,%eax
+  4008fb:	01 c0                	add    %eax,%eax
+  4008fd:	01 c0                	add    %eax,%eax
+  4008ff:	01 c0                	add    %eax,%eax
+  400901:	01 c0                	add    %eax,%eax
+  400903:	01 c0                	add    %eax,%eax
+  400905:	01 c0                	add    %eax,%eax
+  400907:	01 c0                	add    %eax,%eax
+  400909:	01 c0                	add    %eax,%eax
+  40090b:	01 c0                	add    %eax,%eax
+  40090d:	01 c0                	add    %eax,%eax
+  40090f:	01 c0                	add    %eax,%eax
+  400911:	01 c0                	add    %eax,%eax
+  400913:	01 c0                	add    %eax,%eax
+  400915:	01 c0                	add    %eax,%eax
+  400917:	01 c0                	add    %eax,%eax
+  400919:	01 c0                	add    %eax,%eax
+  40091b:	01 c0                	add    %eax,%eax
+  40091d:	01 c0                	add    %eax,%eax
+  40091f:	01 c0                	add    %eax,%eax
+  400921:	01 c0                	add    %eax,%eax
+  400923:	01 c0                	add    %eax,%eax
+  400925:	01 c0                	add    %eax,%eax
+  400927:	01 c0                	add    %eax,%eax
+  400929:	01 c0                	add    %eax,%eax
+  40092b:	01 c0                	add    %eax,%eax
+  40092d:	01 c0                	add    %eax,%eax
+  40092f:	01 c0                	add    %eax,%eax
+  400931:	01 c0                	add    %eax,%eax
+  400933:	01 c0                	add    %eax,%eax
+  400935:	01 c0                	add    %eax,%eax
+  400937:	01 c0                	add    %eax,%eax
+  400939:	01 c0                	add    %eax,%eax
+  40093b:	01 c0                	add    %eax,%eax
+  40093d:	01 c0                	add    %eax,%eax
+  40093f:	01 c0                	add    %eax,%eax
+  400941:	01 c0                	add    %eax,%eax
+  400943:	01 c0                	add    %eax,%eax
+  400945:	01 c0                	add    %eax,%eax
+  400947:	01 c0                	add    %eax,%eax
+  400949:	01 c0                	add    %eax,%eax
+  40094b:	01 c0                	add    %eax,%eax
+  40094d:	01 c0                	add    %eax,%eax
+  40094f:	01 c0                	add    %eax,%eax
+  400951:	01 c0                	add    %eax,%eax
+  400953:	01 c0                	add    %eax,%eax
+  400955:	01 c0                	add    %eax,%eax
+  400957:	01 c0                	add    %eax,%eax
+  400959:	01 c0                	add    %eax,%eax
+  40095b:	01 c0                	add    %eax,%eax
+  40095d:	01 c0                	add    %eax,%eax
+  40095f:	01 c0                	add    %eax,%eax
+  400961:	01 c0                	add    %eax,%eax
+  400963:	01 c0                	add    %eax,%eax
+  400965:	01 c0                	add    %eax,%eax
+  400967:	01 c0                	add    %eax,%eax
+  400969:	01 c0                	add    %eax,%eax
+  40096b:	01 c0                	add    %eax,%eax
+  40096d:	01 c0                	add    %eax,%eax
+  40096f:	01 c0                	add    %eax,%eax
+  400971:	01 c0                	add    %eax,%eax
+  400973:	01 c0                	add    %eax,%eax
+  400975:	01 c0                	add    %eax,%eax
+  400977:	01 c0                	add    %eax,%eax
+  400979:	01 c0                	add    %eax,%eax
+  40097b:	01 c0                	add    %eax,%eax
+  40097d:	01 c0                	add    %eax,%eax
+  40097f:	01 c0                	add    %eax,%eax
+  400981:	01 c0                	add    %eax,%eax
+  400983:	01 c0                	add    %eax,%eax
+  400985:	01 c0                	add    %eax,%eax
+  400987:	01 c0                	add    %eax,%eax
+  400989:	01 c0                	add    %eax,%eax
+  40098b:	01 c0                	add    %eax,%eax
+  40098d:	01 c0                	add    %eax,%eax
+  40098f:	01 c0                	add    %eax,%eax
+  400991:	01 c0                	add    %eax,%eax
+  400993:	01 c0                	add    %eax,%eax
+  400995:	01 c0                	add    %eax,%eax
+  400997:	01 c0                	add    %eax,%eax
+  400999:	01 c0                	add    %eax,%eax
+  40099b:	01 c0                	add    %eax,%eax
+  40099d:	01 c0                	add    %eax,%eax
+  40099f:	01 c0                	add    %eax,%eax
+  4009a1:	01 c0                	add    %eax,%eax
+  4009a3:	01 c0                	add    %eax,%eax
+  4009a5:	01 c0                	add    %eax,%eax
+  4009a7:	01 c0                	add    %eax,%eax
+  4009a9:	01 c0                	add    %eax,%eax
+  4009ab:	01 c0                	add    %eax,%eax
+  4009ad:	01 c0                	add    %eax,%eax
+  4009af:	01 c0                	add    %eax,%eax
+  4009b1:	01 c0                	add    %eax,%eax
+  4009b3:	01 c0                	add    %eax,%eax
+  4009b5:	01 c0                	add    %eax,%eax
+  4009b7:	01 c0                	add    %eax,%eax
+  4009b9:	01 c0                	add    %eax,%eax
+  4009bb:	01 c0                	add    %eax,%eax
+  4009bd:	01 c0                	add    %eax,%eax
+  4009bf:	01 c0                	add    %eax,%eax
+  4009c1:	01 c0                	add    %eax,%eax
+  4009c3:	01 c0                	add    %eax,%eax
+  4009c5:	01 c0                	add    %eax,%eax
+  4009c7:	01 c0                	add    %eax,%eax
+  4009c9:	01 c0                	add    %eax,%eax
+  4009cb:	01 c0                	add    %eax,%eax
+  4009cd:	01 c0                	add    %eax,%eax
+  4009cf:	01 c0                	add    %eax,%eax
+  4009d1:	01 c0                	add    %eax,%eax
+  4009d3:	01 c0                	add    %eax,%eax
+  4009d5:	01 c0                	add    %eax,%eax
+  4009d7:	01 c0                	add    %eax,%eax
+  4009d9:	01 c0                	add    %eax,%eax
+  4009db:	01 c0                	add    %eax,%eax
+  4009dd:	01 c0                	add    %eax,%eax
+  4009df:	01 c0                	add    %eax,%eax
+  4009e1:	01 c0                	add    %eax,%eax
+  4009e3:	01 c0                	add    %eax,%eax
+  4009e5:	01 c0                	add    %eax,%eax
+  4009e7:	01 c0                	add    %eax,%eax
+  4009e9:	01 c0                	add    %eax,%eax
+  4009eb:	01 c0                	add    %eax,%eax
+  4009ed:	01 c0                	add    %eax,%eax
+  4009ef:	01 c0                	add    %eax,%eax
+  4009f1:	01 c0                	add    %eax,%eax
+  4009f3:	01 c0                	add    %eax,%eax
+  4009f5:	01 c0                	add    %eax,%eax
+  4009f7:	01 c0                	add    %eax,%eax
+  4009f9:	01 c0                	add    %eax,%eax
+  4009fb:	01 c0                	add    %eax,%eax
+  4009fd:	01 c0                	add    %eax,%eax
+  4009ff:	01 c0                	add    %eax,%eax
+  400a01:	01 c0                	add    %eax,%eax
+  400a03:	01 c0                	add    %eax,%eax
+  400a05:	01 c0                	add    %eax,%eax
+  400a07:	01 c0                	add    %eax,%eax
+  400a09:	01 c0                	add    %eax,%eax
+  400a0b:	01 c0                	add    %eax,%eax
+  400a0d:	01 c0                	add    %eax,%eax
+  400a0f:	01 c0                	add    %eax,%eax
+  400a11:	01 c0                	add    %eax,%eax
+  400a13:	01 c0                	add    %eax,%eax
+  400a15:	01 c0                	add    %eax,%eax
+  400a17:	01 c0                	add    %eax,%eax
+  400a19:	01 c0                	add    %eax,%eax
+  400a1b:	01 c0                	add    %eax,%eax
+  400a1d:	01 c0                	add    %eax,%eax
+  400a1f:	01 c0                	add    %eax,%eax
+  400a21:	01 c0                	add    %eax,%eax
+  400a23:	01 c0                	add    %eax,%eax
+  400a25:	01 c0                	add    %eax,%eax
+  400a27:	01 c0                	add    %eax,%eax
+  400a29:	01 c0                	add    %eax,%eax
+  400a2b:	01 c0                	add    %eax,%eax
+  400a2d:	01 c0                	add    %eax,%eax
+  400a2f:	01 c0                	add    %eax,%eax
+  400a31:	01 c0                	add    %eax,%eax
+  400a33:	01 c0                	add    %eax,%eax
+  400a35:	01 c0                	add    %eax,%eax
+  400a37:	01 c0                	add    %eax,%eax
+  400a39:	01 c0                	add    %eax,%eax
+  400a3b:	01 c0                	add    %eax,%eax
+  400a3d:	01 c0                	add    %eax,%eax
+  400a3f:	01 c0                	add    %eax,%eax
+  400a41:	01 c0                	add    %eax,%eax
+  400a43:	01 c0                	add    %eax,%eax
+  400a45:	01 c0                	add    %eax,%eax
+  400a47:	01 c0                	add    %eax,%eax
+  400a49:	01 c0                	add    %eax,%eax
+  400a4b:	01 c0                	add    %eax,%eax
+  400a4d:	01 c0                	add    %eax,%eax
+  400a4f:	01 c0                	add    %eax,%eax
+  400a51:	01 c0                	add    %eax,%eax
+  400a53:	01 c0                	add    %eax,%eax
+  400a55:	01 c0                	add    %eax,%eax
+  400a57:	01 c0                	add    %eax,%eax
+  400a59:	01 c0                	add    %eax,%eax
+  400a5b:	01 c0                	add    %eax,%eax
+  400a5d:	01 c0                	add    %eax,%eax
+  400a5f:	01 c0                	add    %eax,%eax
+  400a61:	01 c0                	add    %eax,%eax
+  400a63:	01 c0                	add    %eax,%eax
+  400a65:	01 c0                	add    %eax,%eax
+  400a67:	01 c0                	add    %eax,%eax
+  400a69:	01 c0                	add    %eax,%eax
+  400a6b:	01 c0                	add    %eax,%eax
+  400a6d:	01 c0                	add    %eax,%eax
+  400a6f:	01 c0                	add    %eax,%eax
+  400a71:	01 c0                	add    %eax,%eax
+  400a73:	01 c0                	add    %eax,%eax
+  400a75:	01 c0                	add    %eax,%eax
+  400a77:	01 c0                	add    %eax,%eax
+  400a79:	01 c0                	add    %eax,%eax
+  400a7b:	01 c0                	add    %eax,%eax
+  400a7d:	01 c0                	add    %eax,%eax
+  400a7f:	01 c0                	add    %eax,%eax
+  400a81:	01 c0                	add    %eax,%eax
+  400a83:	01 c0                	add    %eax,%eax
+  400a85:	01 c0                	add    %eax,%eax
+  400a87:	01 c0                	add    %eax,%eax
+  400a89:	01 c0                	add    %eax,%eax
+  400a8b:	01 c0                	add    %eax,%eax
+  400a8d:	01 c0                	add    %eax,%eax
+  400a8f:	01 c0                	add    %eax,%eax
+  400a91:	01 c0                	add    %eax,%eax
+  400a93:	01 c0                	add    %eax,%eax
+  400a95:	01 c0                	add    %eax,%eax
+  400a97:	01 c0                	add    %eax,%eax
+  400a99:	01 c0                	add    %eax,%eax
+  400a9b:	01 c0                	add    %eax,%eax
+  400a9d:	01 c0                	add    %eax,%eax
+  400a9f:	01 c0                	add    %eax,%eax
+  400aa1:	01 c0                	add    %eax,%eax
+  400aa3:	01 c0                	add    %eax,%eax
+  400aa5:	01 c0                	add    %eax,%eax
+  400aa7:	01 c0                	add    %eax,%eax
+  400aa9:	01 c0                	add    %eax,%eax
+  400aab:	01 c0                	add    %eax,%eax
+  400aad:	01 c0                	add    %eax,%eax
+  400aaf:	01 c0                	add    %eax,%eax
+  400ab1:	01 c0                	add    %eax,%eax
+  400ab3:	01 c0                	add    %eax,%eax
+  400ab5:	01 c0                	add    %eax,%eax
+  400ab7:	01 c0                	add    %eax,%eax
+  400ab9:	01 c0                	add    %eax,%eax
+  400abb:	01 c0                	add    %eax,%eax
+  400abd:	01 c0                	add    %eax,%eax
+  400abf:	01 c0                	add    %eax,%eax
+  400ac1:	01 c0                	add    %eax,%eax
+  400ac3:	01 c0                	add    %eax,%eax
+  400ac5:	01 c0                	add    %eax,%eax
+  400ac7:	01 c0                	add    %eax,%eax
+  400ac9:	01 c0                	add    %eax,%eax
+  400acb:	01 c0                	add    %eax,%eax
+  400acd:	01 c0                	add    %eax,%eax
+  400acf:	01 c0                	add    %eax,%eax
+  400ad1:	01 c0                	add    %eax,%eax
+  400ad3:	01 c0                	add    %eax,%eax
+  400ad5:	01 c0                	add    %eax,%eax
+  400ad7:	01 c0                	add    %eax,%eax
+  400ad9:	01 c0                	add    %eax,%eax
+  400adb:	01 c0                	add    %eax,%eax
+  400add:	01 c0                	add    %eax,%eax
+  400adf:	01 c0                	add    %eax,%eax
+  400ae1:	01 c0                	add    %eax,%eax
+  400ae3:	01 c0                	add    %eax,%eax
+  400ae5:	01 c0                	add    %eax,%eax
+  400ae7:	01 c0                	add    %eax,%eax
+  400ae9:	01 c0                	add    %eax,%eax
+  400aeb:	01 c0                	add    %eax,%eax
+  400aed:	01 c0                	add    %eax,%eax
+  400aef:	01 c0                	add    %eax,%eax
+  400af1:	01 c0                	add    %eax,%eax
+  400af3:	01 c0                	add    %eax,%eax
+  400af5:	01 c0                	add    %eax,%eax
+  400af7:	01 c0                	add    %eax,%eax
+  400af9:	01 c0                	add    %eax,%eax
+  400afb:	01 c0                	add    %eax,%eax
+  400afd:	01 c0                	add    %eax,%eax
+  400aff:	01 c0                	add    %eax,%eax
+  400b01:	01 c0                	add    %eax,%eax
+  400b03:	01 c0                	add    %eax,%eax
+  400b05:	01 c0                	add    %eax,%eax
+  400b07:	01 c0                	add    %eax,%eax
+  400b09:	01 c0                	add    %eax,%eax
+  400b0b:	01 c0                	add    %eax,%eax
+  400b0d:	01 c0                	add    %eax,%eax
+  400b0f:	01 c0                	add    %eax,%eax
+  400b11:	01 c0                	add    %eax,%eax
+  400b13:	01 c0                	add    %eax,%eax
+  400b15:	01 c0                	add    %eax,%eax
+  400b17:	01 c0                	add    %eax,%eax
+  400b19:	01 c0                	add    %eax,%eax
+  400b1b:	01 c0                	add    %eax,%eax
+  400b1d:	01 c0                	add    %eax,%eax
+  400b1f:	01 c0                	add    %eax,%eax
+  400b21:	01 c0                	add    %eax,%eax
+  400b23:	01 c0                	add    %eax,%eax
+  400b25:	01 c0                	add    %eax,%eax
+  400b27:	01 c0                	add    %eax,%eax
+  400b29:	01 c0                	add    %eax,%eax
+  400b2b:	01 c0                	add    %eax,%eax
+  400b2d:	01 c0                	add    %eax,%eax
+  400b2f:	01 c0                	add    %eax,%eax
+  400b31:	01 c0                	add    %eax,%eax
+  400b33:	01 c0                	add    %eax,%eax
+  400b35:	01 c0                	add    %eax,%eax
+  400b37:	01 c0                	add    %eax,%eax
+  400b39:	01 c0                	add    %eax,%eax
+  400b3b:	01 c0                	add    %eax,%eax
+  400b3d:	01 c0                	add    %eax,%eax
+  400b3f:	01 c0                	add    %eax,%eax
+  400b41:	01 c0                	add    %eax,%eax
+  400b43:	01 c0                	add    %eax,%eax
+  400b45:	01 c0                	add    %eax,%eax
+  400b47:	01 c0                	add    %eax,%eax
+  400b49:	01 c0                	add    %eax,%eax
+  400b4b:	01 c0                	add    %eax,%eax
+  400b4d:	01 c0                	add    %eax,%eax
+  400b4f:	01 c0                	add    %eax,%eax
+  400b51:	01 c0                	add    %eax,%eax
+  400b53:	01 c0                	add    %eax,%eax
+  400b55:	01 c0                	add    %eax,%eax
+  400b57:	01 c0                	add    %eax,%eax
+  400b59:	01 c0                	add    %eax,%eax
+  400b5b:	01 c0                	add    %eax,%eax
+  400b5d:	01 c0                	add    %eax,%eax
+  400b5f:	01 c0                	add    %eax,%eax
+  400b61:	01 c0                	add    %eax,%eax
+  400b63:	01 c0                	add    %eax,%eax
+  400b65:	01 c0                	add    %eax,%eax
+  400b67:	01 c0                	add    %eax,%eax
+  400b69:	01 c0                	add    %eax,%eax
+  400b6b:	01 c0                	add    %eax,%eax
+  400b6d:	01 c0                	add    %eax,%eax
+  400b6f:	01 c0                	add    %eax,%eax
+  400b71:	01 c0                	add    %eax,%eax
+  400b73:	01 c0                	add    %eax,%eax
+  400b75:	01 c0                	add    %eax,%eax
+  400b77:	01 c0                	add    %eax,%eax
+  400b79:	01 c0                	add    %eax,%eax
+  400b7b:	01 c0                	add    %eax,%eax
+  400b7d:	01 c0                	add    %eax,%eax
+  400b7f:	01 c0                	add    %eax,%eax
+  400b81:	01 c0                	add    %eax,%eax
+  400b83:	01 c0                	add    %eax,%eax
+  400b85:	01 c0                	add    %eax,%eax
+  400b87:	01 c0                	add    %eax,%eax
+  400b89:	01 c0                	add    %eax,%eax
+  400b8b:	01 c0                	add    %eax,%eax
+  400b8d:	01 c0                	add    %eax,%eax
+  400b8f:	01 c0                	add    %eax,%eax
+  400b91:	01 c0                	add    %eax,%eax
+  400b93:	01 c0                	add    %eax,%eax
+  400b95:	01 c0                	add    %eax,%eax
+  400b97:	01 c0                	add    %eax,%eax
+  400b99:	01 c0                	add    %eax,%eax
+  400b9b:	01 c0                	add    %eax,%eax
+  400b9d:	01 c0                	add    %eax,%eax
+  400b9f:	01 c0                	add    %eax,%eax
+  400ba1:	01 c0                	add    %eax,%eax
+  400ba3:	01 c0                	add    %eax,%eax
+  400ba5:	01 c0                	add    %eax,%eax
+  400ba7:	01 c0                	add    %eax,%eax
+  400ba9:	01 c0                	add    %eax,%eax
+  400bab:	01 c0                	add    %eax,%eax
+  400bad:	01 c0                	add    %eax,%eax
+  400baf:	01 c0                	add    %eax,%eax
+  400bb1:	01 c0                	add    %eax,%eax
+  400bb3:	01 c0                	add    %eax,%eax
+  400bb5:	01 c0                	add    %eax,%eax
+  400bb7:	01 c0                	add    %eax,%eax
+  400bb9:	01 c0                	add    %eax,%eax
+  400bbb:	01 c0                	add    %eax,%eax
+  400bbd:	01 c0                	add    %eax,%eax
+  400bbf:	01 c0                	add    %eax,%eax
+  400bc1:	01 c0                	add    %eax,%eax
+  400bc3:	01 c0                	add    %eax,%eax
+  400bc5:	01 c0                	add    %eax,%eax
+  400bc7:	01 c0                	add    %eax,%eax
+  400bc9:	01 c0                	add    %eax,%eax
+  400bcb:	01 c0                	add    %eax,%eax
+  400bcd:	01 c0                	add    %eax,%eax
+  400bcf:	01 c0                	add    %eax,%eax
+  400bd1:	01 c0                	add    %eax,%eax
+  400bd3:	01 c0                	add    %eax,%eax
+  400bd5:	01 c0                	add    %eax,%eax
+  400bd7:	01 c0                	add    %eax,%eax
+  400bd9:	01 c0                	add    %eax,%eax
+  400bdb:	01 c0                	add    %eax,%eax
+  400bdd:	01 c0                	add    %eax,%eax
+  400bdf:	01 c0                	add    %eax,%eax
+  400be1:	01 c0                	add    %eax,%eax
+  400be3:	01 c0                	add    %eax,%eax
+  400be5:	01 c0                	add    %eax,%eax
+  400be7:	01 c0                	add    %eax,%eax
+  400be9:	01 c0                	add    %eax,%eax
+  400beb:	01 c0                	add    %eax,%eax
+  400bed:	01 c0                	add    %eax,%eax
+  400bef:	01 c0                	add    %eax,%eax
+  400bf1:	01 c0                	add    %eax,%eax
+  400bf3:	01 c0                	add    %eax,%eax
+  400bf5:	01 c0                	add    %eax,%eax
+  400bf7:	01 c0                	add    %eax,%eax
+  400bf9:	01 c0                	add    %eax,%eax
+  400bfb:	01 c0                	add    %eax,%eax
+  400bfd:	01 c0                	add    %eax,%eax
+  400bff:	01 c0                	add    %eax,%eax
+  400c01:	01 c0                	add    %eax,%eax
+  400c03:	01 c0                	add    %eax,%eax
+  400c05:	01 c0                	add    %eax,%eax
+  400c07:	01 c0                	add    %eax,%eax
+  400c09:	01 c0                	add    %eax,%eax
+  400c0b:	01 c0                	add    %eax,%eax
+  400c0d:	01 c0                	add    %eax,%eax
+  400c0f:	01 c0                	add    %eax,%eax
+  400c11:	01 c0                	add    %eax,%eax
+  400c13:	01 c0                	add    %eax,%eax
+  400c15:	01 c0                	add    %eax,%eax
+  400c17:	01 c0                	add    %eax,%eax
+  400c19:	01 c0                	add    %eax,%eax
+  400c1b:	01 c0                	add    %eax,%eax
+  400c1d:	01 c0                	add    %eax,%eax
+  400c1f:	01 c0                	add    %eax,%eax
+  400c21:	01 c0                	add    %eax,%eax
+  400c23:	01 c0                	add    %eax,%eax
+  400c25:	01 c0                	add    %eax,%eax
+  400c27:	01 c0                	add    %eax,%eax
+  400c29:	01 c0                	add    %eax,%eax
+  400c2b:	01 c0                	add    %eax,%eax
+  400c2d:	01 c0                	add    %eax,%eax
+  400c2f:	01 c0                	add    %eax,%eax
+  400c31:	01 c0                	add    %eax,%eax
+  400c33:	01 c0                	add    %eax,%eax
+  400c35:	01 c0                	add    %eax,%eax
+  400c37:	01 c0                	add    %eax,%eax
+  400c39:	01 c0                	add    %eax,%eax
+  400c3b:	01 c0                	add    %eax,%eax
+  400c3d:	01 c0                	add    %eax,%eax
+  400c3f:	01 c0                	add    %eax,%eax
+  400c41:	01 c0                	add    %eax,%eax
+  400c43:	01 c0                	add    %eax,%eax
+  400c45:	01 c0                	add    %eax,%eax
+  400c47:	01 c0                	add    %eax,%eax
+  400c49:	01 c0                	add    %eax,%eax
+  400c4b:	01 c0                	add    %eax,%eax
+  400c4d:	01 c0                	add    %eax,%eax
+  400c4f:	01 c0                	add    %eax,%eax
+  400c51:	01 c0                	add    %eax,%eax
+  400c53:	01 c0                	add    %eax,%eax
+  400c55:	01 c0                	add    %eax,%eax
+  400c57:	01 c0                	add    %eax,%eax
+  400c59:	01 c0                	add    %eax,%eax
+  400c5b:	01 c0                	add    %eax,%eax
+  400c5d:	01 c0                	add    %eax,%eax
+  400c5f:	01 c0                	add    %eax,%eax
+  400c61:	01 c0                	add    %eax,%eax
+  400c63:	01 c0                	add    %eax,%eax
+  400c65:	01 c0                	add    %eax,%eax
+  400c67:	01 c0                	add    %eax,%eax
+  400c69:	01 c0                	add    %eax,%eax
+  400c6b:	01 c0                	add    %eax,%eax
+  400c6d:	01 c0                	add    %eax,%eax
+  400c6f:	01 c0                	add    %eax,%eax
+  400c71:	01 c0                	add    %eax,%eax
+  400c73:	01 c0                	add    %eax,%eax
+  400c75:	01 c0                	add    %eax,%eax
+  400c77:	01 c0                	add    %eax,%eax
+  400c79:	01 c0                	add    %eax,%eax
+  400c7b:	01 c0                	add    %eax,%eax
+  400c7d:	01 c0                	add    %eax,%eax
+  400c7f:	01 c0                	add    %eax,%eax
+  400c81:	01 c0                	add    %eax,%eax
+  400c83:	01 c0                	add    %eax,%eax
+  400c85:	01 c0                	add    %eax,%eax
+  400c87:	01 c0                	add    %eax,%eax
+  400c89:	01 c0                	add    %eax,%eax
+  400c8b:	01 c0                	add    %eax,%eax
+  400c8d:	01 c0                	add    %eax,%eax
+  400c8f:	01 c0                	add    %eax,%eax
+  400c91:	01 c0                	add    %eax,%eax
+  400c93:	01 c0                	add    %eax,%eax
+  400c95:	01 c0                	add    %eax,%eax
+  400c97:	01 c0                	add    %eax,%eax
+  400c99:	01 c0                	add    %eax,%eax
+  400c9b:	01 c0                	add    %eax,%eax
+  400c9d:	01 c0                	add    %eax,%eax
+  400c9f:	01 c0                	add    %eax,%eax
+  400ca1:	01 c0                	add    %eax,%eax
+  400ca3:	01 c0                	add    %eax,%eax
+  400ca5:	01 c0                	add    %eax,%eax
+  400ca7:	01 c0                	add    %eax,%eax
+  400ca9:	01 c0                	add    %eax,%eax
+  400cab:	01 c0                	add    %eax,%eax
+  400cad:	01 c0                	add    %eax,%eax
+  400caf:	01 c0                	add    %eax,%eax
+  400cb1:	01 c0                	add    %eax,%eax
+  400cb3:	01 c0                	add    %eax,%eax
+  400cb5:	01 c0                	add    %eax,%eax
+  400cb7:	01 c0                	add    %eax,%eax
+  400cb9:	01 c0                	add    %eax,%eax
+  400cbb:	01 c0                	add    %eax,%eax
+  400cbd:	01 c0                	add    %eax,%eax
+  400cbf:	01 c0                	add    %eax,%eax
+  400cc1:	01 c0                	add    %eax,%eax
+  400cc3:	01 c0                	add    %eax,%eax
+  400cc5:	01 c0                	add    %eax,%eax
+  400cc7:	01 c0                	add    %eax,%eax
+  400cc9:	01 c0                	add    %eax,%eax
+  400ccb:	01 c0                	add    %eax,%eax
+  400ccd:	01 c0                	add    %eax,%eax
+  400ccf:	01 c0                	add    %eax,%eax
+  400cd1:	01 c0                	add    %eax,%eax
+  400cd3:	01 c0                	add    %eax,%eax
+  400cd5:	01 c0                	add    %eax,%eax
+  400cd7:	01 c0                	add    %eax,%eax
+  400cd9:	01 c0                	add    %eax,%eax
+  400cdb:	01 c0                	add    %eax,%eax
+  400cdd:	01 c0                	add    %eax,%eax
+  400cdf:	01 c0                	add    %eax,%eax
+  400ce1:	01 c0                	add    %eax,%eax
+  400ce3:	01 c0                	add    %eax,%eax
+  400ce5:	01 c0                	add    %eax,%eax
+  400ce7:	01 c0                	add    %eax,%eax
+  400ce9:	01 c0                	add    %eax,%eax
+  400ceb:	01 c0                	add    %eax,%eax
+  400ced:	01 c0                	add    %eax,%eax
+  400cef:	01 c0                	add    %eax,%eax
+  400cf1:	01 c0                	add    %eax,%eax
+  400cf3:	01 c0                	add    %eax,%eax
+  400cf5:	01 c0                	add    %eax,%eax
+  400cf7:	01 c0                	add    %eax,%eax
+  400cf9:	01 c0                	add    %eax,%eax
+  400cfb:	01 c0                	add    %eax,%eax
+  400cfd:	01 c0                	add    %eax,%eax
+  400cff:	01 c0                	add    %eax,%eax
+  400d01:	01 c0                	add    %eax,%eax
+  400d03:	01 c0                	add    %eax,%eax
+  400d05:	01 c0                	add    %eax,%eax
+  400d07:	01 c0                	add    %eax,%eax
+  400d09:	01 c0                	add    %eax,%eax
+  400d0b:	01 c0                	add    %eax,%eax
+  400d0d:	01 c0                	add    %eax,%eax
+  400d0f:	01 c0                	add    %eax,%eax
+  400d11:	01 c0                	add    %eax,%eax
+  400d13:	01 c0                	add    %eax,%eax
+  400d15:	01 c0                	add    %eax,%eax
+  400d17:	01 c0                	add    %eax,%eax
+  400d19:	01 c0                	add    %eax,%eax
+  400d1b:	01 c0                	add    %eax,%eax
+  400d1d:	01 c0                	add    %eax,%eax
+  400d1f:	01 c0                	add    %eax,%eax
+  400d21:	01 c0                	add    %eax,%eax
+  400d23:	01 c0                	add    %eax,%eax
+  400d25:	01 c0                	add    %eax,%eax
+  400d27:	01 c0                	add    %eax,%eax
+  400d29:	01 c0                	add    %eax,%eax
+  400d2b:	01 c0                	add    %eax,%eax
+  400d2d:	01 c0                	add    %eax,%eax
+  400d2f:	01 c0                	add    %eax,%eax
+  400d31:	01 c0                	add    %eax,%eax
+  400d33:	01 c0                	add    %eax,%eax
+  400d35:	01 c0                	add    %eax,%eax
+  400d37:	01 c0                	add    %eax,%eax
+  400d39:	01 c0                	add    %eax,%eax
+  400d3b:	01 c0                	add    %eax,%eax
+  400d3d:	01 c0                	add    %eax,%eax
+  400d3f:	01 c0                	add    %eax,%eax
+  400d41:	01 c0                	add    %eax,%eax
+  400d43:	01 c0                	add    %eax,%eax
+  400d45:	01 c0                	add    %eax,%eax
+  400d47:	01 c0                	add    %eax,%eax
+  400d49:	01 c0                	add    %eax,%eax
+  400d4b:	01 c0                	add    %eax,%eax
+  400d4d:	01 c0                	add    %eax,%eax
+  400d4f:	01 c0                	add    %eax,%eax
+  400d51:	01 c0                	add    %eax,%eax
+  400d53:	01 c0                	add    %eax,%eax
+  400d55:	01 c0                	add    %eax,%eax
+  400d57:	01 c0                	add    %eax,%eax
+  400d59:	01 c0                	add    %eax,%eax
+  400d5b:	01 c0                	add    %eax,%eax
+  400d5d:	01 c0                	add    %eax,%eax
+  400d5f:	01 c0                	add    %eax,%eax
+  400d61:	01 c0                	add    %eax,%eax
+  400d63:	01 c0                	add    %eax,%eax
+  400d65:	01 c0                	add    %eax,%eax
+  400d67:	01 c0                	add    %eax,%eax
+  400d69:	01 c0                	add    %eax,%eax
+  400d6b:	01 c0                	add    %eax,%eax
+  400d6d:	01 c0                	add    %eax,%eax
+  400d6f:	01 c0                	add    %eax,%eax
+  400d71:	01 c0                	add    %eax,%eax
+  400d73:	01 c0                	add    %eax,%eax
+  400d75:	01 c0                	add    %eax,%eax
+  400d77:	01 c0                	add    %eax,%eax
+  400d79:	01 c0                	add    %eax,%eax
+  400d7b:	01 c0                	add    %eax,%eax
+  400d7d:	01 c0                	add    %eax,%eax
+  400d7f:	01 c0                	add    %eax,%eax
+  400d81:	01 c0                	add    %eax,%eax
+  400d83:	01 c0                	add    %eax,%eax
+  400d85:	01 c0                	add    %eax,%eax
+  400d87:	01 c0                	add    %eax,%eax
+  400d89:	01 c0                	add    %eax,%eax
+  400d8b:	01 c0                	add    %eax,%eax
+  400d8d:	01 c0                	add    %eax,%eax
+  400d8f:	01 c0                	add    %eax,%eax
+  400d91:	01 c0                	add    %eax,%eax
+  400d93:	01 c0                	add    %eax,%eax
+  400d95:	01 c0                	add    %eax,%eax
+  400d97:	01 c0                	add    %eax,%eax
+  400d99:	01 c0                	add    %eax,%eax
+  400d9b:	01 c0                	add    %eax,%eax
+  400d9d:	01 c0                	add    %eax,%eax
+  400d9f:	01 c0                	add    %eax,%eax
+  400da1:	01 c0                	add    %eax,%eax
+  400da3:	01 c0                	add    %eax,%eax
+  400da5:	01 c0                	add    %eax,%eax
+  400da7:	01 c0                	add    %eax,%eax
+  400da9:	01 c0                	add    %eax,%eax
+  400dab:	01 c0                	add    %eax,%eax
+  400dad:	01 c0                	add    %eax,%eax
+  400daf:	01 c0                	add    %eax,%eax
+  400db1:	01 c0                	add    %eax,%eax
+  400db3:	01 c0                	add    %eax,%eax
+  400db5:	01 c0                	add    %eax,%eax
+  400db7:	01 c0                	add    %eax,%eax
+  400db9:	01 c0                	add    %eax,%eax
+  400dbb:	01 c0                	add    %eax,%eax
+  400dbd:	01 c0                	add    %eax,%eax
+  400dbf:	01 c0                	add    %eax,%eax
+  400dc1:	01 c0                	add    %eax,%eax
+  400dc3:	01 c0                	add    %eax,%eax
+  400dc5:	01 c0                	add    %eax,%eax
+  400dc7:	01 c0                	add    %eax,%eax
+  400dc9:	01 c0                	add    %eax,%eax
+  400dcb:	01 c0                	add    %eax,%eax
+  400dcd:	01 c0                	add    %eax,%eax
+  400dcf:	01 c0                	add    %eax,%eax
+  400dd1:	01 c0                	add    %eax,%eax
+  400dd3:	01 c0                	add    %eax,%eax
+  400dd5:	01 c0                	add    %eax,%eax
+  400dd7:	01 c0                	add    %eax,%eax
+  400dd9:	01 c0                	add    %eax,%eax
+  400ddb:	01 c0                	add    %eax,%eax
+  400ddd:	01 c0                	add    %eax,%eax
+  400ddf:	01 c0                	add    %eax,%eax
+  400de1:	01 c0                	add    %eax,%eax
+  400de3:	01 c0                	add    %eax,%eax
+  400de5:	01 c0                	add    %eax,%eax
+  400de7:	01 c0                	add    %eax,%eax
+  400de9:	01 c0                	add    %eax,%eax
+  400deb:	01 c0                	add    %eax,%eax
+  400ded:	01 c0                	add    %eax,%eax
+  400def:	01 c0                	add    %eax,%eax
+  400df1:	01 c0                	add    %eax,%eax
+  400df3:	01 c0                	add    %eax,%eax
+  400df5:	01 c0                	add    %eax,%eax
+  400df7:	01 c0                	add    %eax,%eax
+  400df9:	01 c0                	add    %eax,%eax
+  400dfb:	01 c0                	add    %eax,%eax
+  400dfd:	01 c0                	add    %eax,%eax
+  400dff:	01 c0                	add    %eax,%eax
+  400e01:	01 c0                	add    %eax,%eax
+  400e03:	01 c0                	add    %eax,%eax
+  400e05:	01 c0                	add    %eax,%eax
+  400e07:	01 c0                	add    %eax,%eax
+  400e09:	01 c0                	add    %eax,%eax
+  400e0b:	01 c0                	add    %eax,%eax
+  400e0d:	01 c0                	add    %eax,%eax
+  400e0f:	01 c0                	add    %eax,%eax
+  400e11:	01 c0                	add    %eax,%eax
+  400e13:	01 c0                	add    %eax,%eax
+  400e15:	01 c0                	add    %eax,%eax
+  400e17:	01 c0                	add    %eax,%eax
+  400e19:	01 c0                	add    %eax,%eax
+  400e1b:	01 c0                	add    %eax,%eax
+  400e1d:	01 c0                	add    %eax,%eax
+  400e1f:	01 c0                	add    %eax,%eax
+  400e21:	01 c0                	add    %eax,%eax
+  400e23:	01 c0                	add    %eax,%eax
+  400e25:	01 c0                	add    %eax,%eax
+  400e27:	01 c0                	add    %eax,%eax
+  400e29:	01 c0                	add    %eax,%eax
+  400e2b:	01 c0                	add    %eax,%eax
+  400e2d:	01 c0                	add    %eax,%eax
+  400e2f:	01 c0                	add    %eax,%eax
+  400e31:	01 c0                	add    %eax,%eax
+  400e33:	01 c0                	add    %eax,%eax
+  400e35:	01 c0                	add    %eax,%eax
+  400e37:	01 c0                	add    %eax,%eax
+  400e39:	01 c0                	add    %eax,%eax
+  400e3b:	01 c0                	add    %eax,%eax
+  400e3d:	01 c0                	add    %eax,%eax
+  400e3f:	01 c0                	add    %eax,%eax
+  400e41:	01 c0                	add    %eax,%eax
+  400e43:	01 c0                	add    %eax,%eax
+  400e45:	01 c0                	add    %eax,%eax
+  400e47:	01 c0                	add    %eax,%eax
+  400e49:	01 c0                	add    %eax,%eax
+  400e4b:	01 c0                	add    %eax,%eax
+  400e4d:	01 c0                	add    %eax,%eax
+  400e4f:	01 c0                	add    %eax,%eax
+  400e51:	01 c0                	add    %eax,%eax
+  400e53:	01 c0                	add    %eax,%eax
+  400e55:	01 c0                	add    %eax,%eax
+  400e57:	01 c0                	add    %eax,%eax
+  400e59:	01 c0                	add    %eax,%eax
+  400e5b:	01 c0                	add    %eax,%eax
+  400e5d:	01 c0                	add    %eax,%eax
+  400e5f:	01 c0                	add    %eax,%eax
+  400e61:	01 c0                	add    %eax,%eax
+  400e63:	01 c0                	add    %eax,%eax
+  400e65:	01 c0                	add    %eax,%eax
+  400e67:	01 c0                	add    %eax,%eax
+  400e69:	01 c0                	add    %eax,%eax
+  400e6b:	01 c0                	add    %eax,%eax
+  400e6d:	01 c0                	add    %eax,%eax
+  400e6f:	01 c0                	add    %eax,%eax
+  400e71:	01 c0                	add    %eax,%eax
+  400e73:	01 c0                	add    %eax,%eax
+  400e75:	01 c0                	add    %eax,%eax
+  400e77:	01 c0                	add    %eax,%eax
+  400e79:	01 c0                	add    %eax,%eax
+  400e7b:	01 c0                	add    %eax,%eax
+  400e7d:	01 c0                	add    %eax,%eax
+  400e7f:	01 c0                	add    %eax,%eax
+  400e81:	01 c0                	add    %eax,%eax
+  400e83:	01 c0                	add    %eax,%eax
+  400e85:	01 c0                	add    %eax,%eax
+  400e87:	01 c0                	add    %eax,%eax
+  400e89:	01 c0                	add    %eax,%eax
+  400e8b:	01 c0                	add    %eax,%eax
+  400e8d:	01 c0                	add    %eax,%eax
+  400e8f:	01 c0                	add    %eax,%eax
+  400e91:	01 c0                	add    %eax,%eax
+  400e93:	01 c0                	add    %eax,%eax
+  400e95:	01 c0                	add    %eax,%eax
+  400e97:	01 c0                	add    %eax,%eax
+  400e99:	01 c0                	add    %eax,%eax
+  400e9b:	01 c0                	add    %eax,%eax
+  400e9d:	01 c0                	add    %eax,%eax
+  400e9f:	48 8d 45 f0          	lea    -0x10(%rbp),%rax
+  400ea3:	be 00 00 00 00       	mov    $0x0,%esi
+  400ea8:	48 89 c7             	mov    %rax,%rdi
+  400eab:	e8 b0 f6 ff ff       	callq  400560 <gettimeofday@plt>
+  400eb0:	48 8b 55 f0          	mov    -0x10(%rbp),%rdx
+  400eb4:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+  400eb8:	48 29 c2             	sub    %rax,%rdx
+  400ebb:	8b 45 dc             	mov    -0x24(%rbp),%eax
+  400ebe:	48 98                	cltq   
+  400ec0:	48 39 c2             	cmp    %rax,%rdx
+  400ec3:	0f 8c 06 f8 ff ff    	jl     4006cf <add+0x32>
+  400ec9:	c9                   	leaveq 
+  400eca:	c3                   	retq   
+
+0000000000400ecb <cache_info>:
+  400ecb:	55                   	push   %rbp
+  400ecc:	48 89 e5             	mov    %rsp,%rbp
+  400ecf:	b8 00 00 00 00       	mov    $0x0,%eax
+  400ed4:	e8 02 00 00 00       	callq  400edb <i386_cpuid_caches>
+  400ed9:	5d                   	pop    %rbp
+  400eda:	c3                   	retq   
+
+0000000000400edb <i386_cpuid_caches>:
+  400edb:	55                   	push   %rbp
+  400edc:	48 89 e5             	mov    %rsp,%rbp
+  400edf:	53                   	push   %rbx
+  400ee0:	48 81 ec 88 00 00 00 	sub    $0x88,%rsp
+  400ee7:	c7 45 ac 00 00 00 00 	movl   $0x0,-0x54(%rbp)
+  400eee:	e9 63 01 00 00       	jmpq   401056 <i386_cpuid_caches+0x17b>
+  400ef3:	c7 45 b0 04 00 00 00 	movl   $0x4,-0x50(%rbp)
+  400efa:	8b 45 ac             	mov    -0x54(%rbp),%eax
+  400efd:	89 45 b4             	mov    %eax,-0x4c(%rbp)
+  400f00:	8b 45 b0             	mov    -0x50(%rbp),%eax
+  400f03:	8b 55 b4             	mov    -0x4c(%rbp),%edx
+  400f06:	89 d1                	mov    %edx,%ecx
+  400f08:	0f a2                	cpuid  
+  400f0a:	89 de                	mov    %ebx,%esi
+  400f0c:	89 45 b0             	mov    %eax,-0x50(%rbp)
+  400f0f:	89 75 b8             	mov    %esi,-0x48(%rbp)
+  400f12:	89 4d b4             	mov    %ecx,-0x4c(%rbp)
+  400f15:	89 55 bc             	mov    %edx,-0x44(%rbp)
+  400f18:	8b 45 b0             	mov    -0x50(%rbp),%eax
+  400f1b:	83 e0 1f             	and    $0x1f,%eax
+  400f1e:	89 45 c0             	mov    %eax,-0x40(%rbp)
+  400f21:	83 7d c0 00          	cmpl   $0x0,-0x40(%rbp)
+  400f25:	75 05                	jne    400f2c <i386_cpuid_caches+0x51>
+  400f27:	e9 34 01 00 00       	jmpq   401060 <i386_cpuid_caches+0x185>
+  400f2c:	8b 45 c0             	mov    -0x40(%rbp),%eax
+  400f2f:	83 f8 02             	cmp    $0x2,%eax
+  400f32:	74 14                	je     400f48 <i386_cpuid_caches+0x6d>
+  400f34:	83 f8 03             	cmp    $0x3,%eax
+  400f37:	74 19                	je     400f52 <i386_cpuid_caches+0x77>
+  400f39:	83 f8 01             	cmp    $0x1,%eax
+  400f3c:	75 1e                	jne    400f5c <i386_cpuid_caches+0x81>
+  400f3e:	48 c7 45 e0 f8 22 40 	movq   $0x4022f8,-0x20(%rbp)
+  400f45:	00 
+  400f46:	eb 1d                	jmp    400f65 <i386_cpuid_caches+0x8a>
+  400f48:	48 c7 45 e0 03 23 40 	movq   $0x402303,-0x20(%rbp)
+  400f4f:	00 
+  400f50:	eb 13                	jmp    400f65 <i386_cpuid_caches+0x8a>
+  400f52:	48 c7 45 e0 15 23 40 	movq   $0x402315,-0x20(%rbp)
+  400f59:	00 
+  400f5a:	eb 09                	jmp    400f65 <i386_cpuid_caches+0x8a>
+  400f5c:	48 c7 45 e0 23 23 40 	movq   $0x402323,-0x20(%rbp)
+  400f63:	00 
+  400f64:	90                   	nop
+  400f65:	c1 6d b0 05          	shrl   $0x5,-0x50(%rbp)
+  400f69:	8b 45 b0             	mov    -0x50(%rbp),%eax
+  400f6c:	83 e0 07             	and    $0x7,%eax
+  400f6f:	89 45 c4             	mov    %eax,-0x3c(%rbp)
+  400f72:	c1 6d b0 03          	shrl   $0x3,-0x50(%rbp)
+  400f76:	8b 45 b0             	mov    -0x50(%rbp),%eax
+  400f79:	83 e0 01             	and    $0x1,%eax
+  400f7c:	89 45 c8             	mov    %eax,-0x38(%rbp)
+  400f7f:	d1 6d b0             	shrl   -0x50(%rbp)
+  400f82:	8b 45 b0             	mov    -0x50(%rbp),%eax
+  400f85:	83 e0 01             	and    $0x1,%eax
+  400f88:	89 45 cc             	mov    %eax,-0x34(%rbp)
+  400f8b:	8b 45 b4             	mov    -0x4c(%rbp),%eax
+  400f8e:	83 c0 01             	add    $0x1,%eax
+  400f91:	89 45 d0             	mov    %eax,-0x30(%rbp)
+  400f94:	8b 45 b8             	mov    -0x48(%rbp),%eax
+  400f97:	25 ff 0f 00 00       	and    $0xfff,%eax
+  400f9c:	83 c0 01             	add    $0x1,%eax
+  400f9f:	89 45 d4             	mov    %eax,-0x2c(%rbp)
+  400fa2:	c1 6d b8 0c          	shrl   $0xc,-0x48(%rbp)
+  400fa6:	8b 45 b8             	mov    -0x48(%rbp),%eax
+  400fa9:	25 ff 03 00 00       	and    $0x3ff,%eax
+  400fae:	83 c0 01             	add    $0x1,%eax
+  400fb1:	89 45 d8             	mov    %eax,-0x28(%rbp)
+  400fb4:	c1 6d b8 0a          	shrl   $0xa,-0x48(%rbp)
+  400fb8:	8b 45 b8             	mov    -0x48(%rbp),%eax
+  400fbb:	25 ff 03 00 00       	and    $0x3ff,%eax
+  400fc0:	83 c0 01             	add    $0x1,%eax
+  400fc3:	89 45 dc             	mov    %eax,-0x24(%rbp)
+  400fc6:	8b 45 dc             	mov    -0x24(%rbp),%eax
+  400fc9:	0f af 45 d8          	imul   -0x28(%rbp),%eax
+  400fcd:	0f af 45 d4          	imul   -0x2c(%rbp),%eax
+  400fd1:	0f af 45 d0          	imul   -0x30(%rbp),%eax
+  400fd5:	89 c0                	mov    %eax,%eax
+  400fd7:	48 89 45 e8          	mov    %rax,-0x18(%rbp)
+  400fdb:	83 7d c8 00          	cmpl   $0x0,-0x38(%rbp)
+  400fdf:	74 07                	je     400fe8 <i386_cpuid_caches+0x10d>
+  400fe1:	ba 36 23 40 00       	mov    $0x402336,%edx
+  400fe6:	eb 05                	jmp    400fed <i386_cpuid_caches+0x112>
+  400fe8:	ba 3b 23 40 00       	mov    $0x40233b,%edx
+  400fed:	83 7d cc 00          	cmpl   $0x0,-0x34(%rbp)
+  400ff1:	74 07                	je     400ffa <i386_cpuid_caches+0x11f>
+  400ff3:	b8 36 23 40 00       	mov    $0x402336,%eax
+  400ff8:	eb 05                	jmp    400fff <i386_cpuid_caches+0x124>
+  400ffa:	b8 3b 23 40 00       	mov    $0x40233b,%eax
+  400fff:	48 8b 4d e8          	mov    -0x18(%rbp),%rcx
+  401003:	48 c1 e9 0a          	shr    $0xa,%rcx
+  401007:	49 89 ca             	mov    %rcx,%r10
+  40100a:	44 8b 4d d4          	mov    -0x2c(%rbp),%r9d
+  40100e:	44 8b 45 d0          	mov    -0x30(%rbp),%r8d
+  401012:	48 8b 4d e0          	mov    -0x20(%rbp),%rcx
+  401016:	8b 7d c4             	mov    -0x3c(%rbp),%edi
+  401019:	8b 75 ac             	mov    -0x54(%rbp),%esi
+  40101c:	48 89 54 24 28       	mov    %rdx,0x28(%rsp)
+  401021:	48 89 44 24 20       	mov    %rax,0x20(%rsp)
+  401026:	4c 89 54 24 18       	mov    %r10,0x18(%rsp)
+  40102b:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  40102f:	48 89 44 24 10       	mov    %rax,0x10(%rsp)
+  401034:	8b 45 dc             	mov    -0x24(%rbp),%eax
+  401037:	89 44 24 08          	mov    %eax,0x8(%rsp)
+  40103b:	8b 45 d8             	mov    -0x28(%rbp),%eax
+  40103e:	89 04 24             	mov    %eax,(%rsp)
+  401041:	89 fa                	mov    %edi,%edx
+  401043:	bf 48 23 40 00       	mov    $0x402348,%edi
+  401048:	b8 00 00 00 00       	mov    $0x0,%eax
+  40104d:	e8 fe f4 ff ff       	callq  400550 <printf@plt>
+  401052:	83 45 ac 01          	addl   $0x1,-0x54(%rbp)
+  401056:	83 7d ac 1f          	cmpl   $0x1f,-0x54(%rbp)
+  40105a:	0f 8e 93 fe ff ff    	jle    400ef3 <i386_cpuid_caches+0x18>
+  401060:	48 81 c4 88 00 00 00 	add    $0x88,%rsp
+  401067:	5b                   	pop    %rbx
+  401068:	5d                   	pop    %rbp
+  401069:	c3                   	retq   
+
+000000000040106a <main>:
+  40106a:	55                   	push   %rbp
+  40106b:	48 89 e5             	mov    %rsp,%rbp
+  40106e:	48 83 ec 20          	sub    $0x20,%rsp
+  401072:	89 7d ec             	mov    %edi,-0x14(%rbp)
+  401075:	48 89 75 e0          	mov    %rsi,-0x20(%rbp)
+  401079:	b8 00 00 00 00       	mov    $0x0,%eax
+  40107e:	e8 78 01 00 00       	callq  4011fb <mem>
+  401083:	c9                   	leaveq 
+  401084:	c3                   	retq   
+
+0000000000401085 <begin>:
+  401085:	55                   	push   %rbp
+  401086:	48 89 e5             	mov    %rsp,%rbp
+  401089:	48 83 ec 10          	sub    $0x10,%rsp
+  40108d:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+  401091:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  401095:	48 89 c6             	mov    %rax,%rsi
+  401098:	bf 32 24 40 00       	mov    $0x402432,%edi
+  40109d:	b8 00 00 00 00       	mov    $0x0,%eax
+  4010a2:	e8 a9 f4 ff ff       	callq  400550 <printf@plt>
+  4010a7:	48 8b 05 b2 1f 20 00 	mov    0x201fb2(%rip),%rax        # 603060 <__TMC_END__>
+  4010ae:	48 89 c7             	mov    %rax,%rdi
+  4010b1:	e8 ea f4 ff ff       	callq  4005a0 <fflush@plt>
+  4010b6:	c9                   	leaveq 
+  4010b7:	c3                   	retq   
+
+00000000004010b8 <complete>:
+  4010b8:	55                   	push   %rbp
+  4010b9:	48 89 e5             	mov    %rsp,%rbp
+  4010bc:	48 83 ec 10          	sub    $0x10,%rsp
+  4010c0:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+  4010c4:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  4010c8:	48 89 c6             	mov    %rax,%rsi
+  4010cb:	bf 39 24 40 00       	mov    $0x402439,%edi
+  4010d0:	b8 00 00 00 00       	mov    $0x0,%eax
+  4010d5:	e8 76 f4 ff ff       	callq  400550 <printf@plt>
+  4010da:	c9                   	leaveq 
+  4010db:	c3                   	retq   
+
+00000000004010dc <force_cache_miss>:
+  4010dc:	55                   	push   %rbp
+  4010dd:	48 89 e5             	mov    %rsp,%rbp
+  4010e0:	48 83 ec 20          	sub    $0x20,%rsp
+  4010e4:	c7 45 ec 00 00 a0 0f 	movl   $0xfa00000,-0x14(%rbp)
+  4010eb:	8b 45 ec             	mov    -0x14(%rbp),%eax
+  4010ee:	48 98                	cltq   
+  4010f0:	48 89 c7             	mov    %rax,%rdi
+  4010f3:	e8 98 f4 ff ff       	callq  400590 <malloc@plt>
+  4010f8:	48 89 45 f0          	mov    %rax,-0x10(%rbp)
+  4010fc:	c7 45 e8 00 00 00 00 	movl   $0x0,-0x18(%rbp)
+  401103:	b8 00 00 00 00       	mov    $0x0,%eax
+  401108:	e8 33 f4 ff ff       	callq  400540 <clock@plt>
+  40110d:	48 98                	cltq   
+  40110f:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+  401113:	c7 45 e4 00 00 00 00 	movl   $0x0,-0x1c(%rbp)
+  40111a:	eb 1e                	jmp    40113a <force_cache_miss+0x5e>
+  40111c:	83 45 e8 01          	addl   $0x1,-0x18(%rbp)
+  401120:	8b 45 e4             	mov    -0x1c(%rbp),%eax
+  401123:	48 63 d0             	movslq %eax,%rdx
+  401126:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+  40112a:	48 01 d0             	add    %rdx,%rax
+  40112d:	0f b6 00             	movzbl (%rax),%eax
+  401130:	88 45 e3             	mov    %al,-0x1d(%rbp)
+  401133:	81 45 e4 00 00 04 00 	addl   $0x40000,-0x1c(%rbp)
+  40113a:	8b 45 e4             	mov    -0x1c(%rbp),%eax
+  40113d:	3b 45 ec             	cmp    -0x14(%rbp),%eax
+  401140:	7c da                	jl     40111c <force_cache_miss+0x40>
+  401142:	b8 00 00 00 00       	mov    $0x0,%eax
+  401147:	e8 f4 f3 ff ff       	callq  400540 <clock@plt>
+  40114c:	48 98                	cltq   
+  40114e:	48 2b 45 f8          	sub    -0x8(%rbp),%rax
+  401152:	f2 48 0f 2a c0       	cvtsi2sd %rax,%xmm0
+  401157:	8b 45 e8             	mov    -0x18(%rbp),%eax
+  40115a:	89 c6                	mov    %eax,%esi
+  40115c:	bf 42 24 40 00       	mov    $0x402442,%edi
+  401161:	b8 01 00 00 00       	mov    $0x1,%eax
+  401166:	e8 e5 f3 ff ff       	callq  400550 <printf@plt>
+  40116b:	c9                   	leaveq 
+  40116c:	c3                   	retq   
+
+000000000040116d <no_cache_miss>:
+  40116d:	55                   	push   %rbp
+  40116e:	48 89 e5             	mov    %rsp,%rbp
+  401171:	48 83 ec 20          	sub    $0x20,%rsp
+  401175:	c7 45 ec e8 03 00 00 	movl   $0x3e8,-0x14(%rbp)
+  40117c:	8b 45 ec             	mov    -0x14(%rbp),%eax
+  40117f:	48 98                	cltq   
+  401181:	48 89 c7             	mov    %rax,%rdi
+  401184:	e8 07 f4 ff ff       	callq  400590 <malloc@plt>
+  401189:	48 89 45 f0          	mov    %rax,-0x10(%rbp)
+  40118d:	c7 45 e8 00 00 00 00 	movl   $0x0,-0x18(%rbp)
+  401194:	b8 00 00 00 00       	mov    $0x0,%eax
+  401199:	e8 a2 f3 ff ff       	callq  400540 <clock@plt>
+  40119e:	48 98                	cltq   
+  4011a0:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+  4011a4:	c7 45 e4 00 00 00 00 	movl   $0x0,-0x1c(%rbp)
+  4011ab:	eb 1b                	jmp    4011c8 <no_cache_miss+0x5b>
+  4011ad:	83 45 e8 01          	addl   $0x1,-0x18(%rbp)
+  4011b1:	8b 45 e4             	mov    -0x1c(%rbp),%eax
+  4011b4:	48 63 d0             	movslq %eax,%rdx
+  4011b7:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+  4011bb:	48 01 d0             	add    %rdx,%rax
+  4011be:	0f b6 00             	movzbl (%rax),%eax
+  4011c1:	88 45 e3             	mov    %al,-0x1d(%rbp)
+  4011c4:	83 45 e4 01          	addl   $0x1,-0x1c(%rbp)
+  4011c8:	8b 45 e4             	mov    -0x1c(%rbp),%eax
+  4011cb:	3b 45 ec             	cmp    -0x14(%rbp),%eax
+  4011ce:	7c dd                	jl     4011ad <no_cache_miss+0x40>
+  4011d0:	b8 00 00 00 00       	mov    $0x0,%eax
+  4011d5:	e8 66 f3 ff ff       	callq  400540 <clock@plt>
+  4011da:	48 98                	cltq   
+  4011dc:	48 2b 45 f8          	sub    -0x8(%rbp),%rax
+  4011e0:	f2 48 0f 2a c0       	cvtsi2sd %rax,%xmm0
+  4011e5:	8b 45 e8             	mov    -0x18(%rbp),%eax
+  4011e8:	89 c6                	mov    %eax,%esi
+  4011ea:	bf 5f 24 40 00       	mov    $0x40245f,%edi
+  4011ef:	b8 01 00 00 00       	mov    $0x1,%eax
+  4011f4:	e8 57 f3 ff ff       	callq  400550 <printf@plt>
+  4011f9:	c9                   	leaveq 
+  4011fa:	c3                   	retq   
+
+00000000004011fb <mem>:
+  4011fb:	55                   	push   %rbp
+  4011fc:	48 89 e5             	mov    %rsp,%rbp
+  4011ff:	48 83 ec 10          	sub    $0x10,%rsp
+  401203:	89 7d fc             	mov    %edi,-0x4(%rbp)
+  401206:	b8 00 00 00 00       	mov    $0x0,%eax
+  40120b:	e8 cc fe ff ff       	callq  4010dc <force_cache_miss>
+  401210:	c9                   	leaveq 
+  401211:	c3                   	retq   
+
+0000000000401212 <mul>:
+  401212:	55                   	push   %rbp
+  401213:	48 89 e5             	mov    %rsp,%rbp
+  401216:	48 83 ec 30          	sub    $0x30,%rsp
+  40121a:	89 7d dc             	mov    %edi,-0x24(%rbp)
+  40121d:	48 8d 45 e0          	lea    -0x20(%rbp),%rax
+  401221:	be 00 00 00 00       	mov    $0x0,%esi
+  401226:	48 89 c7             	mov    %rax,%rdi
+  401229:	e8 32 f3 ff ff       	callq  400560 <gettimeofday@plt>
+  40122e:	48 8d 45 f0          	lea    -0x10(%rbp),%rax
+  401232:	be 00 00 00 00       	mov    $0x0,%esi
+  401237:	48 89 c7             	mov    %rax,%rdi
+  40123a:	e8 21 f3 ff ff       	callq  400560 <gettimeofday@plt>
+  40123f:	e9 e1 07 00 00       	jmpq   401a25 <mul+0x813>
+  401244:	f7 e0                	mul    %eax
+  401246:	f7 e0                	mul    %eax
+  401248:	f7 e0                	mul    %eax
+  40124a:	f7 e0                	mul    %eax
+  40124c:	f7 e0                	mul    %eax
+  40124e:	f7 e0                	mul    %eax
+  401250:	f7 e0                	mul    %eax
+  401252:	f7 e0                	mul    %eax
+  401254:	f7 e0                	mul    %eax
+  401256:	f7 e0                	mul    %eax
+  401258:	f7 e0                	mul    %eax
+  40125a:	f7 e0                	mul    %eax
+  40125c:	f7 e0                	mul    %eax
+  40125e:	f7 e0                	mul    %eax
+  401260:	f7 e0                	mul    %eax
+  401262:	f7 e0                	mul    %eax
+  401264:	f7 e0                	mul    %eax
+  401266:	f7 e0                	mul    %eax
+  401268:	f7 e0                	mul    %eax
+  40126a:	f7 e0                	mul    %eax
+  40126c:	f7 e0                	mul    %eax
+  40126e:	f7 e0                	mul    %eax
+  401270:	f7 e0                	mul    %eax
+  401272:	f7 e0                	mul    %eax
+  401274:	f7 e0                	mul    %eax
+  401276:	f7 e0                	mul    %eax
+  401278:	f7 e0                	mul    %eax
+  40127a:	f7 e0                	mul    %eax
+  40127c:	f7 e0                	mul    %eax
+  40127e:	f7 e0                	mul    %eax
+  401280:	f7 e0                	mul    %eax
+  401282:	f7 e0                	mul    %eax
+  401284:	f7 e0                	mul    %eax
+  401286:	f7 e0                	mul    %eax
+  401288:	f7 e0                	mul    %eax
+  40128a:	f7 e0                	mul    %eax
+  40128c:	f7 e0                	mul    %eax
+  40128e:	f7 e0                	mul    %eax
+  401290:	f7 e0                	mul    %eax
+  401292:	f7 e0                	mul    %eax
+  401294:	f7 e0                	mul    %eax
+  401296:	f7 e0                	mul    %eax
+  401298:	f7 e0                	mul    %eax
+  40129a:	f7 e0                	mul    %eax
+  40129c:	f7 e0                	mul    %eax
+  40129e:	f7 e0                	mul    %eax
+  4012a0:	f7 e0                	mul    %eax
+  4012a2:	f7 e0                	mul    %eax
+  4012a4:	f7 e0                	mul    %eax
+  4012a6:	f7 e0                	mul    %eax
+  4012a8:	f7 e0                	mul    %eax
+  4012aa:	f7 e0                	mul    %eax
+  4012ac:	f7 e0                	mul    %eax
+  4012ae:	f7 e0                	mul    %eax
+  4012b0:	f7 e0                	mul    %eax
+  4012b2:	f7 e0                	mul    %eax
+  4012b4:	f7 e0                	mul    %eax
+  4012b6:	f7 e0                	mul    %eax
+  4012b8:	f7 e0                	mul    %eax
+  4012ba:	f7 e0                	mul    %eax
+  4012bc:	f7 e0                	mul    %eax
+  4012be:	f7 e0                	mul    %eax
+  4012c0:	f7 e0                	mul    %eax
+  4012c2:	f7 e0                	mul    %eax
+  4012c4:	f7 e0                	mul    %eax
+  4012c6:	f7 e0                	mul    %eax
+  4012c8:	f7 e0                	mul    %eax
+  4012ca:	f7 e0                	mul    %eax
+  4012cc:	f7 e0                	mul    %eax
+  4012ce:	f7 e0                	mul    %eax
+  4012d0:	f7 e0                	mul    %eax
+  4012d2:	f7 e0                	mul    %eax
+  4012d4:	f7 e0                	mul    %eax
+  4012d6:	f7 e0                	mul    %eax
+  4012d8:	f7 e0                	mul    %eax
+  4012da:	f7 e0                	mul    %eax
+  4012dc:	f7 e0                	mul    %eax
+  4012de:	f7 e0                	mul    %eax
+  4012e0:	f7 e0                	mul    %eax
+  4012e2:	f7 e0                	mul    %eax
+  4012e4:	f7 e0                	mul    %eax
+  4012e6:	f7 e0                	mul    %eax
+  4012e8:	f7 e0                	mul    %eax
+  4012ea:	f7 e0                	mul    %eax
+  4012ec:	f7 e0                	mul    %eax
+  4012ee:	f7 e0                	mul    %eax
+  4012f0:	f7 e0                	mul    %eax
+  4012f2:	f7 e0                	mul    %eax
+  4012f4:	f7 e0                	mul    %eax
+  4012f6:	f7 e0                	mul    %eax
+  4012f8:	f7 e0                	mul    %eax
+  4012fa:	f7 e0                	mul    %eax
+  4012fc:	f7 e0                	mul    %eax
+  4012fe:	f7 e0                	mul    %eax
+  401300:	f7 e0                	mul    %eax
+  401302:	f7 e0                	mul    %eax
+  401304:	f7 e0                	mul    %eax
+  401306:	f7 e0                	mul    %eax
+  401308:	f7 e0                	mul    %eax
+  40130a:	f7 e0                	mul    %eax
+  40130c:	f7 e0                	mul    %eax
+  40130e:	f7 e0                	mul    %eax
+  401310:	f7 e0                	mul    %eax
+  401312:	f7 e0                	mul    %eax
+  401314:	f7 e0                	mul    %eax
+  401316:	f7 e0                	mul    %eax
+  401318:	f7 e0                	mul    %eax
+  40131a:	f7 e0                	mul    %eax
+  40131c:	f7 e0                	mul    %eax
+  40131e:	f7 e0                	mul    %eax
+  401320:	f7 e0                	mul    %eax
+  401322:	f7 e0                	mul    %eax
+  401324:	f7 e0                	mul    %eax
+  401326:	f7 e0                	mul    %eax
+  401328:	f7 e0                	mul    %eax
+  40132a:	f7 e0                	mul    %eax
+  40132c:	f7 e0                	mul    %eax
+  40132e:	f7 e0                	mul    %eax
+  401330:	f7 e0                	mul    %eax
+  401332:	f7 e0                	mul    %eax
+  401334:	f7 e0                	mul    %eax
+  401336:	f7 e0                	mul    %eax
+  401338:	f7 e0                	mul    %eax
+  40133a:	f7 e0                	mul    %eax
+  40133c:	f7 e0                	mul    %eax
+  40133e:	f7 e0                	mul    %eax
+  401340:	f7 e0                	mul    %eax
+  401342:	f7 e0                	mul    %eax
+  401344:	f7 e0                	mul    %eax
+  401346:	f7 e0                	mul    %eax
+  401348:	f7 e0                	mul    %eax
+  40134a:	f7 e0                	mul    %eax
+  40134c:	f7 e0                	mul    %eax
+  40134e:	f7 e0                	mul    %eax
+  401350:	f7 e0                	mul    %eax
+  401352:	f7 e0                	mul    %eax
+  401354:	f7 e0                	mul    %eax
+  401356:	f7 e0                	mul    %eax
+  401358:	f7 e0                	mul    %eax
+  40135a:	f7 e0                	mul    %eax
+  40135c:	f7 e0                	mul    %eax
+  40135e:	f7 e0                	mul    %eax
+  401360:	f7 e0                	mul    %eax
+  401362:	f7 e0                	mul    %eax
+  401364:	f7 e0                	mul    %eax
+  401366:	f7 e0                	mul    %eax
+  401368:	f7 e0                	mul    %eax
+  40136a:	f7 e0                	mul    %eax
+  40136c:	f7 e0                	mul    %eax
+  40136e:	f7 e0                	mul    %eax
+  401370:	f7 e0                	mul    %eax
+  401372:	f7 e0                	mul    %eax
+  401374:	f7 e0                	mul    %eax
+  401376:	f7 e0                	mul    %eax
+  401378:	f7 e0                	mul    %eax
+  40137a:	f7 e0                	mul    %eax
+  40137c:	f7 e0                	mul    %eax
+  40137e:	f7 e0                	mul    %eax
+  401380:	f7 e0                	mul    %eax
+  401382:	f7 e0                	mul    %eax
+  401384:	f7 e0                	mul    %eax
+  401386:	f7 e0                	mul    %eax
+  401388:	f7 e0                	mul    %eax
+  40138a:	f7 e0                	mul    %eax
+  40138c:	f7 e0                	mul    %eax
+  40138e:	f7 e0                	mul    %eax
+  401390:	f7 e0                	mul    %eax
+  401392:	f7 e0                	mul    %eax
+  401394:	f7 e0                	mul    %eax
+  401396:	f7 e0                	mul    %eax
+  401398:	f7 e0                	mul    %eax
+  40139a:	f7 e0                	mul    %eax
+  40139c:	f7 e0                	mul    %eax
+  40139e:	f7 e0                	mul    %eax
+  4013a0:	f7 e0                	mul    %eax
+  4013a2:	f7 e0                	mul    %eax
+  4013a4:	f7 e0                	mul    %eax
+  4013a6:	f7 e0                	mul    %eax
+  4013a8:	f7 e0                	mul    %eax
+  4013aa:	f7 e0                	mul    %eax
+  4013ac:	f7 e0                	mul    %eax
+  4013ae:	f7 e0                	mul    %eax
+  4013b0:	f7 e0                	mul    %eax
+  4013b2:	f7 e0                	mul    %eax
+  4013b4:	f7 e0                	mul    %eax
+  4013b6:	f7 e0                	mul    %eax
+  4013b8:	f7 e0                	mul    %eax
+  4013ba:	f7 e0                	mul    %eax
+  4013bc:	f7 e0                	mul    %eax
+  4013be:	f7 e0                	mul    %eax
+  4013c0:	f7 e0                	mul    %eax
+  4013c2:	f7 e0                	mul    %eax
+  4013c4:	f7 e0                	mul    %eax
+  4013c6:	f7 e0                	mul    %eax
+  4013c8:	f7 e0                	mul    %eax
+  4013ca:	f7 e0                	mul    %eax
+  4013cc:	f7 e0                	mul    %eax
+  4013ce:	f7 e0                	mul    %eax
+  4013d0:	f7 e0                	mul    %eax
+  4013d2:	f7 e0                	mul    %eax
+  4013d4:	f7 e0                	mul    %eax
+  4013d6:	f7 e0                	mul    %eax
+  4013d8:	f7 e0                	mul    %eax
+  4013da:	f7 e0                	mul    %eax
+  4013dc:	f7 e0                	mul    %eax
+  4013de:	f7 e0                	mul    %eax
+  4013e0:	f7 e0                	mul    %eax
+  4013e2:	f7 e0                	mul    %eax
+  4013e4:	f7 e0                	mul    %eax
+  4013e6:	f7 e0                	mul    %eax
+  4013e8:	f7 e0                	mul    %eax
+  4013ea:	f7 e0                	mul    %eax
+  4013ec:	f7 e0                	mul    %eax
+  4013ee:	f7 e0                	mul    %eax
+  4013f0:	f7 e0                	mul    %eax
+  4013f2:	f7 e0                	mul    %eax
+  4013f4:	f7 e0                	mul    %eax
+  4013f6:	f7 e0                	mul    %eax
+  4013f8:	f7 e0                	mul    %eax
+  4013fa:	f7 e0                	mul    %eax
+  4013fc:	f7 e0                	mul    %eax
+  4013fe:	f7 e0                	mul    %eax
+  401400:	f7 e0                	mul    %eax
+  401402:	f7 e0                	mul    %eax
+  401404:	f7 e0                	mul    %eax
+  401406:	f7 e0                	mul    %eax
+  401408:	f7 e0                	mul    %eax
+  40140a:	f7 e0                	mul    %eax
+  40140c:	f7 e0                	mul    %eax
+  40140e:	f7 e0                	mul    %eax
+  401410:	f7 e0                	mul    %eax
+  401412:	f7 e0                	mul    %eax
+  401414:	f7 e0                	mul    %eax
+  401416:	f7 e0                	mul    %eax
+  401418:	f7 e0                	mul    %eax
+  40141a:	f7 e0                	mul    %eax
+  40141c:	f7 e0                	mul    %eax
+  40141e:	f7 e0                	mul    %eax
+  401420:	f7 e0                	mul    %eax
+  401422:	f7 e0                	mul    %eax
+  401424:	f7 e0                	mul    %eax
+  401426:	f7 e0                	mul    %eax
+  401428:	f7 e0                	mul    %eax
+  40142a:	f7 e0                	mul    %eax
+  40142c:	f7 e0                	mul    %eax
+  40142e:	f7 e0                	mul    %eax
+  401430:	f7 e0                	mul    %eax
+  401432:	f7 e0                	mul    %eax
+  401434:	f7 e0                	mul    %eax
+  401436:	f7 e0                	mul    %eax
+  401438:	f7 e0                	mul    %eax
+  40143a:	f7 e0                	mul    %eax
+  40143c:	f7 e0                	mul    %eax
+  40143e:	f7 e0                	mul    %eax
+  401440:	f7 e0                	mul    %eax
+  401442:	f7 e0                	mul    %eax
+  401444:	f7 e0                	mul    %eax
+  401446:	f7 e0                	mul    %eax
+  401448:	f7 e0                	mul    %eax
+  40144a:	f7 e0                	mul    %eax
+  40144c:	f7 e0                	mul    %eax
+  40144e:	f7 e0                	mul    %eax
+  401450:	f7 e0                	mul    %eax
+  401452:	f7 e0                	mul    %eax
+  401454:	f7 e0                	mul    %eax
+  401456:	f7 e0                	mul    %eax
+  401458:	f7 e0                	mul    %eax
+  40145a:	f7 e0                	mul    %eax
+  40145c:	f7 e0                	mul    %eax
+  40145e:	f7 e0                	mul    %eax
+  401460:	f7 e0                	mul    %eax
+  401462:	f7 e0                	mul    %eax
+  401464:	f7 e0                	mul    %eax
+  401466:	f7 e0                	mul    %eax
+  401468:	f7 e0                	mul    %eax
+  40146a:	f7 e0                	mul    %eax
+  40146c:	f7 e0                	mul    %eax
+  40146e:	f7 e0                	mul    %eax
+  401470:	f7 e0                	mul    %eax
+  401472:	f7 e0                	mul    %eax
+  401474:	f7 e0                	mul    %eax
+  401476:	f7 e0                	mul    %eax
+  401478:	f7 e0                	mul    %eax
+  40147a:	f7 e0                	mul    %eax
+  40147c:	f7 e0                	mul    %eax
+  40147e:	f7 e0                	mul    %eax
+  401480:	f7 e0                	mul    %eax
+  401482:	f7 e0                	mul    %eax
+  401484:	f7 e0                	mul    %eax
+  401486:	f7 e0                	mul    %eax
+  401488:	f7 e0                	mul    %eax
+  40148a:	f7 e0                	mul    %eax
+  40148c:	f7 e0                	mul    %eax
+  40148e:	f7 e0                	mul    %eax
+  401490:	f7 e0                	mul    %eax
+  401492:	f7 e0                	mul    %eax
+  401494:	f7 e0                	mul    %eax
+  401496:	f7 e0                	mul    %eax
+  401498:	f7 e0                	mul    %eax
+  40149a:	f7 e0                	mul    %eax
+  40149c:	f7 e0                	mul    %eax
+  40149e:	f7 e0                	mul    %eax
+  4014a0:	f7 e0                	mul    %eax
+  4014a2:	f7 e0                	mul    %eax
+  4014a4:	f7 e0                	mul    %eax
+  4014a6:	f7 e0                	mul    %eax
+  4014a8:	f7 e0                	mul    %eax
+  4014aa:	f7 e0                	mul    %eax
+  4014ac:	f7 e0                	mul    %eax
+  4014ae:	f7 e0                	mul    %eax
+  4014b0:	f7 e0                	mul    %eax
+  4014b2:	f7 e0                	mul    %eax
+  4014b4:	f7 e0                	mul    %eax
+  4014b6:	f7 e0                	mul    %eax
+  4014b8:	f7 e0                	mul    %eax
+  4014ba:	f7 e0                	mul    %eax
+  4014bc:	f7 e0                	mul    %eax
+  4014be:	f7 e0                	mul    %eax
+  4014c0:	f7 e0                	mul    %eax
+  4014c2:	f7 e0                	mul    %eax
+  4014c4:	f7 e0                	mul    %eax
+  4014c6:	f7 e0                	mul    %eax
+  4014c8:	f7 e0                	mul    %eax
+  4014ca:	f7 e0                	mul    %eax
+  4014cc:	f7 e0                	mul    %eax
+  4014ce:	f7 e0                	mul    %eax
+  4014d0:	f7 e0                	mul    %eax
+  4014d2:	f7 e0                	mul    %eax
+  4014d4:	f7 e0                	mul    %eax
+  4014d6:	f7 e0                	mul    %eax
+  4014d8:	f7 e0                	mul    %eax
+  4014da:	f7 e0                	mul    %eax
+  4014dc:	f7 e0                	mul    %eax
+  4014de:	f7 e0                	mul    %eax
+  4014e0:	f7 e0                	mul    %eax
+  4014e2:	f7 e0                	mul    %eax
+  4014e4:	f7 e0                	mul    %eax
+  4014e6:	f7 e0                	mul    %eax
+  4014e8:	f7 e0                	mul    %eax
+  4014ea:	f7 e0                	mul    %eax
+  4014ec:	f7 e0                	mul    %eax
+  4014ee:	f7 e0                	mul    %eax
+  4014f0:	f7 e0                	mul    %eax
+  4014f2:	f7 e0                	mul    %eax
+  4014f4:	f7 e0                	mul    %eax
+  4014f6:	f7 e0                	mul    %eax
+  4014f8:	f7 e0                	mul    %eax
+  4014fa:	f7 e0                	mul    %eax
+  4014fc:	f7 e0                	mul    %eax
+  4014fe:	f7 e0                	mul    %eax
+  401500:	f7 e0                	mul    %eax
+  401502:	f7 e0                	mul    %eax
+  401504:	f7 e0                	mul    %eax
+  401506:	f7 e0                	mul    %eax
+  401508:	f7 e0                	mul    %eax
+  40150a:	f7 e0                	mul    %eax
+  40150c:	f7 e0                	mul    %eax
+  40150e:	f7 e0                	mul    %eax
+  401510:	f7 e0                	mul    %eax
+  401512:	f7 e0                	mul    %eax
+  401514:	f7 e0                	mul    %eax
+  401516:	f7 e0                	mul    %eax
+  401518:	f7 e0                	mul    %eax
+  40151a:	f7 e0                	mul    %eax
+  40151c:	f7 e0                	mul    %eax
+  40151e:	f7 e0                	mul    %eax
+  401520:	f7 e0                	mul    %eax
+  401522:	f7 e0                	mul    %eax
+  401524:	f7 e0                	mul    %eax
+  401526:	f7 e0                	mul    %eax
+  401528:	f7 e0                	mul    %eax
+  40152a:	f7 e0                	mul    %eax
+  40152c:	f7 e0                	mul    %eax
+  40152e:	f7 e0                	mul    %eax
+  401530:	f7 e0                	mul    %eax
+  401532:	f7 e0                	mul    %eax
+  401534:	f7 e0                	mul    %eax
+  401536:	f7 e0                	mul    %eax
+  401538:	f7 e0                	mul    %eax
+  40153a:	f7 e0                	mul    %eax
+  40153c:	f7 e0                	mul    %eax
+  40153e:	f7 e0                	mul    %eax
+  401540:	f7 e0                	mul    %eax
+  401542:	f7 e0                	mul    %eax
+  401544:	f7 e0                	mul    %eax
+  401546:	f7 e0                	mul    %eax
+  401548:	f7 e0                	mul    %eax
+  40154a:	f7 e0                	mul    %eax
+  40154c:	f7 e0                	mul    %eax
+  40154e:	f7 e0                	mul    %eax
+  401550:	f7 e0                	mul    %eax
+  401552:	f7 e0                	mul    %eax
+  401554:	f7 e0                	mul    %eax
+  401556:	f7 e0                	mul    %eax
+  401558:	f7 e0                	mul    %eax
+  40155a:	f7 e0                	mul    %eax
+  40155c:	f7 e0                	mul    %eax
+  40155e:	f7 e0                	mul    %eax
+  401560:	f7 e0                	mul    %eax
+  401562:	f7 e0                	mul    %eax
+  401564:	f7 e0                	mul    %eax
+  401566:	f7 e0                	mul    %eax
+  401568:	f7 e0                	mul    %eax
+  40156a:	f7 e0                	mul    %eax
+  40156c:	f7 e0                	mul    %eax
+  40156e:	f7 e0                	mul    %eax
+  401570:	f7 e0                	mul    %eax
+  401572:	f7 e0                	mul    %eax
+  401574:	f7 e0                	mul    %eax
+  401576:	f7 e0                	mul    %eax
+  401578:	f7 e0                	mul    %eax
+  40157a:	f7 e0                	mul    %eax
+  40157c:	f7 e0                	mul    %eax
+  40157e:	f7 e0                	mul    %eax
+  401580:	f7 e0                	mul    %eax
+  401582:	f7 e0                	mul    %eax
+  401584:	f7 e0                	mul    %eax
+  401586:	f7 e0                	mul    %eax
+  401588:	f7 e0                	mul    %eax
+  40158a:	f7 e0                	mul    %eax
+  40158c:	f7 e0                	mul    %eax
+  40158e:	f7 e0                	mul    %eax
+  401590:	f7 e0                	mul    %eax
+  401592:	f7 e0                	mul    %eax
+  401594:	f7 e0                	mul    %eax
+  401596:	f7 e0                	mul    %eax
+  401598:	f7 e0                	mul    %eax
+  40159a:	f7 e0                	mul    %eax
+  40159c:	f7 e0                	mul    %eax
+  40159e:	f7 e0                	mul    %eax
+  4015a0:	f7 e0                	mul    %eax
+  4015a2:	f7 e0                	mul    %eax
+  4015a4:	f7 e0                	mul    %eax
+  4015a6:	f7 e0                	mul    %eax
+  4015a8:	f7 e0                	mul    %eax
+  4015aa:	f7 e0                	mul    %eax
+  4015ac:	f7 e0                	mul    %eax
+  4015ae:	f7 e0                	mul    %eax
+  4015b0:	f7 e0                	mul    %eax
+  4015b2:	f7 e0                	mul    %eax
+  4015b4:	f7 e0                	mul    %eax
+  4015b6:	f7 e0                	mul    %eax
+  4015b8:	f7 e0                	mul    %eax
+  4015ba:	f7 e0                	mul    %eax
+  4015bc:	f7 e0                	mul    %eax
+  4015be:	f7 e0                	mul    %eax
+  4015c0:	f7 e0                	mul    %eax
+  4015c2:	f7 e0                	mul    %eax
+  4015c4:	f7 e0                	mul    %eax
+  4015c6:	f7 e0                	mul    %eax
+  4015c8:	f7 e0                	mul    %eax
+  4015ca:	f7 e0                	mul    %eax
+  4015cc:	f7 e0                	mul    %eax
+  4015ce:	f7 e0                	mul    %eax
+  4015d0:	f7 e0                	mul    %eax
+  4015d2:	f7 e0                	mul    %eax
+  4015d4:	f7 e0                	mul    %eax
+  4015d6:	f7 e0                	mul    %eax
+  4015d8:	f7 e0                	mul    %eax
+  4015da:	f7 e0                	mul    %eax
+  4015dc:	f7 e0                	mul    %eax
+  4015de:	f7 e0                	mul    %eax
+  4015e0:	f7 e0                	mul    %eax
+  4015e2:	f7 e0                	mul    %eax
+  4015e4:	f7 e0                	mul    %eax
+  4015e6:	f7 e0                	mul    %eax
+  4015e8:	f7 e0                	mul    %eax
+  4015ea:	f7 e0                	mul    %eax
+  4015ec:	f7 e0                	mul    %eax
+  4015ee:	f7 e0                	mul    %eax
+  4015f0:	f7 e0                	mul    %eax
+  4015f2:	f7 e0                	mul    %eax
+  4015f4:	f7 e0                	mul    %eax
+  4015f6:	f7 e0                	mul    %eax
+  4015f8:	f7 e0                	mul    %eax
+  4015fa:	f7 e0                	mul    %eax
+  4015fc:	f7 e0                	mul    %eax
+  4015fe:	f7 e0                	mul    %eax
+  401600:	f7 e0                	mul    %eax
+  401602:	f7 e0                	mul    %eax
+  401604:	f7 e0                	mul    %eax
+  401606:	f7 e0                	mul    %eax
+  401608:	f7 e0                	mul    %eax
+  40160a:	f7 e0                	mul    %eax
+  40160c:	f7 e0                	mul    %eax
+  40160e:	f7 e0                	mul    %eax
+  401610:	f7 e0                	mul    %eax
+  401612:	f7 e0                	mul    %eax
+  401614:	f7 e0                	mul    %eax
+  401616:	f7 e0                	mul    %eax
+  401618:	f7 e0                	mul    %eax
+  40161a:	f7 e0                	mul    %eax
+  40161c:	f7 e0                	mul    %eax
+  40161e:	f7 e0                	mul    %eax
+  401620:	f7 e0                	mul    %eax
+  401622:	f7 e0                	mul    %eax
+  401624:	f7 e0                	mul    %eax
+  401626:	f7 e0                	mul    %eax
+  401628:	f7 e0                	mul    %eax
+  40162a:	f7 e0                	mul    %eax
+  40162c:	f7 e0                	mul    %eax
+  40162e:	f7 e0                	mul    %eax
+  401630:	f7 e0                	mul    %eax
+  401632:	f7 e0                	mul    %eax
+  401634:	f7 e0                	mul    %eax
+  401636:	f7 e0                	mul    %eax
+  401638:	f7 e0                	mul    %eax
+  40163a:	f7 e0                	mul    %eax
+  40163c:	f7 e0                	mul    %eax
+  40163e:	f7 e0                	mul    %eax
+  401640:	f7 e0                	mul    %eax
+  401642:	f7 e0                	mul    %eax
+  401644:	f7 e0                	mul    %eax
+  401646:	f7 e0                	mul    %eax
+  401648:	f7 e0                	mul    %eax
+  40164a:	f7 e0                	mul    %eax
+  40164c:	f7 e0                	mul    %eax
+  40164e:	f7 e0                	mul    %eax
+  401650:	f7 e0                	mul    %eax
+  401652:	f7 e0                	mul    %eax
+  401654:	f7 e0                	mul    %eax
+  401656:	f7 e0                	mul    %eax
+  401658:	f7 e0                	mul    %eax
+  40165a:	f7 e0                	mul    %eax
+  40165c:	f7 e0                	mul    %eax
+  40165e:	f7 e0                	mul    %eax
+  401660:	f7 e0                	mul    %eax
+  401662:	f7 e0                	mul    %eax
+  401664:	f7 e0                	mul    %eax
+  401666:	f7 e0                	mul    %eax
+  401668:	f7 e0                	mul    %eax
+  40166a:	f7 e0                	mul    %eax
+  40166c:	f7 e0                	mul    %eax
+  40166e:	f7 e0                	mul    %eax
+  401670:	f7 e0                	mul    %eax
+  401672:	f7 e0                	mul    %eax
+  401674:	f7 e0                	mul    %eax
+  401676:	f7 e0                	mul    %eax
+  401678:	f7 e0                	mul    %eax
+  40167a:	f7 e0                	mul    %eax
+  40167c:	f7 e0                	mul    %eax
+  40167e:	f7 e0                	mul    %eax
+  401680:	f7 e0                	mul    %eax
+  401682:	f7 e0                	mul    %eax
+  401684:	f7 e0                	mul    %eax
+  401686:	f7 e0                	mul    %eax
+  401688:	f7 e0                	mul    %eax
+  40168a:	f7 e0                	mul    %eax
+  40168c:	f7 e0                	mul    %eax
+  40168e:	f7 e0                	mul    %eax
+  401690:	f7 e0                	mul    %eax
+  401692:	f7 e0                	mul    %eax
+  401694:	f7 e0                	mul    %eax
+  401696:	f7 e0                	mul    %eax
+  401698:	f7 e0                	mul    %eax
+  40169a:	f7 e0                	mul    %eax
+  40169c:	f7 e0                	mul    %eax
+  40169e:	f7 e0                	mul    %eax
+  4016a0:	f7 e0                	mul    %eax
+  4016a2:	f7 e0                	mul    %eax
+  4016a4:	f7 e0                	mul    %eax
+  4016a6:	f7 e0                	mul    %eax
+  4016a8:	f7 e0                	mul    %eax
+  4016aa:	f7 e0                	mul    %eax
+  4016ac:	f7 e0                	mul    %eax
+  4016ae:	f7 e0                	mul    %eax
+  4016b0:	f7 e0                	mul    %eax
+  4016b2:	f7 e0                	mul    %eax
+  4016b4:	f7 e0                	mul    %eax
+  4016b6:	f7 e0                	mul    %eax
+  4016b8:	f7 e0                	mul    %eax
+  4016ba:	f7 e0                	mul    %eax
+  4016bc:	f7 e0                	mul    %eax
+  4016be:	f7 e0                	mul    %eax
+  4016c0:	f7 e0                	mul    %eax
+  4016c2:	f7 e0                	mul    %eax
+  4016c4:	f7 e0                	mul    %eax
+  4016c6:	f7 e0                	mul    %eax
+  4016c8:	f7 e0                	mul    %eax
+  4016ca:	f7 e0                	mul    %eax
+  4016cc:	f7 e0                	mul    %eax
+  4016ce:	f7 e0                	mul    %eax
+  4016d0:	f7 e0                	mul    %eax
+  4016d2:	f7 e0                	mul    %eax
+  4016d4:	f7 e0                	mul    %eax
+  4016d6:	f7 e0                	mul    %eax
+  4016d8:	f7 e0                	mul    %eax
+  4016da:	f7 e0                	mul    %eax
+  4016dc:	f7 e0                	mul    %eax
+  4016de:	f7 e0                	mul    %eax
+  4016e0:	f7 e0                	mul    %eax
+  4016e2:	f7 e0                	mul    %eax
+  4016e4:	f7 e0                	mul    %eax
+  4016e6:	f7 e0                	mul    %eax
+  4016e8:	f7 e0                	mul    %eax
+  4016ea:	f7 e0                	mul    %eax
+  4016ec:	f7 e0                	mul    %eax
+  4016ee:	f7 e0                	mul    %eax
+  4016f0:	f7 e0                	mul    %eax
+  4016f2:	f7 e0                	mul    %eax
+  4016f4:	f7 e0                	mul    %eax
+  4016f6:	f7 e0                	mul    %eax
+  4016f8:	f7 e0                	mul    %eax
+  4016fa:	f7 e0                	mul    %eax
+  4016fc:	f7 e0                	mul    %eax
+  4016fe:	f7 e0                	mul    %eax
+  401700:	f7 e0                	mul    %eax
+  401702:	f7 e0                	mul    %eax
+  401704:	f7 e0                	mul    %eax
+  401706:	f7 e0                	mul    %eax
+  401708:	f7 e0                	mul    %eax
+  40170a:	f7 e0                	mul    %eax
+  40170c:	f7 e0                	mul    %eax
+  40170e:	f7 e0                	mul    %eax
+  401710:	f7 e0                	mul    %eax
+  401712:	f7 e0                	mul    %eax
+  401714:	f7 e0                	mul    %eax
+  401716:	f7 e0                	mul    %eax
+  401718:	f7 e0                	mul    %eax
+  40171a:	f7 e0                	mul    %eax
+  40171c:	f7 e0                	mul    %eax
+  40171e:	f7 e0                	mul    %eax
+  401720:	f7 e0                	mul    %eax
+  401722:	f7 e0                	mul    %eax
+  401724:	f7 e0                	mul    %eax
+  401726:	f7 e0                	mul    %eax
+  401728:	f7 e0                	mul    %eax
+  40172a:	f7 e0                	mul    %eax
+  40172c:	f7 e0                	mul    %eax
+  40172e:	f7 e0                	mul    %eax
+  401730:	f7 e0                	mul    %eax
+  401732:	f7 e0                	mul    %eax
+  401734:	f7 e0                	mul    %eax
+  401736:	f7 e0                	mul    %eax
+  401738:	f7 e0                	mul    %eax
+  40173a:	f7 e0                	mul    %eax
+  40173c:	f7 e0                	mul    %eax
+  40173e:	f7 e0                	mul    %eax
+  401740:	f7 e0                	mul    %eax
+  401742:	f7 e0                	mul    %eax
+  401744:	f7 e0                	mul    %eax
+  401746:	f7 e0                	mul    %eax
+  401748:	f7 e0                	mul    %eax
+  40174a:	f7 e0                	mul    %eax
+  40174c:	f7 e0                	mul    %eax
+  40174e:	f7 e0                	mul    %eax
+  401750:	f7 e0                	mul    %eax
+  401752:	f7 e0                	mul    %eax
+  401754:	f7 e0                	mul    %eax
+  401756:	f7 e0                	mul    %eax
+  401758:	f7 e0                	mul    %eax
+  40175a:	f7 e0                	mul    %eax
+  40175c:	f7 e0                	mul    %eax
+  40175e:	f7 e0                	mul    %eax
+  401760:	f7 e0                	mul    %eax
+  401762:	f7 e0                	mul    %eax
+  401764:	f7 e0                	mul    %eax
+  401766:	f7 e0                	mul    %eax
+  401768:	f7 e0                	mul    %eax
+  40176a:	f7 e0                	mul    %eax
+  40176c:	f7 e0                	mul    %eax
+  40176e:	f7 e0                	mul    %eax
+  401770:	f7 e0                	mul    %eax
+  401772:	f7 e0                	mul    %eax
+  401774:	f7 e0                	mul    %eax
+  401776:	f7 e0                	mul    %eax
+  401778:	f7 e0                	mul    %eax
+  40177a:	f7 e0                	mul    %eax
+  40177c:	f7 e0                	mul    %eax
+  40177e:	f7 e0                	mul    %eax
+  401780:	f7 e0                	mul    %eax
+  401782:	f7 e0                	mul    %eax
+  401784:	f7 e0                	mul    %eax
+  401786:	f7 e0                	mul    %eax
+  401788:	f7 e0                	mul    %eax
+  40178a:	f7 e0                	mul    %eax
+  40178c:	f7 e0                	mul    %eax
+  40178e:	f7 e0                	mul    %eax
+  401790:	f7 e0                	mul    %eax
+  401792:	f7 e0                	mul    %eax
+  401794:	f7 e0                	mul    %eax
+  401796:	f7 e0                	mul    %eax
+  401798:	f7 e0                	mul    %eax
+  40179a:	f7 e0                	mul    %eax
+  40179c:	f7 e0                	mul    %eax
+  40179e:	f7 e0                	mul    %eax
+  4017a0:	f7 e0                	mul    %eax
+  4017a2:	f7 e0                	mul    %eax
+  4017a4:	f7 e0                	mul    %eax
+  4017a6:	f7 e0                	mul    %eax
+  4017a8:	f7 e0                	mul    %eax
+  4017aa:	f7 e0                	mul    %eax
+  4017ac:	f7 e0                	mul    %eax
+  4017ae:	f7 e0                	mul    %eax
+  4017b0:	f7 e0                	mul    %eax
+  4017b2:	f7 e0                	mul    %eax
+  4017b4:	f7 e0                	mul    %eax
+  4017b6:	f7 e0                	mul    %eax
+  4017b8:	f7 e0                	mul    %eax
+  4017ba:	f7 e0                	mul    %eax
+  4017bc:	f7 e0                	mul    %eax
+  4017be:	f7 e0                	mul    %eax
+  4017c0:	f7 e0                	mul    %eax
+  4017c2:	f7 e0                	mul    %eax
+  4017c4:	f7 e0                	mul    %eax
+  4017c6:	f7 e0                	mul    %eax
+  4017c8:	f7 e0                	mul    %eax
+  4017ca:	f7 e0                	mul    %eax
+  4017cc:	f7 e0                	mul    %eax
+  4017ce:	f7 e0                	mul    %eax
+  4017d0:	f7 e0                	mul    %eax
+  4017d2:	f7 e0                	mul    %eax
+  4017d4:	f7 e0                	mul    %eax
+  4017d6:	f7 e0                	mul    %eax
+  4017d8:	f7 e0                	mul    %eax
+  4017da:	f7 e0                	mul    %eax
+  4017dc:	f7 e0                	mul    %eax
+  4017de:	f7 e0                	mul    %eax
+  4017e0:	f7 e0                	mul    %eax
+  4017e2:	f7 e0                	mul    %eax
+  4017e4:	f7 e0                	mul    %eax
+  4017e6:	f7 e0                	mul    %eax
+  4017e8:	f7 e0                	mul    %eax
+  4017ea:	f7 e0                	mul    %eax
+  4017ec:	f7 e0                	mul    %eax
+  4017ee:	f7 e0                	mul    %eax
+  4017f0:	f7 e0                	mul    %eax
+  4017f2:	f7 e0                	mul    %eax
+  4017f4:	f7 e0                	mul    %eax
+  4017f6:	f7 e0                	mul    %eax
+  4017f8:	f7 e0                	mul    %eax
+  4017fa:	f7 e0                	mul    %eax
+  4017fc:	f7 e0                	mul    %eax
+  4017fe:	f7 e0                	mul    %eax
+  401800:	f7 e0                	mul    %eax
+  401802:	f7 e0                	mul    %eax
+  401804:	f7 e0                	mul    %eax
+  401806:	f7 e0                	mul    %eax
+  401808:	f7 e0                	mul    %eax
+  40180a:	f7 e0                	mul    %eax
+  40180c:	f7 e0                	mul    %eax
+  40180e:	f7 e0                	mul    %eax
+  401810:	f7 e0                	mul    %eax
+  401812:	f7 e0                	mul    %eax
+  401814:	f7 e0                	mul    %eax
+  401816:	f7 e0                	mul    %eax
+  401818:	f7 e0                	mul    %eax
+  40181a:	f7 e0                	mul    %eax
+  40181c:	f7 e0                	mul    %eax
+  40181e:	f7 e0                	mul    %eax
+  401820:	f7 e0                	mul    %eax
+  401822:	f7 e0                	mul    %eax
+  401824:	f7 e0                	mul    %eax
+  401826:	f7 e0                	mul    %eax
+  401828:	f7 e0                	mul    %eax
+  40182a:	f7 e0                	mul    %eax
+  40182c:	f7 e0                	mul    %eax
+  40182e:	f7 e0                	mul    %eax
+  401830:	f7 e0                	mul    %eax
+  401832:	f7 e0                	mul    %eax
+  401834:	f7 e0                	mul    %eax
+  401836:	f7 e0                	mul    %eax
+  401838:	f7 e0                	mul    %eax
+  40183a:	f7 e0                	mul    %eax
+  40183c:	f7 e0                	mul    %eax
+  40183e:	f7 e0                	mul    %eax
+  401840:	f7 e0                	mul    %eax
+  401842:	f7 e0                	mul    %eax
+  401844:	f7 e0                	mul    %eax
+  401846:	f7 e0                	mul    %eax
+  401848:	f7 e0                	mul    %eax
+  40184a:	f7 e0                	mul    %eax
+  40184c:	f7 e0                	mul    %eax
+  40184e:	f7 e0                	mul    %eax
+  401850:	f7 e0                	mul    %eax
+  401852:	f7 e0                	mul    %eax
+  401854:	f7 e0                	mul    %eax
+  401856:	f7 e0                	mul    %eax
+  401858:	f7 e0                	mul    %eax
+  40185a:	f7 e0                	mul    %eax
+  40185c:	f7 e0                	mul    %eax
+  40185e:	f7 e0                	mul    %eax
+  401860:	f7 e0                	mul    %eax
+  401862:	f7 e0                	mul    %eax
+  401864:	f7 e0                	mul    %eax
+  401866:	f7 e0                	mul    %eax
+  401868:	f7 e0                	mul    %eax
+  40186a:	f7 e0                	mul    %eax
+  40186c:	f7 e0                	mul    %eax
+  40186e:	f7 e0                	mul    %eax
+  401870:	f7 e0                	mul    %eax
+  401872:	f7 e0                	mul    %eax
+  401874:	f7 e0                	mul    %eax
+  401876:	f7 e0                	mul    %eax
+  401878:	f7 e0                	mul    %eax
+  40187a:	f7 e0                	mul    %eax
+  40187c:	f7 e0                	mul    %eax
+  40187e:	f7 e0                	mul    %eax
+  401880:	f7 e0                	mul    %eax
+  401882:	f7 e0                	mul    %eax
+  401884:	f7 e0                	mul    %eax
+  401886:	f7 e0                	mul    %eax
+  401888:	f7 e0                	mul    %eax
+  40188a:	f7 e0                	mul    %eax
+  40188c:	f7 e0                	mul    %eax
+  40188e:	f7 e0                	mul    %eax
+  401890:	f7 e0                	mul    %eax
+  401892:	f7 e0                	mul    %eax
+  401894:	f7 e0                	mul    %eax
+  401896:	f7 e0                	mul    %eax
+  401898:	f7 e0                	mul    %eax
+  40189a:	f7 e0                	mul    %eax
+  40189c:	f7 e0                	mul    %eax
+  40189e:	f7 e0                	mul    %eax
+  4018a0:	f7 e0                	mul    %eax
+  4018a2:	f7 e0                	mul    %eax
+  4018a4:	f7 e0                	mul    %eax
+  4018a6:	f7 e0                	mul    %eax
+  4018a8:	f7 e0                	mul    %eax
+  4018aa:	f7 e0                	mul    %eax
+  4018ac:	f7 e0                	mul    %eax
+  4018ae:	f7 e0                	mul    %eax
+  4018b0:	f7 e0                	mul    %eax
+  4018b2:	f7 e0                	mul    %eax
+  4018b4:	f7 e0                	mul    %eax
+  4018b6:	f7 e0                	mul    %eax
+  4018b8:	f7 e0                	mul    %eax
+  4018ba:	f7 e0                	mul    %eax
+  4018bc:	f7 e0                	mul    %eax
+  4018be:	f7 e0                	mul    %eax
+  4018c0:	f7 e0                	mul    %eax
+  4018c2:	f7 e0                	mul    %eax
+  4018c4:	f7 e0                	mul    %eax
+  4018c6:	f7 e0                	mul    %eax
+  4018c8:	f7 e0                	mul    %eax
+  4018ca:	f7 e0                	mul    %eax
+  4018cc:	f7 e0                	mul    %eax
+  4018ce:	f7 e0                	mul    %eax
+  4018d0:	f7 e0                	mul    %eax
+  4018d2:	f7 e0                	mul    %eax
+  4018d4:	f7 e0                	mul    %eax
+  4018d6:	f7 e0                	mul    %eax
+  4018d8:	f7 e0                	mul    %eax
+  4018da:	f7 e0                	mul    %eax
+  4018dc:	f7 e0                	mul    %eax
+  4018de:	f7 e0                	mul    %eax
+  4018e0:	f7 e0                	mul    %eax
+  4018e2:	f7 e0                	mul    %eax
+  4018e4:	f7 e0                	mul    %eax
+  4018e6:	f7 e0                	mul    %eax
+  4018e8:	f7 e0                	mul    %eax
+  4018ea:	f7 e0                	mul    %eax
+  4018ec:	f7 e0                	mul    %eax
+  4018ee:	f7 e0                	mul    %eax
+  4018f0:	f7 e0                	mul    %eax
+  4018f2:	f7 e0                	mul    %eax
+  4018f4:	f7 e0                	mul    %eax
+  4018f6:	f7 e0                	mul    %eax
+  4018f8:	f7 e0                	mul    %eax
+  4018fa:	f7 e0                	mul    %eax
+  4018fc:	f7 e0                	mul    %eax
+  4018fe:	f7 e0                	mul    %eax
+  401900:	f7 e0                	mul    %eax
+  401902:	f7 e0                	mul    %eax
+  401904:	f7 e0                	mul    %eax
+  401906:	f7 e0                	mul    %eax
+  401908:	f7 e0                	mul    %eax
+  40190a:	f7 e0                	mul    %eax
+  40190c:	f7 e0                	mul    %eax
+  40190e:	f7 e0                	mul    %eax
+  401910:	f7 e0                	mul    %eax
+  401912:	f7 e0                	mul    %eax
+  401914:	f7 e0                	mul    %eax
+  401916:	f7 e0                	mul    %eax
+  401918:	f7 e0                	mul    %eax
+  40191a:	f7 e0                	mul    %eax
+  40191c:	f7 e0                	mul    %eax
+  40191e:	f7 e0                	mul    %eax
+  401920:	f7 e0                	mul    %eax
+  401922:	f7 e0                	mul    %eax
+  401924:	f7 e0                	mul    %eax
+  401926:	f7 e0                	mul    %eax
+  401928:	f7 e0                	mul    %eax
+  40192a:	f7 e0                	mul    %eax
+  40192c:	f7 e0                	mul    %eax
+  40192e:	f7 e0                	mul    %eax
+  401930:	f7 e0                	mul    %eax
+  401932:	f7 e0                	mul    %eax
+  401934:	f7 e0                	mul    %eax
+  401936:	f7 e0                	mul    %eax
+  401938:	f7 e0                	mul    %eax
+  40193a:	f7 e0                	mul    %eax
+  40193c:	f7 e0                	mul    %eax
+  40193e:	f7 e0                	mul    %eax
+  401940:	f7 e0                	mul    %eax
+  401942:	f7 e0                	mul    %eax
+  401944:	f7 e0                	mul    %eax
+  401946:	f7 e0                	mul    %eax
+  401948:	f7 e0                	mul    %eax
+  40194a:	f7 e0                	mul    %eax
+  40194c:	f7 e0                	mul    %eax
+  40194e:	f7 e0                	mul    %eax
+  401950:	f7 e0                	mul    %eax
+  401952:	f7 e0                	mul    %eax
+  401954:	f7 e0                	mul    %eax
+  401956:	f7 e0                	mul    %eax
+  401958:	f7 e0                	mul    %eax
+  40195a:	f7 e0                	mul    %eax
+  40195c:	f7 e0                	mul    %eax
+  40195e:	f7 e0                	mul    %eax
+  401960:	f7 e0                	mul    %eax
+  401962:	f7 e0                	mul    %eax
+  401964:	f7 e0                	mul    %eax
+  401966:	f7 e0                	mul    %eax
+  401968:	f7 e0                	mul    %eax
+  40196a:	f7 e0                	mul    %eax
+  40196c:	f7 e0                	mul    %eax
+  40196e:	f7 e0                	mul    %eax
+  401970:	f7 e0                	mul    %eax
+  401972:	f7 e0                	mul    %eax
+  401974:	f7 e0                	mul    %eax
+  401976:	f7 e0                	mul    %eax
+  401978:	f7 e0                	mul    %eax
+  40197a:	f7 e0                	mul    %eax
+  40197c:	f7 e0                	mul    %eax
+  40197e:	f7 e0                	mul    %eax
+  401980:	f7 e0                	mul    %eax
+  401982:	f7 e0                	mul    %eax
+  401984:	f7 e0                	mul    %eax
+  401986:	f7 e0                	mul    %eax
+  401988:	f7 e0                	mul    %eax
+  40198a:	f7 e0                	mul    %eax
+  40198c:	f7 e0                	mul    %eax
+  40198e:	f7 e0                	mul    %eax
+  401990:	f7 e0                	mul    %eax
+  401992:	f7 e0                	mul    %eax
+  401994:	f7 e0                	mul    %eax
+  401996:	f7 e0                	mul    %eax
+  401998:	f7 e0                	mul    %eax
+  40199a:	f7 e0                	mul    %eax
+  40199c:	f7 e0                	mul    %eax
+  40199e:	f7 e0                	mul    %eax
+  4019a0:	f7 e0                	mul    %eax
+  4019a2:	f7 e0                	mul    %eax
+  4019a4:	f7 e0                	mul    %eax
+  4019a6:	f7 e0                	mul    %eax
+  4019a8:	f7 e0                	mul    %eax
+  4019aa:	f7 e0                	mul    %eax
+  4019ac:	f7 e0                	mul    %eax
+  4019ae:	f7 e0                	mul    %eax
+  4019b0:	f7 e0                	mul    %eax
+  4019b2:	f7 e0                	mul    %eax
+  4019b4:	f7 e0                	mul    %eax
+  4019b6:	f7 e0                	mul    %eax
+  4019b8:	f7 e0                	mul    %eax
+  4019ba:	f7 e0                	mul    %eax
+  4019bc:	f7 e0                	mul    %eax
+  4019be:	f7 e0                	mul    %eax
+  4019c0:	f7 e0                	mul    %eax
+  4019c2:	f7 e0                	mul    %eax
+  4019c4:	f7 e0                	mul    %eax
+  4019c6:	f7 e0                	mul    %eax
+  4019c8:	f7 e0                	mul    %eax
+  4019ca:	f7 e0                	mul    %eax
+  4019cc:	f7 e0                	mul    %eax
+  4019ce:	f7 e0                	mul    %eax
+  4019d0:	f7 e0                	mul    %eax
+  4019d2:	f7 e0                	mul    %eax
+  4019d4:	f7 e0                	mul    %eax
+  4019d6:	f7 e0                	mul    %eax
+  4019d8:	f7 e0                	mul    %eax
+  4019da:	f7 e0                	mul    %eax
+  4019dc:	f7 e0                	mul    %eax
+  4019de:	f7 e0                	mul    %eax
+  4019e0:	f7 e0                	mul    %eax
+  4019e2:	f7 e0                	mul    %eax
+  4019e4:	f7 e0                	mul    %eax
+  4019e6:	f7 e0                	mul    %eax
+  4019e8:	f7 e0                	mul    %eax
+  4019ea:	f7 e0                	mul    %eax
+  4019ec:	f7 e0                	mul    %eax
+  4019ee:	f7 e0                	mul    %eax
+  4019f0:	f7 e0                	mul    %eax
+  4019f2:	f7 e0                	mul    %eax
+  4019f4:	f7 e0                	mul    %eax
+  4019f6:	f7 e0                	mul    %eax
+  4019f8:	f7 e0                	mul    %eax
+  4019fa:	f7 e0                	mul    %eax
+  4019fc:	f7 e0                	mul    %eax
+  4019fe:	f7 e0                	mul    %eax
+  401a00:	f7 e0                	mul    %eax
+  401a02:	f7 e0                	mul    %eax
+  401a04:	f7 e0                	mul    %eax
+  401a06:	f7 e0                	mul    %eax
+  401a08:	f7 e0                	mul    %eax
+  401a0a:	f7 e0                	mul    %eax
+  401a0c:	f7 e0                	mul    %eax
+  401a0e:	f7 e0                	mul    %eax
+  401a10:	f7 e0                	mul    %eax
+  401a12:	f7 e0                	mul    %eax
+  401a14:	48 8d 45 f0          	lea    -0x10(%rbp),%rax
+  401a18:	be 00 00 00 00       	mov    $0x0,%esi
+  401a1d:	48 89 c7             	mov    %rax,%rdi
+  401a20:	e8 3b eb ff ff       	callq  400560 <gettimeofday@plt>
+  401a25:	48 8b 55 f0          	mov    -0x10(%rbp),%rdx
+  401a29:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+  401a2d:	48 29 c2             	sub    %rax,%rdx
+  401a30:	8b 45 dc             	mov    -0x24(%rbp),%eax
+  401a33:	48 98                	cltq   
+  401a35:	48 39 c2             	cmp    %rax,%rdx
+  401a38:	0f 8c 06 f8 ff ff    	jl     401244 <mul+0x32>
+  401a3e:	c9                   	leaveq 
+  401a3f:	c3                   	retq   
+
+0000000000401a40 <nop>:
+  401a40:	55                   	push   %rbp
+  401a41:	48 89 e5             	mov    %rsp,%rbp
+  401a44:	48 83 ec 30          	sub    $0x30,%rsp
+  401a48:	89 7d dc             	mov    %edi,-0x24(%rbp)
+  401a4b:	48 8d 45 e0          	lea    -0x20(%rbp),%rax
+  401a4f:	be 00 00 00 00       	mov    $0x0,%esi
+  401a54:	48 89 c7             	mov    %rax,%rdi
+  401a57:	e8 04 eb ff ff       	callq  400560 <gettimeofday@plt>
+  401a5c:	48 8d 45 f0          	lea    -0x10(%rbp),%rax
+  401a60:	be 00 00 00 00       	mov    $0x0,%esi
+  401a65:	48 89 c7             	mov    %rax,%rdi
+  401a68:	e8 f3 ea ff ff       	callq  400560 <gettimeofday@plt>
+  401a6d:	e9 e1 07 00 00       	jmpq   402253 <nop+0x813>
+  401a72:	f3 90                	pause  
+  401a74:	f3 90                	pause  
+  401a76:	f3 90                	pause  
+  401a78:	f3 90                	pause  
+  401a7a:	f3 90                	pause  
+  401a7c:	f3 90                	pause  
+  401a7e:	f3 90                	pause  
+  401a80:	f3 90                	pause  
+  401a82:	f3 90                	pause  
+  401a84:	f3 90                	pause  
+  401a86:	f3 90                	pause  
+  401a88:	f3 90                	pause  
+  401a8a:	f3 90                	pause  
+  401a8c:	f3 90                	pause  
+  401a8e:	f3 90                	pause  
+  401a90:	f3 90                	pause  
+  401a92:	f3 90                	pause  
+  401a94:	f3 90                	pause  
+  401a96:	f3 90                	pause  
+  401a98:	f3 90                	pause  
+  401a9a:	f3 90                	pause  
+  401a9c:	f3 90                	pause  
+  401a9e:	f3 90                	pause  
+  401aa0:	f3 90                	pause  
+  401aa2:	f3 90                	pause  
+  401aa4:	f3 90                	pause  
+  401aa6:	f3 90                	pause  
+  401aa8:	f3 90                	pause  
+  401aaa:	f3 90                	pause  
+  401aac:	f3 90                	pause  
+  401aae:	f3 90                	pause  
+  401ab0:	f3 90                	pause  
+  401ab2:	f3 90                	pause  
+  401ab4:	f3 90                	pause  
+  401ab6:	f3 90                	pause  
+  401ab8:	f3 90                	pause  
+  401aba:	f3 90                	pause  
+  401abc:	f3 90                	pause  
+  401abe:	f3 90                	pause  
+  401ac0:	f3 90                	pause  
+  401ac2:	f3 90                	pause  
+  401ac4:	f3 90                	pause  
+  401ac6:	f3 90                	pause  
+  401ac8:	f3 90                	pause  
+  401aca:	f3 90                	pause  
+  401acc:	f3 90                	pause  
+  401ace:	f3 90                	pause  
+  401ad0:	f3 90                	pause  
+  401ad2:	f3 90                	pause  
+  401ad4:	f3 90                	pause  
+  401ad6:	f3 90                	pause  
+  401ad8:	f3 90                	pause  
+  401ada:	f3 90                	pause  
+  401adc:	f3 90                	pause  
+  401ade:	f3 90                	pause  
+  401ae0:	f3 90                	pause  
+  401ae2:	f3 90                	pause  
+  401ae4:	f3 90                	pause  
+  401ae6:	f3 90                	pause  
+  401ae8:	f3 90                	pause  
+  401aea:	f3 90                	pause  
+  401aec:	f3 90                	pause  
+  401aee:	f3 90                	pause  
+  401af0:	f3 90                	pause  
+  401af2:	f3 90                	pause  
+  401af4:	f3 90                	pause  
+  401af6:	f3 90                	pause  
+  401af8:	f3 90                	pause  
+  401afa:	f3 90                	pause  
+  401afc:	f3 90                	pause  
+  401afe:	f3 90                	pause  
+  401b00:	f3 90                	pause  
+  401b02:	f3 90                	pause  
+  401b04:	f3 90                	pause  
+  401b06:	f3 90                	pause  
+  401b08:	f3 90                	pause  
+  401b0a:	f3 90                	pause  
+  401b0c:	f3 90                	pause  
+  401b0e:	f3 90                	pause  
+  401b10:	f3 90                	pause  
+  401b12:	f3 90                	pause  
+  401b14:	f3 90                	pause  
+  401b16:	f3 90                	pause  
+  401b18:	f3 90                	pause  
+  401b1a:	f3 90                	pause  
+  401b1c:	f3 90                	pause  
+  401b1e:	f3 90                	pause  
+  401b20:	f3 90                	pause  
+  401b22:	f3 90                	pause  
+  401b24:	f3 90                	pause  
+  401b26:	f3 90                	pause  
+  401b28:	f3 90                	pause  
+  401b2a:	f3 90                	pause  
+  401b2c:	f3 90                	pause  
+  401b2e:	f3 90                	pause  
+  401b30:	f3 90                	pause  
+  401b32:	f3 90                	pause  
+  401b34:	f3 90                	pause  
+  401b36:	f3 90                	pause  
+  401b38:	f3 90                	pause  
+  401b3a:	f3 90                	pause  
+  401b3c:	f3 90                	pause  
+  401b3e:	f3 90                	pause  
+  401b40:	f3 90                	pause  
+  401b42:	f3 90                	pause  
+  401b44:	f3 90                	pause  
+  401b46:	f3 90                	pause  
+  401b48:	f3 90                	pause  
+  401b4a:	f3 90                	pause  
+  401b4c:	f3 90                	pause  
+  401b4e:	f3 90                	pause  
+  401b50:	f3 90                	pause  
+  401b52:	f3 90                	pause  
+  401b54:	f3 90                	pause  
+  401b56:	f3 90                	pause  
+  401b58:	f3 90                	pause  
+  401b5a:	f3 90                	pause  
+  401b5c:	f3 90                	pause  
+  401b5e:	f3 90                	pause  
+  401b60:	f3 90                	pause  
+  401b62:	f3 90                	pause  
+  401b64:	f3 90                	pause  
+  401b66:	f3 90                	pause  
+  401b68:	f3 90                	pause  
+  401b6a:	f3 90                	pause  
+  401b6c:	f3 90                	pause  
+  401b6e:	f3 90                	pause  
+  401b70:	f3 90                	pause  
+  401b72:	f3 90                	pause  
+  401b74:	f3 90                	pause  
+  401b76:	f3 90                	pause  
+  401b78:	f3 90                	pause  
+  401b7a:	f3 90                	pause  
+  401b7c:	f3 90                	pause  
+  401b7e:	f3 90                	pause  
+  401b80:	f3 90                	pause  
+  401b82:	f3 90                	pause  
+  401b84:	f3 90                	pause  
+  401b86:	f3 90                	pause  
+  401b88:	f3 90                	pause  
+  401b8a:	f3 90                	pause  
+  401b8c:	f3 90                	pause  
+  401b8e:	f3 90                	pause  
+  401b90:	f3 90                	pause  
+  401b92:	f3 90                	pause  
+  401b94:	f3 90                	pause  
+  401b96:	f3 90                	pause  
+  401b98:	f3 90                	pause  
+  401b9a:	f3 90                	pause  
+  401b9c:	f3 90                	pause  
+  401b9e:	f3 90                	pause  
+  401ba0:	f3 90                	pause  
+  401ba2:	f3 90                	pause  
+  401ba4:	f3 90                	pause  
+  401ba6:	f3 90                	pause  
+  401ba8:	f3 90                	pause  
+  401baa:	f3 90                	pause  
+  401bac:	f3 90                	pause  
+  401bae:	f3 90                	pause  
+  401bb0:	f3 90                	pause  
+  401bb2:	f3 90                	pause  
+  401bb4:	f3 90                	pause  
+  401bb6:	f3 90                	pause  
+  401bb8:	f3 90                	pause  
+  401bba:	f3 90                	pause  
+  401bbc:	f3 90                	pause  
+  401bbe:	f3 90                	pause  
+  401bc0:	f3 90                	pause  
+  401bc2:	f3 90                	pause  
+  401bc4:	f3 90                	pause  
+  401bc6:	f3 90                	pause  
+  401bc8:	f3 90                	pause  
+  401bca:	f3 90                	pause  
+  401bcc:	f3 90                	pause  
+  401bce:	f3 90                	pause  
+  401bd0:	f3 90                	pause  
+  401bd2:	f3 90                	pause  
+  401bd4:	f3 90                	pause  
+  401bd6:	f3 90                	pause  
+  401bd8:	f3 90                	pause  
+  401bda:	f3 90                	pause  
+  401bdc:	f3 90                	pause  
+  401bde:	f3 90                	pause  
+  401be0:	f3 90                	pause  
+  401be2:	f3 90                	pause  
+  401be4:	f3 90                	pause  
+  401be6:	f3 90                	pause  
+  401be8:	f3 90                	pause  
+  401bea:	f3 90                	pause  
+  401bec:	f3 90                	pause  
+  401bee:	f3 90                	pause  
+  401bf0:	f3 90                	pause  
+  401bf2:	f3 90                	pause  
+  401bf4:	f3 90                	pause  
+  401bf6:	f3 90                	pause  
+  401bf8:	f3 90                	pause  
+  401bfa:	f3 90                	pause  
+  401bfc:	f3 90                	pause  
+  401bfe:	f3 90                	pause  
+  401c00:	f3 90                	pause  
+  401c02:	f3 90                	pause  
+  401c04:	f3 90                	pause  
+  401c06:	f3 90                	pause  
+  401c08:	f3 90                	pause  
+  401c0a:	f3 90                	pause  
+  401c0c:	f3 90                	pause  
+  401c0e:	f3 90                	pause  
+  401c10:	f3 90                	pause  
+  401c12:	f3 90                	pause  
+  401c14:	f3 90                	pause  
+  401c16:	f3 90                	pause  
+  401c18:	f3 90                	pause  
+  401c1a:	f3 90                	pause  
+  401c1c:	f3 90                	pause  
+  401c1e:	f3 90                	pause  
+  401c20:	f3 90                	pause  
+  401c22:	f3 90                	pause  
+  401c24:	f3 90                	pause  
+  401c26:	f3 90                	pause  
+  401c28:	f3 90                	pause  
+  401c2a:	f3 90                	pause  
+  401c2c:	f3 90                	pause  
+  401c2e:	f3 90                	pause  
+  401c30:	f3 90                	pause  
+  401c32:	f3 90                	pause  
+  401c34:	f3 90                	pause  
+  401c36:	f3 90                	pause  
+  401c38:	f3 90                	pause  
+  401c3a:	f3 90                	pause  
+  401c3c:	f3 90                	pause  
+  401c3e:	f3 90                	pause  
+  401c40:	f3 90                	pause  
+  401c42:	f3 90                	pause  
+  401c44:	f3 90                	pause  
+  401c46:	f3 90                	pause  
+  401c48:	f3 90                	pause  
+  401c4a:	f3 90                	pause  
+  401c4c:	f3 90                	pause  
+  401c4e:	f3 90                	pause  
+  401c50:	f3 90                	pause  
+  401c52:	f3 90                	pause  
+  401c54:	f3 90                	pause  
+  401c56:	f3 90                	pause  
+  401c58:	f3 90                	pause  
+  401c5a:	f3 90                	pause  
+  401c5c:	f3 90                	pause  
+  401c5e:	f3 90                	pause  
+  401c60:	f3 90                	pause  
+  401c62:	f3 90                	pause  
+  401c64:	f3 90                	pause  
+  401c66:	f3 90                	pause  
+  401c68:	f3 90                	pause  
+  401c6a:	f3 90                	pause  
+  401c6c:	f3 90                	pause  
+  401c6e:	f3 90                	pause  
+  401c70:	f3 90                	pause  
+  401c72:	f3 90                	pause  
+  401c74:	f3 90                	pause  
+  401c76:	f3 90                	pause  
+  401c78:	f3 90                	pause  
+  401c7a:	f3 90                	pause  
+  401c7c:	f3 90                	pause  
+  401c7e:	f3 90                	pause  
+  401c80:	f3 90                	pause  
+  401c82:	f3 90                	pause  
+  401c84:	f3 90                	pause  
+  401c86:	f3 90                	pause  
+  401c88:	f3 90                	pause  
+  401c8a:	f3 90                	pause  
+  401c8c:	f3 90                	pause  
+  401c8e:	f3 90                	pause  
+  401c90:	f3 90                	pause  
+  401c92:	f3 90                	pause  
+  401c94:	f3 90                	pause  
+  401c96:	f3 90                	pause  
+  401c98:	f3 90                	pause  
+  401c9a:	f3 90                	pause  
+  401c9c:	f3 90                	pause  
+  401c9e:	f3 90                	pause  
+  401ca0:	f3 90                	pause  
+  401ca2:	f3 90                	pause  
+  401ca4:	f3 90                	pause  
+  401ca6:	f3 90                	pause  
+  401ca8:	f3 90                	pause  
+  401caa:	f3 90                	pause  
+  401cac:	f3 90                	pause  
+  401cae:	f3 90                	pause  
+  401cb0:	f3 90                	pause  
+  401cb2:	f3 90                	pause  
+  401cb4:	f3 90                	pause  
+  401cb6:	f3 90                	pause  
+  401cb8:	f3 90                	pause  
+  401cba:	f3 90                	pause  
+  401cbc:	f3 90                	pause  
+  401cbe:	f3 90                	pause  
+  401cc0:	f3 90                	pause  
+  401cc2:	f3 90                	pause  
+  401cc4:	f3 90                	pause  
+  401cc6:	f3 90                	pause  
+  401cc8:	f3 90                	pause  
+  401cca:	f3 90                	pause  
+  401ccc:	f3 90                	pause  
+  401cce:	f3 90                	pause  
+  401cd0:	f3 90                	pause  
+  401cd2:	f3 90                	pause  
+  401cd4:	f3 90                	pause  
+  401cd6:	f3 90                	pause  
+  401cd8:	f3 90                	pause  
+  401cda:	f3 90                	pause  
+  401cdc:	f3 90                	pause  
+  401cde:	f3 90                	pause  
+  401ce0:	f3 90                	pause  
+  401ce2:	f3 90                	pause  
+  401ce4:	f3 90                	pause  
+  401ce6:	f3 90                	pause  
+  401ce8:	f3 90                	pause  
+  401cea:	f3 90                	pause  
+  401cec:	f3 90                	pause  
+  401cee:	f3 90                	pause  
+  401cf0:	f3 90                	pause  
+  401cf2:	f3 90                	pause  
+  401cf4:	f3 90                	pause  
+  401cf6:	f3 90                	pause  
+  401cf8:	f3 90                	pause  
+  401cfa:	f3 90                	pause  
+  401cfc:	f3 90                	pause  
+  401cfe:	f3 90                	pause  
+  401d00:	f3 90                	pause  
+  401d02:	f3 90                	pause  
+  401d04:	f3 90                	pause  
+  401d06:	f3 90                	pause  
+  401d08:	f3 90                	pause  
+  401d0a:	f3 90                	pause  
+  401d0c:	f3 90                	pause  
+  401d0e:	f3 90                	pause  
+  401d10:	f3 90                	pause  
+  401d12:	f3 90                	pause  
+  401d14:	f3 90                	pause  
+  401d16:	f3 90                	pause  
+  401d18:	f3 90                	pause  
+  401d1a:	f3 90                	pause  
+  401d1c:	f3 90                	pause  
+  401d1e:	f3 90                	pause  
+  401d20:	f3 90                	pause  
+  401d22:	f3 90                	pause  
+  401d24:	f3 90                	pause  
+  401d26:	f3 90                	pause  
+  401d28:	f3 90                	pause  
+  401d2a:	f3 90                	pause  
+  401d2c:	f3 90                	pause  
+  401d2e:	f3 90                	pause  
+  401d30:	f3 90                	pause  
+  401d32:	f3 90                	pause  
+  401d34:	f3 90                	pause  
+  401d36:	f3 90                	pause  
+  401d38:	f3 90                	pause  
+  401d3a:	f3 90                	pause  
+  401d3c:	f3 90                	pause  
+  401d3e:	f3 90                	pause  
+  401d40:	f3 90                	pause  
+  401d42:	f3 90                	pause  
+  401d44:	f3 90                	pause  
+  401d46:	f3 90                	pause  
+  401d48:	f3 90                	pause  
+  401d4a:	f3 90                	pause  
+  401d4c:	f3 90                	pause  
+  401d4e:	f3 90                	pause  
+  401d50:	f3 90                	pause  
+  401d52:	f3 90                	pause  
+  401d54:	f3 90                	pause  
+  401d56:	f3 90                	pause  
+  401d58:	f3 90                	pause  
+  401d5a:	f3 90                	pause  
+  401d5c:	f3 90                	pause  
+  401d5e:	f3 90                	pause  
+  401d60:	f3 90                	pause  
+  401d62:	f3 90                	pause  
+  401d64:	f3 90                	pause  
+  401d66:	f3 90                	pause  
+  401d68:	f3 90                	pause  
+  401d6a:	f3 90                	pause  
+  401d6c:	f3 90                	pause  
+  401d6e:	f3 90                	pause  
+  401d70:	f3 90                	pause  
+  401d72:	f3 90                	pause  
+  401d74:	f3 90                	pause  
+  401d76:	f3 90                	pause  
+  401d78:	f3 90                	pause  
+  401d7a:	f3 90                	pause  
+  401d7c:	f3 90                	pause  
+  401d7e:	f3 90                	pause  
+  401d80:	f3 90                	pause  
+  401d82:	f3 90                	pause  
+  401d84:	f3 90                	pause  
+  401d86:	f3 90                	pause  
+  401d88:	f3 90                	pause  
+  401d8a:	f3 90                	pause  
+  401d8c:	f3 90                	pause  
+  401d8e:	f3 90                	pause  
+  401d90:	f3 90                	pause  
+  401d92:	f3 90                	pause  
+  401d94:	f3 90                	pause  
+  401d96:	f3 90                	pause  
+  401d98:	f3 90                	pause  
+  401d9a:	f3 90                	pause  
+  401d9c:	f3 90                	pause  
+  401d9e:	f3 90                	pause  
+  401da0:	f3 90                	pause  
+  401da2:	f3 90                	pause  
+  401da4:	f3 90                	pause  
+  401da6:	f3 90                	pause  
+  401da8:	f3 90                	pause  
+  401daa:	f3 90                	pause  
+  401dac:	f3 90                	pause  
+  401dae:	f3 90                	pause  
+  401db0:	f3 90                	pause  
+  401db2:	f3 90                	pause  
+  401db4:	f3 90                	pause  
+  401db6:	f3 90                	pause  
+  401db8:	f3 90                	pause  
+  401dba:	f3 90                	pause  
+  401dbc:	f3 90                	pause  
+  401dbe:	f3 90                	pause  
+  401dc0:	f3 90                	pause  
+  401dc2:	f3 90                	pause  
+  401dc4:	f3 90                	pause  
+  401dc6:	f3 90                	pause  
+  401dc8:	f3 90                	pause  
+  401dca:	f3 90                	pause  
+  401dcc:	f3 90                	pause  
+  401dce:	f3 90                	pause  
+  401dd0:	f3 90                	pause  
+  401dd2:	f3 90                	pause  
+  401dd4:	f3 90                	pause  
+  401dd6:	f3 90                	pause  
+  401dd8:	f3 90                	pause  
+  401dda:	f3 90                	pause  
+  401ddc:	f3 90                	pause  
+  401dde:	f3 90                	pause  
+  401de0:	f3 90                	pause  
+  401de2:	f3 90                	pause  
+  401de4:	f3 90                	pause  
+  401de6:	f3 90                	pause  
+  401de8:	f3 90                	pause  
+  401dea:	f3 90                	pause  
+  401dec:	f3 90                	pause  
+  401dee:	f3 90                	pause  
+  401df0:	f3 90                	pause  
+  401df2:	f3 90                	pause  
+  401df4:	f3 90                	pause  
+  401df6:	f3 90                	pause  
+  401df8:	f3 90                	pause  
+  401dfa:	f3 90                	pause  
+  401dfc:	f3 90                	pause  
+  401dfe:	f3 90                	pause  
+  401e00:	f3 90                	pause  
+  401e02:	f3 90                	pause  
+  401e04:	f3 90                	pause  
+  401e06:	f3 90                	pause  
+  401e08:	f3 90                	pause  
+  401e0a:	f3 90                	pause  
+  401e0c:	f3 90                	pause  
+  401e0e:	f3 90                	pause  
+  401e10:	f3 90                	pause  
+  401e12:	f3 90                	pause  
+  401e14:	f3 90                	pause  
+  401e16:	f3 90                	pause  
+  401e18:	f3 90                	pause  
+  401e1a:	f3 90                	pause  
+  401e1c:	f3 90                	pause  
+  401e1e:	f3 90                	pause  
+  401e20:	f3 90                	pause  
+  401e22:	f3 90                	pause  
+  401e24:	f3 90                	pause  
+  401e26:	f3 90                	pause  
+  401e28:	f3 90                	pause  
+  401e2a:	f3 90                	pause  
+  401e2c:	f3 90                	pause  
+  401e2e:	f3 90                	pause  
+  401e30:	f3 90                	pause  
+  401e32:	f3 90                	pause  
+  401e34:	f3 90                	pause  
+  401e36:	f3 90                	pause  
+  401e38:	f3 90                	pause  
+  401e3a:	f3 90                	pause  
+  401e3c:	f3 90                	pause  
+  401e3e:	f3 90                	pause  
+  401e40:	f3 90                	pause  
+  401e42:	f3 90                	pause  
+  401e44:	f3 90                	pause  
+  401e46:	f3 90                	pause  
+  401e48:	f3 90                	pause  
+  401e4a:	f3 90                	pause  
+  401e4c:	f3 90                	pause  
+  401e4e:	f3 90                	pause  
+  401e50:	f3 90                	pause  
+  401e52:	f3 90                	pause  
+  401e54:	f3 90                	pause  
+  401e56:	f3 90                	pause  
+  401e58:	f3 90                	pause  
+  401e5a:	f3 90                	pause  
+  401e5c:	f3 90                	pause  
+  401e5e:	f3 90                	pause  
+  401e60:	f3 90                	pause  
+  401e62:	f3 90                	pause  
+  401e64:	f3 90                	pause  
+  401e66:	f3 90                	pause  
+  401e68:	f3 90                	pause  
+  401e6a:	f3 90                	pause  
+  401e6c:	f3 90                	pause  
+  401e6e:	f3 90                	pause  
+  401e70:	f3 90                	pause  
+  401e72:	f3 90                	pause  
+  401e74:	f3 90                	pause  
+  401e76:	f3 90                	pause  
+  401e78:	f3 90                	pause  
+  401e7a:	f3 90                	pause  
+  401e7c:	f3 90                	pause  
+  401e7e:	f3 90                	pause  
+  401e80:	f3 90                	pause  
+  401e82:	f3 90                	pause  
+  401e84:	f3 90                	pause  
+  401e86:	f3 90                	pause  
+  401e88:	f3 90                	pause  
+  401e8a:	f3 90                	pause  
+  401e8c:	f3 90                	pause  
+  401e8e:	f3 90                	pause  
+  401e90:	f3 90                	pause  
+  401e92:	f3 90                	pause  
+  401e94:	f3 90                	pause  
+  401e96:	f3 90                	pause  
+  401e98:	f3 90                	pause  
+  401e9a:	f3 90                	pause  
+  401e9c:	f3 90                	pause  
+  401e9e:	f3 90                	pause  
+  401ea0:	f3 90                	pause  
+  401ea2:	f3 90                	pause  
+  401ea4:	f3 90                	pause  
+  401ea6:	f3 90                	pause  
+  401ea8:	f3 90                	pause  
+  401eaa:	f3 90                	pause  
+  401eac:	f3 90                	pause  
+  401eae:	f3 90                	pause  
+  401eb0:	f3 90                	pause  
+  401eb2:	f3 90                	pause  
+  401eb4:	f3 90                	pause  
+  401eb6:	f3 90                	pause  
+  401eb8:	f3 90                	pause  
+  401eba:	f3 90                	pause  
+  401ebc:	f3 90                	pause  
+  401ebe:	f3 90                	pause  
+  401ec0:	f3 90                	pause  
+  401ec2:	f3 90                	pause  
+  401ec4:	f3 90                	pause  
+  401ec6:	f3 90                	pause  
+  401ec8:	f3 90                	pause  
+  401eca:	f3 90                	pause  
+  401ecc:	f3 90                	pause  
+  401ece:	f3 90                	pause  
+  401ed0:	f3 90                	pause  
+  401ed2:	f3 90                	pause  
+  401ed4:	f3 90                	pause  
+  401ed6:	f3 90                	pause  
+  401ed8:	f3 90                	pause  
+  401eda:	f3 90                	pause  
+  401edc:	f3 90                	pause  
+  401ede:	f3 90                	pause  
+  401ee0:	f3 90                	pause  
+  401ee2:	f3 90                	pause  
+  401ee4:	f3 90                	pause  
+  401ee6:	f3 90                	pause  
+  401ee8:	f3 90                	pause  
+  401eea:	f3 90                	pause  
+  401eec:	f3 90                	pause  
+  401eee:	f3 90                	pause  
+  401ef0:	f3 90                	pause  
+  401ef2:	f3 90                	pause  
+  401ef4:	f3 90                	pause  
+  401ef6:	f3 90                	pause  
+  401ef8:	f3 90                	pause  
+  401efa:	f3 90                	pause  
+  401efc:	f3 90                	pause  
+  401efe:	f3 90                	pause  
+  401f00:	f3 90                	pause  
+  401f02:	f3 90                	pause  
+  401f04:	f3 90                	pause  
+  401f06:	f3 90                	pause  
+  401f08:	f3 90                	pause  
+  401f0a:	f3 90                	pause  
+  401f0c:	f3 90                	pause  
+  401f0e:	f3 90                	pause  
+  401f10:	f3 90                	pause  
+  401f12:	f3 90                	pause  
+  401f14:	f3 90                	pause  
+  401f16:	f3 90                	pause  
+  401f18:	f3 90                	pause  
+  401f1a:	f3 90                	pause  
+  401f1c:	f3 90                	pause  
+  401f1e:	f3 90                	pause  
+  401f20:	f3 90                	pause  
+  401f22:	f3 90                	pause  
+  401f24:	f3 90                	pause  
+  401f26:	f3 90                	pause  
+  401f28:	f3 90                	pause  
+  401f2a:	f3 90                	pause  
+  401f2c:	f3 90                	pause  
+  401f2e:	f3 90                	pause  
+  401f30:	f3 90                	pause  
+  401f32:	f3 90                	pause  
+  401f34:	f3 90                	pause  
+  401f36:	f3 90                	pause  
+  401f38:	f3 90                	pause  
+  401f3a:	f3 90                	pause  
+  401f3c:	f3 90                	pause  
+  401f3e:	f3 90                	pause  
+  401f40:	f3 90                	pause  
+  401f42:	f3 90                	pause  
+  401f44:	f3 90                	pause  
+  401f46:	f3 90                	pause  
+  401f48:	f3 90                	pause  
+  401f4a:	f3 90                	pause  
+  401f4c:	f3 90                	pause  
+  401f4e:	f3 90                	pause  
+  401f50:	f3 90                	pause  
+  401f52:	f3 90                	pause  
+  401f54:	f3 90                	pause  
+  401f56:	f3 90                	pause  
+  401f58:	f3 90                	pause  
+  401f5a:	f3 90                	pause  
+  401f5c:	f3 90                	pause  
+  401f5e:	f3 90                	pause  
+  401f60:	f3 90                	pause  
+  401f62:	f3 90                	pause  
+  401f64:	f3 90                	pause  
+  401f66:	f3 90                	pause  
+  401f68:	f3 90                	pause  
+  401f6a:	f3 90                	pause  
+  401f6c:	f3 90                	pause  
+  401f6e:	f3 90                	pause  
+  401f70:	f3 90                	pause  
+  401f72:	f3 90                	pause  
+  401f74:	f3 90                	pause  
+  401f76:	f3 90                	pause  
+  401f78:	f3 90                	pause  
+  401f7a:	f3 90                	pause  
+  401f7c:	f3 90                	pause  
+  401f7e:	f3 90                	pause  
+  401f80:	f3 90                	pause  
+  401f82:	f3 90                	pause  
+  401f84:	f3 90                	pause  
+  401f86:	f3 90                	pause  
+  401f88:	f3 90                	pause  
+  401f8a:	f3 90                	pause  
+  401f8c:	f3 90                	pause  
+  401f8e:	f3 90                	pause  
+  401f90:	f3 90                	pause  
+  401f92:	f3 90                	pause  
+  401f94:	f3 90                	pause  
+  401f96:	f3 90                	pause  
+  401f98:	f3 90                	pause  
+  401f9a:	f3 90                	pause  
+  401f9c:	f3 90                	pause  
+  401f9e:	f3 90                	pause  
+  401fa0:	f3 90                	pause  
+  401fa2:	f3 90                	pause  
+  401fa4:	f3 90                	pause  
+  401fa6:	f3 90                	pause  
+  401fa8:	f3 90                	pause  
+  401faa:	f3 90                	pause  
+  401fac:	f3 90                	pause  
+  401fae:	f3 90                	pause  
+  401fb0:	f3 90                	pause  
+  401fb2:	f3 90                	pause  
+  401fb4:	f3 90                	pause  
+  401fb6:	f3 90                	pause  
+  401fb8:	f3 90                	pause  
+  401fba:	f3 90                	pause  
+  401fbc:	f3 90                	pause  
+  401fbe:	f3 90                	pause  
+  401fc0:	f3 90                	pause  
+  401fc2:	f3 90                	pause  
+  401fc4:	f3 90                	pause  
+  401fc6:	f3 90                	pause  
+  401fc8:	f3 90                	pause  
+  401fca:	f3 90                	pause  
+  401fcc:	f3 90                	pause  
+  401fce:	f3 90                	pause  
+  401fd0:	f3 90                	pause  
+  401fd2:	f3 90                	pause  
+  401fd4:	f3 90                	pause  
+  401fd6:	f3 90                	pause  
+  401fd8:	f3 90                	pause  
+  401fda:	f3 90                	pause  
+  401fdc:	f3 90                	pause  
+  401fde:	f3 90                	pause  
+  401fe0:	f3 90                	pause  
+  401fe2:	f3 90                	pause  
+  401fe4:	f3 90                	pause  
+  401fe6:	f3 90                	pause  
+  401fe8:	f3 90                	pause  
+  401fea:	f3 90                	pause  
+  401fec:	f3 90                	pause  
+  401fee:	f3 90                	pause  
+  401ff0:	f3 90                	pause  
+  401ff2:	f3 90                	pause  
+  401ff4:	f3 90                	pause  
+  401ff6:	f3 90                	pause  
+  401ff8:	f3 90                	pause  
+  401ffa:	f3 90                	pause  
+  401ffc:	f3 90                	pause  
+  401ffe:	f3 90                	pause  
+  402000:	f3 90                	pause  
+  402002:	f3 90                	pause  
+  402004:	f3 90                	pause  
+  402006:	f3 90                	pause  
+  402008:	f3 90                	pause  
+  40200a:	f3 90                	pause  
+  40200c:	f3 90                	pause  
+  40200e:	f3 90                	pause  
+  402010:	f3 90                	pause  
+  402012:	f3 90                	pause  
+  402014:	f3 90                	pause  
+  402016:	f3 90                	pause  
+  402018:	f3 90                	pause  
+  40201a:	f3 90                	pause  
+  40201c:	f3 90                	pause  
+  40201e:	f3 90                	pause  
+  402020:	f3 90                	pause  
+  402022:	f3 90                	pause  
+  402024:	f3 90                	pause  
+  402026:	f3 90                	pause  
+  402028:	f3 90                	pause  
+  40202a:	f3 90                	pause  
+  40202c:	f3 90                	pause  
+  40202e:	f3 90                	pause  
+  402030:	f3 90                	pause  
+  402032:	f3 90                	pause  
+  402034:	f3 90                	pause  
+  402036:	f3 90                	pause  
+  402038:	f3 90                	pause  
+  40203a:	f3 90                	pause  
+  40203c:	f3 90                	pause  
+  40203e:	f3 90                	pause  
+  402040:	f3 90                	pause  
+  402042:	f3 90                	pause  
+  402044:	f3 90                	pause  
+  402046:	f3 90                	pause  
+  402048:	f3 90                	pause  
+  40204a:	f3 90                	pause  
+  40204c:	f3 90                	pause  
+  40204e:	f3 90                	pause  
+  402050:	f3 90                	pause  
+  402052:	f3 90                	pause  
+  402054:	f3 90                	pause  
+  402056:	f3 90                	pause  
+  402058:	f3 90                	pause  
+  40205a:	f3 90                	pause  
+  40205c:	f3 90                	pause  
+  40205e:	f3 90                	pause  
+  402060:	f3 90                	pause  
+  402062:	f3 90                	pause  
+  402064:	f3 90                	pause  
+  402066:	f3 90                	pause  
+  402068:	f3 90                	pause  
+  40206a:	f3 90                	pause  
+  40206c:	f3 90                	pause  
+  40206e:	f3 90                	pause  
+  402070:	f3 90                	pause  
+  402072:	f3 90                	pause  
+  402074:	f3 90                	pause  
+  402076:	f3 90                	pause  
+  402078:	f3 90                	pause  
+  40207a:	f3 90                	pause  
+  40207c:	f3 90                	pause  
+  40207e:	f3 90                	pause  
+  402080:	f3 90                	pause  
+  402082:	f3 90                	pause  
+  402084:	f3 90                	pause  
+  402086:	f3 90                	pause  
+  402088:	f3 90                	pause  
+  40208a:	f3 90                	pause  
+  40208c:	f3 90                	pause  
+  40208e:	f3 90                	pause  
+  402090:	f3 90                	pause  
+  402092:	f3 90                	pause  
+  402094:	f3 90                	pause  
+  402096:	f3 90                	pause  
+  402098:	f3 90                	pause  
+  40209a:	f3 90                	pause  
+  40209c:	f3 90                	pause  
+  40209e:	f3 90                	pause  
+  4020a0:	f3 90                	pause  
+  4020a2:	f3 90                	pause  
+  4020a4:	f3 90                	pause  
+  4020a6:	f3 90                	pause  
+  4020a8:	f3 90                	pause  
+  4020aa:	f3 90                	pause  
+  4020ac:	f3 90                	pause  
+  4020ae:	f3 90                	pause  
+  4020b0:	f3 90                	pause  
+  4020b2:	f3 90                	pause  
+  4020b4:	f3 90                	pause  
+  4020b6:	f3 90                	pause  
+  4020b8:	f3 90                	pause  
+  4020ba:	f3 90                	pause  
+  4020bc:	f3 90                	pause  
+  4020be:	f3 90                	pause  
+  4020c0:	f3 90                	pause  
+  4020c2:	f3 90                	pause  
+  4020c4:	f3 90                	pause  
+  4020c6:	f3 90                	pause  
+  4020c8:	f3 90                	pause  
+  4020ca:	f3 90                	pause  
+  4020cc:	f3 90                	pause  
+  4020ce:	f3 90                	pause  
+  4020d0:	f3 90                	pause  
+  4020d2:	f3 90                	pause  
+  4020d4:	f3 90                	pause  
+  4020d6:	f3 90                	pause  
+  4020d8:	f3 90                	pause  
+  4020da:	f3 90                	pause  
+  4020dc:	f3 90                	pause  
+  4020de:	f3 90                	pause  
+  4020e0:	f3 90                	pause  
+  4020e2:	f3 90                	pause  
+  4020e4:	f3 90                	pause  
+  4020e6:	f3 90                	pause  
+  4020e8:	f3 90                	pause  
+  4020ea:	f3 90                	pause  
+  4020ec:	f3 90                	pause  
+  4020ee:	f3 90                	pause  
+  4020f0:	f3 90                	pause  
+  4020f2:	f3 90                	pause  
+  4020f4:	f3 90                	pause  
+  4020f6:	f3 90                	pause  
+  4020f8:	f3 90                	pause  
+  4020fa:	f3 90                	pause  
+  4020fc:	f3 90                	pause  
+  4020fe:	f3 90                	pause  
+  402100:	f3 90                	pause  
+  402102:	f3 90                	pause  
+  402104:	f3 90                	pause  
+  402106:	f3 90                	pause  
+  402108:	f3 90                	pause  
+  40210a:	f3 90                	pause  
+  40210c:	f3 90                	pause  
+  40210e:	f3 90                	pause  
+  402110:	f3 90                	pause  
+  402112:	f3 90                	pause  
+  402114:	f3 90                	pause  
+  402116:	f3 90                	pause  
+  402118:	f3 90                	pause  
+  40211a:	f3 90                	pause  
+  40211c:	f3 90                	pause  
+  40211e:	f3 90                	pause  
+  402120:	f3 90                	pause  
+  402122:	f3 90                	pause  
+  402124:	f3 90                	pause  
+  402126:	f3 90                	pause  
+  402128:	f3 90                	pause  
+  40212a:	f3 90                	pause  
+  40212c:	f3 90                	pause  
+  40212e:	f3 90                	pause  
+  402130:	f3 90                	pause  
+  402132:	f3 90                	pause  
+  402134:	f3 90                	pause  
+  402136:	f3 90                	pause  
+  402138:	f3 90                	pause  
+  40213a:	f3 90                	pause  
+  40213c:	f3 90                	pause  
+  40213e:	f3 90                	pause  
+  402140:	f3 90                	pause  
+  402142:	f3 90                	pause  
+  402144:	f3 90                	pause  
+  402146:	f3 90                	pause  
+  402148:	f3 90                	pause  
+  40214a:	f3 90                	pause  
+  40214c:	f3 90                	pause  
+  40214e:	f3 90                	pause  
+  402150:	f3 90                	pause  
+  402152:	f3 90                	pause  
+  402154:	f3 90                	pause  
+  402156:	f3 90                	pause  
+  402158:	f3 90                	pause  
+  40215a:	f3 90                	pause  
+  40215c:	f3 90                	pause  
+  40215e:	f3 90                	pause  
+  402160:	f3 90                	pause  
+  402162:	f3 90                	pause  
+  402164:	f3 90                	pause  
+  402166:	f3 90                	pause  
+  402168:	f3 90                	pause  
+  40216a:	f3 90                	pause  
+  40216c:	f3 90                	pause  
+  40216e:	f3 90                	pause  
+  402170:	f3 90                	pause  
+  402172:	f3 90                	pause  
+  402174:	f3 90                	pause  
+  402176:	f3 90                	pause  
+  402178:	f3 90                	pause  
+  40217a:	f3 90                	pause  
+  40217c:	f3 90                	pause  
+  40217e:	f3 90                	pause  
+  402180:	f3 90                	pause  
+  402182:	f3 90                	pause  
+  402184:	f3 90                	pause  
+  402186:	f3 90                	pause  
+  402188:	f3 90                	pause  
+  40218a:	f3 90                	pause  
+  40218c:	f3 90                	pause  
+  40218e:	f3 90                	pause  
+  402190:	f3 90                	pause  
+  402192:	f3 90                	pause  
+  402194:	f3 90                	pause  
+  402196:	f3 90                	pause  
+  402198:	f3 90                	pause  
+  40219a:	f3 90                	pause  
+  40219c:	f3 90                	pause  
+  40219e:	f3 90                	pause  
+  4021a0:	f3 90                	pause  
+  4021a2:	f3 90                	pause  
+  4021a4:	f3 90                	pause  
+  4021a6:	f3 90                	pause  
+  4021a8:	f3 90                	pause  
+  4021aa:	f3 90                	pause  
+  4021ac:	f3 90                	pause  
+  4021ae:	f3 90                	pause  
+  4021b0:	f3 90                	pause  
+  4021b2:	f3 90                	pause  
+  4021b4:	f3 90                	pause  
+  4021b6:	f3 90                	pause  
+  4021b8:	f3 90                	pause  
+  4021ba:	f3 90                	pause  
+  4021bc:	f3 90                	pause  
+  4021be:	f3 90                	pause  
+  4021c0:	f3 90                	pause  
+  4021c2:	f3 90                	pause  
+  4021c4:	f3 90                	pause  
+  4021c6:	f3 90                	pause  
+  4021c8:	f3 90                	pause  
+  4021ca:	f3 90                	pause  
+  4021cc:	f3 90                	pause  
+  4021ce:	f3 90                	pause  
+  4021d0:	f3 90                	pause  
+  4021d2:	f3 90                	pause  
+  4021d4:	f3 90                	pause  
+  4021d6:	f3 90                	pause  
+  4021d8:	f3 90                	pause  
+  4021da:	f3 90                	pause  
+  4021dc:	f3 90                	pause  
+  4021de:	f3 90                	pause  
+  4021e0:	f3 90                	pause  
+  4021e2:	f3 90                	pause  
+  4021e4:	f3 90                	pause  
+  4021e6:	f3 90                	pause  
+  4021e8:	f3 90                	pause  
+  4021ea:	f3 90                	pause  
+  4021ec:	f3 90                	pause  
+  4021ee:	f3 90                	pause  
+  4021f0:	f3 90                	pause  
+  4021f2:	f3 90                	pause  
+  4021f4:	f3 90                	pause  
+  4021f6:	f3 90                	pause  
+  4021f8:	f3 90                	pause  
+  4021fa:	f3 90                	pause  
+  4021fc:	f3 90                	pause  
+  4021fe:	f3 90                	pause  
+  402200:	f3 90                	pause  
+  402202:	f3 90                	pause  
+  402204:	f3 90                	pause  
+  402206:	f3 90                	pause  
+  402208:	f3 90                	pause  
+  40220a:	f3 90                	pause  
+  40220c:	f3 90                	pause  
+  40220e:	f3 90                	pause  
+  402210:	f3 90                	pause  
+  402212:	f3 90                	pause  
+  402214:	f3 90                	pause  
+  402216:	f3 90                	pause  
+  402218:	f3 90                	pause  
+  40221a:	f3 90                	pause  
+  40221c:	f3 90                	pause  
+  40221e:	f3 90                	pause  
+  402220:	f3 90                	pause  
+  402222:	f3 90                	pause  
+  402224:	f3 90                	pause  
+  402226:	f3 90                	pause  
+  402228:	f3 90                	pause  
+  40222a:	f3 90                	pause  
+  40222c:	f3 90                	pause  
+  40222e:	f3 90                	pause  
+  402230:	f3 90                	pause  
+  402232:	f3 90                	pause  
+  402234:	f3 90                	pause  
+  402236:	f3 90                	pause  
+  402238:	f3 90                	pause  
+  40223a:	f3 90                	pause  
+  40223c:	f3 90                	pause  
+  40223e:	f3 90                	pause  
+  402240:	f3 90                	pause  
+  402242:	48 8d 45 f0          	lea    -0x10(%rbp),%rax
+  402246:	be 00 00 00 00       	mov    $0x0,%esi
+  40224b:	48 89 c7             	mov    %rax,%rdi
+  40224e:	e8 0d e3 ff ff       	callq  400560 <gettimeofday@plt>
+  402253:	48 8b 55 f0          	mov    -0x10(%rbp),%rdx
+  402257:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+  40225b:	48 29 c2             	sub    %rax,%rdx
+  40225e:	8b 45 dc             	mov    -0x24(%rbp),%eax
+  402261:	48 98                	cltq   
+  402263:	48 39 c2             	cmp    %rax,%rdx
+  402266:	0f 8c 06 f8 ff ff    	jl     401a72 <nop+0x32>
+  40226c:	c9                   	leaveq 
+  40226d:	c3                   	retq   
+  40226e:	66 90                	xchg   %ax,%ax
+
+0000000000402270 <__libc_csu_init>:
+  402270:	41 57                	push   %r15
+  402272:	41 89 ff             	mov    %edi,%r15d
+  402275:	41 56                	push   %r14
+  402277:	49 89 f6             	mov    %rsi,%r14
+  40227a:	41 55                	push   %r13
+  40227c:	49 89 d5             	mov    %rdx,%r13
+  40227f:	41 54                	push   %r12
+  402281:	4c 8d 25 88 0b 20 00 	lea    0x200b88(%rip),%r12        # 602e10 <__frame_dummy_init_array_entry>
+  402288:	55                   	push   %rbp
+  402289:	48 8d 2d 88 0b 20 00 	lea    0x200b88(%rip),%rbp        # 602e18 <__init_array_end>
+  402290:	53                   	push   %rbx
+  402291:	4c 29 e5             	sub    %r12,%rbp
+  402294:	31 db                	xor    %ebx,%ebx
+  402296:	48 c1 fd 03          	sar    $0x3,%rbp
+  40229a:	48 83 ec 08          	sub    $0x8,%rsp
+  40229e:	e8 6d e2 ff ff       	callq  400510 <_init>
+  4022a3:	48 85 ed             	test   %rbp,%rbp
+  4022a6:	74 1e                	je     4022c6 <__libc_csu_init+0x56>
+  4022a8:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+  4022af:	00 
+  4022b0:	4c 89 ea             	mov    %r13,%rdx
+  4022b3:	4c 89 f6             	mov    %r14,%rsi
+  4022b6:	44 89 ff             	mov    %r15d,%edi
+  4022b9:	41 ff 14 dc          	callq  *(%r12,%rbx,8)
+  4022bd:	48 83 c3 01          	add    $0x1,%rbx
+  4022c1:	48 39 eb             	cmp    %rbp,%rbx
+  4022c4:	75 ea                	jne    4022b0 <__libc_csu_init+0x40>
+  4022c6:	48 83 c4 08          	add    $0x8,%rsp
+  4022ca:	5b                   	pop    %rbx
+  4022cb:	5d                   	pop    %rbp
+  4022cc:	41 5c                	pop    %r12
+  4022ce:	41 5d                	pop    %r13
+  4022d0:	41 5e                	pop    %r14
+  4022d2:	41 5f                	pop    %r15
+  4022d4:	c3                   	retq   
+  4022d5:	66 66 2e 0f 1f 84 00 	data32 nopw %cs:0x0(%rax,%rax,1)
+  4022dc:	00 00 00 00 
+
+00000000004022e0 <__libc_csu_fini>:
+  4022e0:	f3 c3                	repz retq 
+
+Disassembly of section .fini:
+
+00000000004022e4 <_fini>:
+  4022e4:	48 83 ec 08          	sub    $0x8,%rsp
+  4022e8:	48 83 c4 08          	add    $0x8,%rsp
+  4022ec:	c3                   	retq   

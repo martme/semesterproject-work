@@ -15,16 +15,25 @@ static void complete(char *label);
 int main (int argc, char* argv) 
 {	
 	struct timeval stop, start;
+	int i;
 
 	/* timeval t -->
 	 * tv_usec --> elapsed time in micro seconds 
 	 * tv_sec --> elapsed time in seconds
 	 */
 
-	begin("nop");
-	nop(TIME_PER_OPERATION);
-	complete("nop");
+	for (i = 0; i < 3; i++)
+	{
+		begin("nop");
+		nop(TIME_PER_OPERATION);
+		complete("nop");
 
+		begin("mem");
+		mem(TIME_PER_OPERATION);
+		complete("mem");
+	}
+
+	/*
 	begin("mul");
 	mul(TIME_PER_OPERATION);
 	complete("mul");
@@ -44,6 +53,8 @@ int main (int argc, char* argv)
 	begin("add");
 	add(TIME_PER_OPERATION);
 	complete("add");
+
+	*/
 	return 0;
 }
 
@@ -56,3 +67,4 @@ static void complete(char *label)
 {
 	printf("\r[+] %s\n", label);
 }
+
