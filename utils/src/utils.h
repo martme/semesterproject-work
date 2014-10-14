@@ -4,9 +4,9 @@
 void cache_info();
 
 /* Operations */
-void mem(int TIME);
-void nop(int TIME);
-void mul(int TIME);
-void add(int TIME);
+void mem();
+void nop();
+void mul();
+void add();
 
 #endif

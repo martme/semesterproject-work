@@ -41,7 +41,7 @@ def main(argv):
     #z_min = Z.min()/5
     #z_max = 0
 
-    z_max = 0 #np.max(Z) - np.std(Z)
+    z_max = 0
     z_min = np.median(Z)
 
     plt.pcolor(np.array(X), np.array(Y), np.array(Z), cmap=color, vmin=z_min, vmax=z_max) #cmap = 'binary'

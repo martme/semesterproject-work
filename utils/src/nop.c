@@ -1,14 +1,16 @@
 #include "utils.h"
 
+#include <stdlib.h>
+#include <inttypes.h>
 #include <stdio.h>
 #include <sys/time.h>
 
-void nop(int TIME)
+void nop()
 {
 	struct timeval start, stop;
 	gettimeofday(&start, NULL);
 	gettimeofday(&stop, NULL);
-	while (stop.tv_sec - start.tv_sec < TIME) 
+	while ( (uint)(stop.tv_usec - start.tv_usec) % 1000000 < 500000 )
 	{
 		__asm__ (
 			"rep; nop;"
