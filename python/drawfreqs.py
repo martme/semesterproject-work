@@ -35,11 +35,8 @@ def main(argv):
     print "std:\t%f" % np.std(Z)
     print "median:\t%f" % np.median(Z)
 
-    #z_max = np.mean(Z)+np.std(Z)
-    #z_max = foo*np.median(Z)
-    #z_max = np.mean(Z)
-    #z_min = Z.min()/5
-    #z_max = 0
+    #z_min = np.min(Z)
+    #z_max = 5*np.median(Z)
 
     z_max = 0
     z_min = np.median(Z)
