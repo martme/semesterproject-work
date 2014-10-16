@@ -9,29 +9,35 @@
 #include <fftw3.h>
 #include <sndfile.h>
 
-#define WINDOW_SIZE (2048) /* Higher value --> better frequency granularity / worse time granularity */
+#define WINDOW_SIZE (4096) /* Higher value --> better frequency granularity / worse time granularity */
 #define SMOOTHING_DEPTH (100)
 
 /* For inspiration: http://www.labbookpages.co.uk/audio/wavFiles.html */
-static float* power_spectrum(float *in, int N);
 static int process_sndfile(char * sndfilepath);
 static void apply_window(float *in, int N);
 static void convert_to_dB(float *arr, int N);
 static void dump_spectrum(float *arr, int N);
 static void dump_metadata(int W, int Fs);
-
-static float* copy (float * in, int N);
 static void smooth (float *curr, float *prev, int N);
+
+static float* power_spectrum(float *in, int N);
+static float* copy (float * in, int N);
+
+int process_wav(char* filename)
+{
+    return process_sndfile(filename);
+}
 
 static int process_sndfile (char * sndfilepath)
 {
     SNDFILE *sndfile;
     SF_INFO sndinfo;
     float avg, *window, *spectrum, *prev_spectrum;
-    int samples_in_spectrum = WINDOW_SIZE / 2 + 1;
-    uint64_t i, j, k, w, num_windows;
+    int o, samples_in_spectrum = WINDOW_SIZE / 2 + 1;
+    uint64_t i, j, w, num_windows;
 
     memset (&sndinfo, 0, sizeof (sndinfo)) ;
+
 
     sndfile = sf_open (sndfilepath, SFM_READ, &sndinfo) ;
     if (sndfile == NULL)
@@ -102,45 +108,20 @@ static int process_sndfile (char * sndfilepath)
 
     for (w = 0ull; w < num_windows; w++)
     {
-        for (k = 0ull; k <= 1ull; k++)
+        for (o = 0; o <= 1; o++)
         {
             j = 0;
             for (i = 0; i < sndinfo.channels*WINDOW_SIZE; i += sndinfo.channels)
             {
-                window[j++] = buffer[w*WINDOW_SIZE + k*(WINDOW_SIZE/2) + i]; /* k*(WINDOW_SIZE/2) equals stride of half a window */
+                window[j++] = buffer[w*WINDOW_SIZE + o*(WINDOW_SIZE/2) + i]; /* o*(WINDOW_SIZE/2) equals stride of half a window */
             }
 
             spectrum = power_spectrum(window, WINDOW_SIZE);
-            smooth(spectrum, prev_spectrum, samples_in_spectrum);
-            prev_spectrum = copy(spectrum, samples_in_spectrum);
+            //float* temp = copy(spectrum, samples_in_spectrum);
+            //smooth(spectrum, prev_spectrum, samples_in_spectrum);
+            //prev_spectrum = copy(temp, samples_in_spectrum);
             dump_spectrum(spectrum, samples_in_spectrum);
         }
-
-        /*
-        j = 0;
-        for (i = 0; i < sndinfo.channels*WINDOW_SIZE; i += sndinfo.channels)
-        {
-            window[j++] = buffer[w*WINDOW_SIZE + i];
-        }
-
-        spectrum = power_spectrum(window, WINDOW_SIZE);
-        spectrum = smooth(spectrum, samples_in_spectrum, prev_spectrum);
-        prev_spectrum = copy(spectrum, samples_in_spectrum);
-        dump_spectrum(spectrum, samples_in_spectrum);
-    */
-        /* Calculate spectrum with 50% overlap */
-    /*    if (w + 1 >= num_windows) continue;
-
-        j = 0;
-        for (i = 0; i < sndinfo.channels*WINDOW_SIZE; i += sndinfo.channels)
-        {
-            window[j++] = buffer[w*WINDOW_SIZE + WINDOW_SIZE/2 + i];
-        }
-        spectrum = power_spectrum(window, WINDOW_SIZE);
-        spectrum = smooth(spectrum, samples_in_spectrum, prev_spectrum);
-        prev_spectrum = copy(spectrum, samples_in_spectrum);
-        dump_spectrum(spectrum, samples_in_spectrum);
-        */
     }
 
 
