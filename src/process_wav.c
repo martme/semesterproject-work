@@ -11,7 +11,7 @@
 
 #define WINDOW_SIZE (4096) /* Higher value --> better frequency granularity / worse time granularity */
 #define SMOOTHING_DEPTH (100)
-#define WINDOW_OVERLAP (3)
+#define WINDOW_OVERLAP (4)
 
 /* For inspiration: http://www.labbookpages.co.uk/audio/wavFiles.html */
 static int process_sndfile(char * sndfilepath);
@@ -21,24 +21,24 @@ static void dump_spectrum(float *arr, int N);
 static void dump_metadata(char* filename, int W, int Fs);
 
 static float* power_spectrum(float *in, int N);
-static void smooth_spectrum (float **frequency_response, int N, int L);
-static void smooth_spectrum_reverse (float **frequency_response, int N, int L);
+static void smooth_spectrum (float **spectrum, int N, int L);
+static void smooth_spectrum_reverse (float **spectrum, int N, int L);
 
 int process_wav(char* filename)
 {
     return process_sndfile(filename);
 }
 
+
 static int process_sndfile (char * sndfilepath)
 {
     SNDFILE *sndfile;
     SF_INFO sndinfo;
-    float avg, *window, *spectrum, **frequency_response;
-    int o, samples_in_spectrum = WINDOW_SIZE / 2 + 1;
-    uint64_t i, j, w, num_windows, ctr;
+    float *window, **spectrum;
+    long i, j, w, num_w, ctr;
+    int o, num_c;
 
     memset (&sndinfo, 0, sizeof (sndinfo)) ;
-
 
     sndfile = sf_open (sndfilepath, SFM_READ, &sndinfo) ;
     if (sndfile == NULL)
@@ -47,28 +47,24 @@ static int process_sndfile (char * sndfilepath)
         return 1;
     }
 
-     // Check format - 16bit PCM
+     // Check format - 24bit PCM
     if (sndinfo.format != (SF_FORMAT_WAV | SF_FORMAT_PCM_24))
     {
-        fprintf(stderr, "Input should be 24bit Wav\n");
+        fprintf(stderr, "Input should be 24bit WAV\n");
         sf_close(sndfile);
         return 1;
     }
 
     // Check channels - sterio
     if (sndinfo.channels != 2) {
-        fprintf(stderr, "Wrong number of channels does not equal sterio sound\n");
+        fprintf(stderr, "Wrong number of channels; does not equal sterio sound\n");
         sf_close(sndfile);
         return 2;
     }
 
-    // printf("sample rate\t: %d Hz\n", sndinfo.samplerate);
-    // printf("num frames \t: %lld\n", sndinfo.frames);
-
+    /* Print relevant sndfile metadata to stdout */
     dump_metadata(sndfilepath, WINDOW_SIZE, sndinfo.samplerate);
 
-
-    // printf("%s\n", "Allocating buffer ...");
     float * buffer = malloc(sndinfo.channels*sndinfo.frames * sizeof(float));
     if (buffer == NULL)
     {
@@ -76,12 +72,8 @@ static int process_sndfile (char * sndfilepath)
         sf_close(sndfile);
         return 1;
     }
-    // printf("%s\n", "Allocating buffer completed.");
 
-    // printf("%s\n", "Reading frames ...");
     long num_frames = sf_readf_float(sndfile, buffer, sndinfo.frames);
-    // printf("%s\n", "Reading frames completed.");
-
     if (num_frames != sndinfo.frames)
     {
         fprintf(stderr, "Did not read enough frames for source\n");
@@ -89,46 +81,47 @@ static int process_sndfile (char * sndfilepath)
         free(buffer);
         return 1;
     }
-
-
-    /*printf("Read %ld frames, Sample rate: %d, Lenght: %fs\n",
-        num_frames, sndinfo.samplerate, (float)num_frames/sndinfo.samplerate);
-    */
     sf_close(sndfile);
 
+    /*************************************
+     ***** Start processing sndfile ******
+     *************************************/
 
-    num_windows = sndinfo.frames / WINDOW_SIZE;
+
+    /* Number of c_i in frequency response spectrum */
+    num_c = WINDOW_SIZE / 2 + 1;
+    /* Number of frames per window */
+    num_w = sndinfo.frames / WINDOW_SIZE;
     window = malloc( WINDOW_SIZE * sizeof(float) );
-
-    frequency_response = malloc( num_windows * WINDOW_OVERLAP * sizeof(float*) );
+    spectrum = malloc( num_w * WINDOW_OVERLAP * sizeof(float*) );
 
     ctr = 0;
-    for (w = 0ull; w < num_windows; w++)
+    /* For every whole window in the samples */
+    for (w = 0; w < num_w; w++)
     {
+        /* For every partial window within the window (compute with overlap) */
         for (o = 0; o < WINDOW_OVERLAP; o++)
         {
             j = 0;
+            /* For the samples making up this window */
             for (i = 0; i < sndinfo.channels*WINDOW_SIZE; i += sndinfo.channels)
             {
-                window[j++] = buffer[w*WINDOW_SIZE + o*(WINDOW_SIZE/WINDOW_OVERLAP) + i]; /* o*(WINDOW_SIZE/2) equals stride of half a window */
+                /* Assign sample to correct position in window */
+                window[j++] = buffer[i + (w*WINDOW_SIZE) + o*(WINDOW_SIZE/WINDOW_OVERLAP)];
             }
-
-            spectrum = power_spectrum(window, WINDOW_SIZE);
-            frequency_response[ctr++] = spectrum;
-            //dump_spectrum(spectrum, samples_in_spectrum);
+            spectrum[ctr++] = power_spectrum(window, WINDOW_SIZE);
         }
     }
-    // printf ("ctr: %d\n", (int)ctr);
 
-    smooth_spectrum_reverse(frequency_response, ctr, samples_in_spectrum);
+    smooth_spectrum_reverse(spectrum, ctr, num_c);
     for (i = 10; i < ctr - 10; i++) // Skip 10 first and last windows
     {
-        dump_spectrum(frequency_response[i], samples_in_spectrum);
+        /* Print the frequency response components for this window */
+        dump_spectrum(spectrum[i], num_c);
     }
 
 
 
-    free(frequency_response);
     free(spectrum);
     free(window);
     free(buffer);
@@ -138,36 +131,39 @@ static int process_sndfile (char * sndfilepath)
 
 
 /* Subtract averaged 1 previous samples from next sample */
-static void smooth_spectrum (float **frequency_response, int N, int L)
+static void smooth_spectrum (float **spectrum, int N, int L)
 {
     int i, j;
     for (i = 1; i < N; i++)
     {
         for (j = 0; j < L; j++)
         {
-            frequency_response[i][j] -= frequency_response[i-1][j];
-            if (frequency_response[i][j] < 0)
+            spectrum[i][j] -= spectrum[i-1][j];
+            if (spectrum[i][j] < 0)
             {
-                frequency_response[i][j] = 0;
+                spectrum[i][j] = 0;
             }
         }
     }
 }
-static void smooth_spectrum_reverse (float **frequency_response, int N, int L)
+
+
+static void smooth_spectrum_reverse (float **spectrum, int N, int L)
 {
     int i, j;
     for (i = N-1; i > 0; i--)
     {
         for (j = 0; j < L; j++)
         {
-            frequency_response[i][j] -= frequency_response[i-1][j];
-            if (frequency_response[i][j] < 0)
+            spectrum[i][j] -= spectrum[i-1][j];
+            if (spectrum[i][j] < 0)
             {
-                frequency_response[i][j] = 0;
+                spectrum[i][j] = 0;
             }
         }
     }
 }
+
 
 static float* power_spectrum(float *in, int N)
 {
@@ -203,11 +199,14 @@ static float* power_spectrum(float *in, int N)
     return result;
 }
 
+
 static void apply_window(float *in, int N)
 {
-    wf_blackman_harris(in, N);
+    wf_hamming(in, N);
+    //wf_blackman_harris(in, N);
     //wf_hann(in, N);
 }
+
 
 static void convert_to_dB(float *arr, int N)
 {
@@ -228,6 +227,7 @@ static void dump_metadata(char* filename, int W, int Fs)
     printf("%d\n", W);
     printf("%d\n", Fs);
 }
+
 
 static void dump_spectrum(float *arr, int N)
 {
