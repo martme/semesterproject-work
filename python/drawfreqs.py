@@ -45,7 +45,7 @@ def main(argv):
     # use with result after processing with log10
     #z_max = 0
     #z_min = np.median(Z)
-    z_max = 2*np.std(Z)#np.max(Z)
+    z_max = 5*np.mean(Z)#np.max(Z)
     z_min = np.min(Z)
 
     plt.title(title)

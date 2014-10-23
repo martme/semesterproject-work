@@ -11,7 +11,7 @@
 
 #define WINDOW_SIZE (4096) /* Higher value --> better frequency granularity / worse time granularity */
 #define SMOOTHING_DEPTH (100)
-#define WINDOW_OVERLAP (4)
+#define WINDOW_OVERLAP (2)
 
 /* For inspiration: http://www.labbookpages.co.uk/audio/wavFiles.html */
 static int process_sndfile(char * sndfilepath);
@@ -47,8 +47,10 @@ static int process_sndfile (char * sndfilepath)
         return 1;
     }
 
-     // Check format - 24bit PCM
-    if (sndinfo.format != (SF_FORMAT_WAV | SF_FORMAT_PCM_24))
+    // Check format - 24bit PCM
+    // printf("%#x\n", sndinfo.format);
+    if ( !( sndinfo.format == (SF_FORMAT_WAVEX | SF_FORMAT_PCM_24)  ||   // For Knowles
+            sndinfo.format == (SF_FORMAT_WAV   | SF_FORMAT_PCM_24) ) )     // For Zoom H4n
     {
         fprintf(stderr, "Input should be 24bit WAV\n");
         sf_close(sndfile);
@@ -56,8 +58,8 @@ static int process_sndfile (char * sndfilepath)
     }
 
     // Check channels - sterio
-    if (sndinfo.channels != 2) {
-        fprintf(stderr, "Wrong number of channels; does not equal sterio sound\n");
+    if (sndinfo.channels > 2) {
+        fprintf(stderr, "Wrong number of channels; got more than two.\n");
         sf_close(sndfile);
         return 2;
     }
