@@ -58,11 +58,11 @@ static void no_cache_miss()
     //printf("Time w/o cache miss:\t%f\n", (double)(clock() - start));
 }
 
-void mem() {
+void mem(long duration) {
 	struct timeval start, stop;
 	gettimeofday(&start, NULL);
 	gettimeofday(&stop, NULL);
-	while ( (uint)(stop.tv_usec - start.tv_usec) % 1000000 < 500000 )
+	while ( (uint)(stop.tv_usec - start.tv_usec) % 1000000 < duration )
 	{
 		force_cache_miss ();
 		gettimeofday(&stop, NULL);

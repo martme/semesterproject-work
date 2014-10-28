@@ -5,12 +5,12 @@
 #include <stdio.h>
 #include <sys/time.h>
 
-void nop()
+void nop(long duration)
 {
 	struct timeval start, stop;
 	gettimeofday(&start, NULL);
 	gettimeofday(&stop, NULL);
-	while ( (uint)(stop.tv_usec - start.tv_usec) % 1000000 < 500000 )
+	while ( (uint)(stop.tv_usec - start.tv_usec) % 1000000 < duration )
 	{
 		__asm__ (
 			"rep; nop;"

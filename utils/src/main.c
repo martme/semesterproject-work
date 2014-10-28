@@ -6,6 +6,7 @@
 #include <linux/kd.h>
 /* #include <sys/time.h> */
 
+#define DURATION (330000)
 
 static void begin(char *label);
 static void complete(char *label);
@@ -22,15 +23,25 @@ int main (int argc, char* argv)
 	 * tv_sec --> elapsed time in seconds
 	 */
 
+    nop(DURATION);
+
 	for (i = 0; i < 3; i++)
 	{
 		begin("nop");
-		nop();
+		nop(DURATION);
 		complete("nop");
 
 		begin("mem");
-		mem();
+		mem(DURATION);
 		complete("mem");
+
+        begin("mul");
+        mul(DURATION);
+        complete("mul");
+
+        begin("add");
+        add(DURATION);
+        complete("add");
 	}
 	return 0;
 }
@@ -43,5 +54,6 @@ static void begin(char *label)
 static void complete(char *label)
 {
 	printf("\r[+] %s\n", label);
+    fflush(stdout);
 }
 
