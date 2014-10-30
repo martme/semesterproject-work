@@ -1,4 +1,5 @@
-all: bin/main
+all: bin/x86_instructions bin/cpuload
+raspberry: bin/arm_instructions bin/cpuload
 
 clean:
 	rm -rf bin
@@ -6,7 +7,13 @@ clean:
 bin:
 	mkdir -p bin
 
-bin/main: src/*.c | bin
+bin/x86_instructions: src/x86_instructions/*.c | bin
 	cc $+ -o $@
+
+bin/arm_instructions: src/arm_instructions/*.c | bin
+	cc $+ -o $@
+
+bin/cpuload: src/cpuload/main.sh | bin
+	cp $+ $@
 
 .PHONY: all

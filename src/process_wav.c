@@ -106,7 +106,8 @@ static int process_sndfile (char * sndfilepath)
         {
             j = 0;
             /* For the samples making up this window */
-            for (i = 0; i < sndinfo.channels*WINDOW_SIZE; i += sndinfo.channels)
+            //for (i = 0; i < sndinfo.channels*WINDOW_SIZE; i += sndinfo.channels) // Left channel
+            for (i = 1; i < sndinfo.channels*WINDOW_SIZE; i += sndinfo.channels) // Right channel
             {
                 /* Assign sample to correct position in window */
                 window[j++] = buffer[i + (w*WINDOW_SIZE) + o*(WINDOW_SIZE/WINDOW_OVERLAP)];
@@ -116,7 +117,8 @@ static int process_sndfile (char * sndfilepath)
     }
 
     smooth_spectrum_reverse(spectrum, ctr, num_c);
-    for (i = 10; i < ctr - 10; i++) // Skip 10 first and last windows
+    //for (i = 10; i < ctr - 10; i++) // Skip 10 first and last windows
+    for (i = 0; i < ctr; i++)
     {
         /* Print the frequency response components for this window */
         dump_spectrum(spectrum[i], num_c);
