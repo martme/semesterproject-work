@@ -13,7 +13,7 @@ void mul(long duration)
 	while ( (uint)(stop.tv_usec - start.tv_usec) % 1000000 < duration )
 	{
 		__asm__ (
-			"MUL r0 r0 r0;"
+			"MUL r0, r2, r2;"
 			);
 		gettimeofday(&stop, NULL);
 	}
