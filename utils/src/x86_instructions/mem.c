@@ -9,53 +9,50 @@
  * on information derrived from cache_info utility
  */
 
-/* Size of both L1 and L2 is 32768 bytes */
 #define L1_SIZE (32768)
 #define L2_SIZE (262144)
-#define L3_SIZE (8388608)
+#define COUNT (1000)
 
-static void force_cache_miss()
+static void thousand_cache_misses()
 {
     /* Access memory 1000 times with high probability not hitting L1 or L2 cache.
      * Can use performance counters to check actuall number of cache misses:
      * $ perf stat -e cache-misses:u bin/main
     */
-
     srand(4321);
     char *data, tmp;
-    int i, size;
-    clock_t start;
+    int i, r, L;
 
-    size = 1000*L2_SIZE*sizeof(char);
-    data = malloc(size);
+    /* Allocate memory 1000 times bigger than the L2 cache */
+    L = 1000*L2_SIZE*sizeof(char);
+    data = malloc( L );
 
-    //start = clock();
-    for ( i = 0; i < size; i += L2_SIZE)
+    /* Do 1000 random lookups in the array */
+    for ( i = 0; i < COUNT; ++i)
     {
-    	tmp = data[rand() % size];
+        r = rand();
+        tmp = data[r % L];
     }
     free(data);
-    //printf("Time w/ cache miss:\t%f\n", (double)(clock() - start));
 }
 
-static void no_cache_miss()
+static void thousand_cache_hits()
 {
-    /* Access memory 1000 times with high probability not hitting L1 or L2 cache */
-
+    srand(4321);
     char *data, tmp;
-    int i, size;
-    clock_t start;
+    int i, r, L;
 
-    size = 1000*sizeof(char);
-    data = malloc(size);
+    /* Allocate memory 1000 times bigger than the L2 cache */
+    L = 1000*L2_SIZE*sizeof(char);
+    data = malloc( L );
 
-    //start = clock();
-    for ( i = 0; i < size; i += 1)
+    /* Do 1000 random lookups in the array */
+    for ( i = 0; i < COUNT; ++i)
     {
-        tmp = data[i];
+        r = rand();
+        tmp = data[i % L];
     }
     free(data);
-    //printf("Time w/o cache miss:\t%f\n", (double)(clock() - start));
 }
 
 void mem(long duration) {
@@ -64,7 +61,7 @@ void mem(long duration) {
 	gettimeofday(&stop, NULL);
 	while ( (uint)(stop.tv_usec - start.tv_usec) % 1000000 < duration )
 	{
-		force_cache_miss ();
+		thousand_cache_misses ();
 		gettimeofday(&stop, NULL);
 	}
 }
