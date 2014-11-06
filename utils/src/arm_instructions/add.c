@@ -13,7 +13,9 @@ void add(long duration)
 	while ( (uint)(stop.tv_usec - start.tv_usec) % 1000000 < duration )
 	{
 		__asm__ (
-			"ADD r0, r2, r2;"
+            "MOV r0, #0;"
+            "MOV r1, #1;"
+			"ADD r0, r0, r1;"
 			);
 		gettimeofday(&stop, NULL);
 	}

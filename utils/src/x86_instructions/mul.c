@@ -13,6 +13,8 @@ void mul(long duration)
 	while ( (uint)(stop.tv_usec - start.tv_usec) % 1000000 < duration )
 	{
 		__asm__ (
+            "mov $0, %eax;" /* Initialize to 0 to remove overflow possibility */
+            "mov $1, %ebx;" /* Perform 1*0 endlessly ... */
 			"mul %eax;"
 			"mul %eax;"
 			"mul %eax;"

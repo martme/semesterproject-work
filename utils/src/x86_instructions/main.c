@@ -1,4 +1,4 @@
-
+#include <unistd.h>
 #include <stdio.h>
 #include <sys/time.h>
 #include <stdlib.h>
@@ -10,8 +10,6 @@
 
 static void begin(char *label);
 static void complete(char *label);
-/*static void byreference(void (*foo)(int));
-*/
 
 int main (int argc, char* argv)
 {
@@ -23,7 +21,7 @@ int main (int argc, char* argv)
 	 * tv_sec --> elapsed time in seconds
 	 */
 
-    nop(DURATION);
+    sleep(1);
 
 	for (i = 0; i < 3; i++)
 	{
