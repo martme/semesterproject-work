@@ -1,4 +1,5 @@
 
+#include <unistd.h>
 #include <stdio.h>
 #include <sys/time.h>
 #include <stdlib.h>
@@ -23,7 +24,7 @@ int main (int argc, char* argv)
 	 * tv_sec --> elapsed time in seconds
 	 */
 
-    nop(DURATION);
+    sleep(1);
 
 	for (i = 0; i < 3; i++)
 	{
