@@ -6,6 +6,7 @@
 CORES=1
 REPITITIONS=3
 SLEEPTIME=1
+BURNTIME=2
 i=0
 
 function usage
@@ -38,6 +39,7 @@ while [ "$1" != "" ]; do
     shift
 done
 
+sleep 1
 until [ $REPITITIONS -lt 1 ]; do
     sleep $SLEEPTIME
     i=$CORES
@@ -46,7 +48,7 @@ until [ $REPITITIONS -lt 1 ]; do
         echo "starting burn thread ..."
         let i=i-1
     done
-    sleep $SLEEPTIME
+    sleep $BURNTIME
     do_kill
     let REPITITIONS=REPITITIONS-1
 

@@ -24,7 +24,7 @@ int main (int argc, char* argv)
 	 * tv_sec --> elapsed time in seconds
 	 */
 
-    sleep(1);
+    sleep(2);
 
 	for (i = 0; i < 3; i++)
 	{
