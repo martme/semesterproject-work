@@ -11,7 +11,7 @@
 
 #define WINDOW_SIZE (4096) /* Higher value --> better frequency granularity / worse time granularity */
 #define SMOOTHING_DEPTH (100)
-#define WINDOW_OVERLAP (2)
+#define WINDOW_OVERLAP (1)
 
 /* For inspiration: http://www.labbookpages.co.uk/audio/wavFiles.html */
 static int process_sndfile(char * sndfilepath);
@@ -116,7 +116,7 @@ static int process_sndfile (char * sndfilepath)
         }
     }
 
-    smooth_spectrum_reverse(spectrum, ctr, num_c);
+    // smooth_spectrum_reverse(spectrum, ctr, num_c);
     //for (i = 10; i < ctr - 10; i++) // Skip 10 first and last windows
     for (i = 0; i < ctr; i++)
     {
