@@ -1,5 +1,4 @@
 #include "main.h"
-#include "sndfile.h"
 #include <stdio.h>
 #include <math.h>
 
@@ -21,8 +20,5 @@ int main(int argc, char *argv[])
     {
         process_wav(argv[1]);
     }
-    /*signal_dump();*/
-
-    /*ampl_dump();*/
     return 0;
 }

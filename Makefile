@@ -3,7 +3,8 @@ LIBSNDFILE=/usr/local/lib/libsndfile.a /usr/local/lib/libvorbis.a /usr/local/lib
 FFTW=/usr/local/lib/libfftw3f.a
 FRAMEWORKS=-framework Carbon -framework CoreServices -framework AudioUnit -framework AudioToolbox -framework CoreAudio
 DEPENDENCIES=$(FRAMEWORKS) $(PORTAUDIO) $(LIBSNDFILE) $(FFTW) -I /usr/local/include/
-LINUX_DEPENDENCIES=-lm -lfftw3f -lsndfile
+
+LINUX_DEPENDENCIES=-lm -lsndfile -lfftw3f
 
 
 all: bin/main
@@ -15,6 +16,7 @@ bin:
 	mkdir -p bin
 
 bin/main: src/*.c | bin
-	cc $+ $(LINUX_DEPENDENCIES) -o $@
+	#cc $+ $(LINUX_DEPENDENCIES) -o $@
+	cc $+ $(LIBSNDFILE) $(FFTW) -I /usr/local/include -o $@
 
 .PHONY: all

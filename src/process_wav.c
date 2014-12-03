@@ -16,19 +16,15 @@
 /* For inspiration: http://www.labbookpages.co.uk/audio/wavFiles.html */
 static int process_sndfile(char * sndfilepath);
 static void apply_window(float *in, int N);
-static void convert_to_dB(float *arr, int N);
 static void dump_spectrum(float *arr, int N);
 static void dump_metadata(char* filename, int W, int Fs);
 
 static float* power_spectrum(float *in, int N);
-static void smooth_spectrum (float **spectrum, int N, int L);
-static void smooth_spectrum_reverse (float **spectrum, int N, int L);
 
 int process_wav(char* filename)
 {
     return process_sndfile(filename);
 }
-
 
 static int process_sndfile (char * sndfilepath)
 {
@@ -106,8 +102,7 @@ static int process_sndfile (char * sndfilepath)
         {
             j = 0;
             /* For the samples making up this window */
-            //for (i = 0; i < sndinfo.channels*WINDOW_SIZE; i += sndinfo.channels) // Left channel
-            for (i = 1; i < sndinfo.channels*WINDOW_SIZE; i += sndinfo.channels) // Right channel
+            for (i = 0; i < sndinfo.channels*WINDOW_SIZE; i += sndinfo.channels) // Left channel in stereo
             {
                 /* Assign sample to correct position in window */
                 window[j++] = buffer[i + (w*WINDOW_SIZE) + o*(WINDOW_SIZE/WINDOW_OVERLAP)];
@@ -132,41 +127,6 @@ static int process_sndfile (char * sndfilepath)
     return 0;
 
 } /* render_sndfile */
-
-
-/* Subtract averaged 1 previous samples from next sample */
-static void smooth_spectrum (float **spectrum, int N, int L)
-{
-    int i, j;
-    for (i = 1; i < N; i++)
-    {
-        for (j = 0; j < L; j++)
-        {
-            spectrum[i][j] -= spectrum[i-1][j];
-            if (spectrum[i][j] < 0)
-            {
-                spectrum[i][j] = 0;
-            }
-        }
-    }
-}
-
-
-static void smooth_spectrum_reverse (float **spectrum, int N, int L)
-{
-    int i, j;
-    for (i = N-1; i > 0; i--)
-    {
-        for (j = 0; j < L; j++)
-        {
-            spectrum[i][j] -= spectrum[i-1][j];
-            if (spectrum[i][j] < 0)
-            {
-                spectrum[i][j] = 0;
-            }
-        }
-    }
-}
 
 
 static float* power_spectrum(float *in, int N)
@@ -194,9 +154,6 @@ static float* power_spectrum(float *in, int N)
         result[i] = (float) sqrt( (float)creal(out[i])*creal(out[i]) + cimag(out[i])*cimag(out[i]) );
     }
 
-    /* 5. (optional) Calculate 10 * log10 of each magnitude squared output bin to get a value in dB */
-    //convert_to_dB(result, nc);
-
     fftwf_destroy_plan(plan_forward);
     fftwf_free(out);
 
@@ -207,22 +164,9 @@ static float* power_spectrum(float *in, int N)
 static void apply_window(float *in, int N)
 {
     wf_hamming(in, N);
-    //wf_blackman_harris(in, N);
-    //wf_hann(in, N);
 }
 
 
-static void convert_to_dB(float *arr, int N)
-{
-    int i;
-    for (i = 0; i < N; i++)
-    {
-
-        //printf("%f ", arr[i]);
-        arr[i] = (float) 10*log10(arr[i]); /* 20 or 10 * log10 ???? */
-    }
-    //printf("\n");
-}
 
 static void dump_metadata(char* filename, int W, int Fs)
 {
