@@ -9,24 +9,18 @@
 #include <fftw3.h>
 #include <sndfile.h>
 
-#define WINDOW_SIZE (4096) /* Higher value --> better frequency granularity / worse time granularity */
-#define SMOOTHING_DEPTH (100)
+#define WINDOW_SIZE (4096)
 #define WINDOW_OVERLAP (1)
 
 /* For inspiration: http://www.labbookpages.co.uk/audio/wavFiles.html */
-static int process_sndfile(char * sndfilepath);
-static void apply_window(float *in, int N);
+int process_sndfile(char * sndfilepath);
 static void dump_spectrum(float *arr, int N);
 static void dump_metadata(char* filename, int W, int Fs);
+static void wf_hamming(float * in, int N);
 
 static float* power_spectrum(float *in, int N);
 
-int process_wav(char* filename)
-{
-    return process_sndfile(filename);
-}
-
-static int process_sndfile (char * sndfilepath)
+int process_sndfile (char * sndfilepath)
 {
     SNDFILE *sndfile;
     SF_INFO sndinfo;
@@ -88,7 +82,7 @@ static int process_sndfile (char * sndfilepath)
 
     /* Number of c_i in frequency response spectrum */
     num_c = WINDOW_SIZE / 2 + 1;
-    /* Number of frames per window */
+    /* Number of windows */
     num_w = sndinfo.frames / WINDOW_SIZE;
     window = malloc( WINDOW_SIZE * sizeof(float) );
     spectrum = malloc( num_w * WINDOW_OVERLAP * sizeof(float*) );
@@ -111,22 +105,18 @@ static int process_sndfile (char * sndfilepath)
         }
     }
 
-    // smooth_spectrum_reverse(spectrum, ctr, num_c);
-    //for (i = 10; i < ctr - 10; i++) // Skip 10 first and last windows
     for (i = 0; i < ctr; i++)
     {
         /* Print the frequency response components for this window */
         dump_spectrum(spectrum[i], num_c);
     }
 
-
-
     free(spectrum);
     free(window);
     free(buffer);
     return 0;
 
-} /* render_sndfile */
+}
 
 
 static float* power_spectrum(float *in, int N)
@@ -140,7 +130,7 @@ static float* power_spectrum(float *in, int N)
     float *result = malloc( sizeof (float) * nc );
 
     /* 2. Apply a soutable window function to the samples */
-    apply_window(in, N);
+    wf_hamming(in, N);
 
     /* 3. Pass windowed samples to an FFT routine */
     out = fftwf_malloc( sizeof( fftwf_complex ) * nc );
@@ -150,7 +140,6 @@ static float* power_spectrum(float *in, int N)
     /* 4. Calculate the squared magnitude of the FFT output bins (re * re + im * im) */
     for (i = 0; i < nc; i++)
     {
-        /* Normalization here?? */
         result[i] = (float) sqrt( (float)creal(out[i])*creal(out[i]) + cimag(out[i])*cimag(out[i]) );
     }
 
@@ -159,13 +148,6 @@ static float* power_spectrum(float *in, int N)
 
     return result;
 }
-
-
-static void apply_window(float *in, int N)
-{
-    wf_hamming(in, N);
-}
-
 
 
 static void dump_metadata(char* filename, int W, int Fs)
@@ -187,3 +169,16 @@ static void dump_spectrum(float *arr, int N)
     /* Flush output buffer to remove buffer delay in pipe */
     fflush(stdout);
 }
+
+static void wf_hamming(float * in, int N)
+{
+    int n;
+    float a, b, w_n;
+    a = 0.54;
+    b = 0.46;
+    for (n = 0; n < N; n++){
+        w_n = (float) ( a - b * cos( (2*M_PI*n)/(N-1) ) );
+        in[n] *= w_n;
+    }
+}
+

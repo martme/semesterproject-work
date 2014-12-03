@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     }
     else if (argc == 2)
     {
-        process_wav(argv[1]);
+        process_sndfile(argv[1]);
     }
     return 0;
 }
