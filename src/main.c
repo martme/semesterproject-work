@@ -1,4 +1,3 @@
-#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -13,6 +12,8 @@
 #define WINDOW_SIZE (4096)
 #define WINDOW_OVERLAP (1)
 
+
+int process_sndfile(char * sndfilepath);
 static void dump_spectrum(float *arr, int N);
 static void dump_metadata(char* filename, int W, int Fs);
 static void wf_hamming(float * in, int N);

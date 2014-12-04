@@ -16,7 +16,7 @@ bin:
 	mkdir -p bin
 
 bin/main: src/*.c | bin
-	#cc $+ $(LINUX_DEPENDENCIES) -o $@
-	cc $+ $(LIBSNDFILE) $(FFTW) -I /usr/local/include -o $@
+	cc $+ $(LINUX_DEPENDENCIES) -o $@
+	#cc $+ $(LIBSNDFILE) $(FFTW) -I /usr/local/include -o $@
 
 .PHONY: all
